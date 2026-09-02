@@ -20,23 +20,17 @@ export const getPublishedInstitutes = async (type, setInstitutes, setError, setL
     }).finally(() => setLoading(false));
 };
 
-export const getPublishedInstituteById = async (id, setInstData, setMessage, setLoading) => {
+export const getPublishedInstituteById = async (id, setInstData, setError, setLoading) => {
     await axios.get(`${API_URL}/institutes/${id}`)
         .then((res) => {
             if (res.data.success) {
                 setInstData(res.data.institute);
             } else {
-                setMessage({
-                    text: res.data.message,
-                    type: "error"
-                });
+                setError(res.data.message);
             }
         })
         .catch(() => {
-            setMessage({
-                text: "Institute could not be loaded.",
-                type: "error"
-            });
+            setError("Institute could not be loaded.");
         })
         .finally(() => setLoading(false));
 };
@@ -183,7 +177,7 @@ export const getHeroPageInstitutes = (setHeroPageInstitutes) => {
             if (res.data.success) {
                 setHeroPageInstitutes(res.data.institutes);
             }
-        }).catch(() => {});
+        }).catch(() => { });
 };
 
 // FORGET PASSWORD (RECOVERY)

@@ -1,7 +1,5 @@
 import "./login.css";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import {
     FaArrowRight,
     FaEnvelope,
@@ -9,32 +7,20 @@ import {
     FaUniversity,
     FaUserGraduate
 } from "react-icons/fa";
-
 import {
     FaGraduationCap,
     FaShieldHalved
 } from "react-icons/fa6";
-
 import { Navbar } from "../../components/navbar/navbar";
-
 import { loginApi } from "../../apicalls/public_apicalls";
-
 import { useContext, useState } from "react";
-
 import AppContext from "../../app_context/context";
 
-
 export const Login = () => {
-
     const navigate = useNavigate();
-
-    const {
-        setUserState
-    } = useContext(AppContext);
-
+    const { setUserState } = useContext(AppContext);
 
     const [loading, setLoading] = useState(false);
-
     const [message, setMessage] = useState({
         text: "",
         type: ""
@@ -49,7 +35,6 @@ export const Login = () => {
 
 
     const handleOnChange = (e) => {
-
         const {
             name,
             value
@@ -70,9 +55,7 @@ export const Login = () => {
 
 
     const handleOnSubmit = (e) => {
-
         e.preventDefault();
-
         if (!formData.email.trim()) {
             setMessage({
                 text: "Please enter your email address.",
@@ -197,7 +180,7 @@ export const Login = () => {
                                 />
                             </div>
                         </div>
-                        
+
                         {/* ROLE */}
                         <div className="inputGroup">
                             <label htmlFor="login-role">
@@ -211,7 +194,6 @@ export const Login = () => {
                                     value={formData.role}
                                     onChange={handleOnChange}
                                     style={{ border: "none", outline: "none", width: "100%", background: "transparent" }}
-                                    required
                                 >
                                     <option value="" disabled>Select your account role</option>
                                     <option value="student">Student</option>

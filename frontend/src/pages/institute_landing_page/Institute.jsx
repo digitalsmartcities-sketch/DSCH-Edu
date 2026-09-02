@@ -6,6 +6,7 @@ import { Navbar } from "../../components/navbar/navbar";
 import { getPublishedInstituteById } from "../../apicalls/public_apicalls";
 import { RatingReview } from "../../components/rating_component/rating_sec";
 import { Footer } from "../../components/footer/Footer";
+import { useNavigate, useParams } from "react-router-dom";
 
 const formatCurrency = (amount) => `PKR ${Number(amount || 0).toLocaleString()}`;
 
