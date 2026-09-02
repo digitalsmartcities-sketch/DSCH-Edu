@@ -1,0 +1,502 @@
+/* =====================================================
+   ADMIN STUDENTS PAGE
+===================================================== */
+
+.adminStudentsPage {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 45px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.adminStudentsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.adminStudentsEyebrow {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.adminStudentsHeader h1 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.adminStudentsHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.adminStudentsCount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 15px;
+    background: #ecfdf5;
+    border: 1px solid #d1fae5;
+    border-radius: 10px;
+}
+
+.adminStudentsCount>svg {
+    color: #059669;
+    font-size: 19px;
+}
+
+.adminStudentsCount div {
+    display: flex;
+    flex-direction: column;
+}
+
+.adminStudentsCount strong {
+    color: #111827;
+    font-size: 17px;
+}
+
+.adminStudentsCount span {
+    margin-top: 2px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   FILTER CARD
+===================================================== */
+
+.adminStudentFilterCard {
+    padding: 18px;
+    margin-bottom: 18px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .025);
+}
+
+.adminStudentFilterTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.adminStudentFilterIcon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 12px;
+}
+
+.adminStudentFilterTitle h2 {
+    margin: 0 0 3px;
+    color: #374151;
+    font-size: 12px;
+}
+
+.adminStudentFilterTitle p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.adminStudentFilters {
+    display: grid;
+    grid-template-columns: minmax(250px, 1.5fr) minmax(150px, .7fr) minmax(150px, .7fr);
+    gap: 12px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.adminStudentSearch {
+    position: relative;
+}
+
+.adminStudentSearch>svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+.adminStudentSearch input {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 12px 0 34px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.adminStudentSearch input::placeholder {
+    color: #9ca3af;
+}
+
+.adminStudentSearch input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .08);
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.adminStudentSelect {
+    position: relative;
+}
+
+.adminStudentSelect select {
+    width: 100%;
+    height: 40px;
+    appearance: none;
+    padding: 0 34px 0 12px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.adminStudentSelect select:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .08);
+}
+
+.adminStudentSelect>svg {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6b7280;
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+.adminStudentsTableWrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.adminStudentsTableCard {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .025);
+}
+
+.adminStudentsTableHeader {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.adminStudentsTableHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 15px;
+}
+
+.adminStudentsTableHeader p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.adminStudentsTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.adminStudentsTable {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+.adminStudentsTable th {
+    padding: 12px 14px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    color: #6b7280;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.adminStudentsTable td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+    font-size: 10px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.adminStudentsTable tbody tr:hover {
+    background: #fafffc;
+}
+
+.adminStudentsTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   STUDENT INFO
+===================================================== */
+
+.adminStudentInfo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.adminStudentAvatar {
+    width: 33px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.adminStudentInfo>div:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 130px;
+}
+
+.adminStudentInfo strong {
+    color: #374151;
+    font-size: 10px;
+}
+
+.adminStudentInfo span {
+    margin-top: 2px;
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.adminStudentStatus {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.adminStudentStatus.active {
+    background: #ecfdf5;
+    color: #166534;
+}
+
+.adminStudentStatus.inactive {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.adminStudentStatus.suspended {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.adminStudentActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.studentProfileActionBtn {
+    height: 31px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #fff;
+    color: #059669;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.studentProfileActionBtn:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.adminStudentsEmptyCell {
+    height: 300px;
+    padding: 0 !important;
+}
+
+.adminStudentsEmpty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.adminStudentsEmpty>svg {
+    margin-bottom: 11px;
+    color: #9ca3af;
+    font-size: 25px;
+}
+
+.adminStudentsEmpty h3 {
+    margin: 0 0 5px;
+    color: #374151;
+    font-size: 13px;
+}
+
+.adminStudentsEmpty p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.adminComponentLoading {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.adminComponentLoading p {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.adminComponentLoader {
+    width: 26px;
+    height: 26px;
+    border: 3px solid #dcfce7;
+    border-top-color: #10b981;
+    border-radius: 50%;
+    animation: adminStudentsSpin .8s linear infinite;
+}
+
+@keyframes adminStudentsSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width:900px) {
+    .adminStudentsHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .adminStudentsCount {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .adminStudentFilters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .adminStudentSearch {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width:600px) {
+    .adminStudentFilters {
+        grid-template-columns: 1fr;
+    }
+
+    .adminStudentSearch {
+        grid-column: auto;
+    }
+
+    .adminStudentFilterCard {
+        padding: 15px;
+    }
+}

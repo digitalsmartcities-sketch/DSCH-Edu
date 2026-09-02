@@ -1,0 +1,328 @@
+.dschErrorPage {
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    box-sizing:border-box;
+    padding:40px 20px;
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(16,185,129,.09),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(5,150,105,.07),
+            transparent 30%
+        ),
+        #f8fafc;
+    font-family:"Outfit",sans-serif;
+}
+
+
+/* =====================================================
+   BACKGROUND SHAPES
+===================================================== */
+
+.dschErrorBackgroundShape {
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+}
+
+.shapeOne {
+    width:420px;
+    height:420px;
+    top:-220px;
+    right:-120px;
+    background:rgba(16,185,129,.07);
+    filter:blur(40px);
+}
+
+.shapeTwo {
+    width:330px;
+    height:330px;
+    bottom:-180px;
+    left:-120px;
+    background:rgba(52,211,153,.07);
+    filter:blur(45px);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.dschErrorContainer {
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:620px;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    padding:48px 45px;
+    box-sizing:border-box;
+    border:1px solid #e5e7eb;
+    border-radius:22px;
+    background:rgba(255,255,255,.96);
+    box-shadow:
+        0 25px 65px rgba(17,24,39,.08);
+    text-align:center;
+    backdrop-filter:blur(10px);
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.dschErrorBrand {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:38px;
+}
+
+.dschErrorBrandIcon {
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:11px;
+    background:#10b981;
+    color:#fff;
+    font-size:19px;
+    box-shadow:0 8px 18px rgba(16,185,129,.18);
+}
+
+.dschErrorBrand > div:last-child {
+    display:flex;
+    align-items:flex-start;
+    flex-direction:column;
+    text-align:left;
+}
+
+.dschErrorBrand strong {
+    color:#111827;
+    font-size:17px;
+    line-height:1.1;
+}
+
+.dschErrorBrand span {
+    margin-top:3px;
+    color:#059669;
+    font-size:9px;
+    font-weight:600;
+}
+
+
+/* =====================================================
+   ERROR ICON
+===================================================== */
+
+.dschErrorIcon {
+    margin-bottom:22px;
+}
+
+.dschErrorIconCircle {
+    width:125px;
+    height:125px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:10px solid #ecfdf5;
+    border-radius:50%;
+    background:#d1fae5;
+    color:#059669;
+    font-size:38px;
+    font-weight:800;
+    box-shadow:
+        0 0 0 1px #a7f3d0,
+        0 15px 35px rgba(16,185,129,.10);
+}
+
+.dschErrorIconCircle svg {
+    font-size:34px;
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.dschErrorLabel {
+    display:inline-block;
+    margin-bottom:9px;
+    color:#059669;
+    font-size:10px;
+    font-weight:750;
+    letter-spacing:1.5px;
+}
+
+.dschErrorContainer h1 {
+    margin:0 0 13px;
+    color:#111827;
+    font-size:34px;
+    line-height:1.2;
+    letter-spacing:-.6px;
+}
+
+.dschErrorContainer > p {
+    max-width:500px;
+    margin:0;
+    color:#6b7280;
+    font-size:14px;
+    line-height:1.8;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.dschErrorActions {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:30px;
+}
+
+.dschErrorPrimaryBtn,
+.dschErrorSecondaryBtn {
+    min-height:46px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:0 19px;
+    border-radius:9px;
+    font-family:inherit;
+    font-size:11px;
+    font-weight:650;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.dschErrorPrimaryBtn {
+    border:1px solid #10b981;
+    background:#10b981;
+    color:#fff;
+    box-shadow:0 7px 18px rgba(16,185,129,.14);
+}
+
+.dschErrorPrimaryBtn:hover {
+    background:#059669;
+    border-color:#059669;
+    transform:translateY(-2px);
+}
+
+.dschErrorSecondaryBtn {
+    border:1px solid #d1d5db;
+    background:#fff;
+    color:#374151;
+}
+
+.dschErrorSecondaryBtn:hover {
+    border-color:#10b981;
+    background:#ecfdf5;
+    color:#059669;
+    transform:translateY(-2px);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.dschErrorFooter {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    margin-top:35px;
+    padding-top:20px;
+    border-top:1px solid #f3f4f6;
+}
+
+.dschErrorFooter span {
+    color:#6b7280;
+    font-size:9px;
+    font-weight:600;
+}
+
+.dschErrorFooter small {
+    color:#10b981;
+    font-size:9px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:600px) {
+
+    .dschErrorPage {
+        padding:20px 12px;
+    }
+
+    .dschErrorContainer {
+        padding:35px 22px;
+        border-radius:17px;
+    }
+
+    .dschErrorBrand {
+        margin-bottom:30px;
+    }
+
+    .dschErrorIconCircle {
+        width:105px;
+        height:105px;
+        font-size:31px;
+    }
+
+    .dschErrorContainer h1 {
+        font-size:28px;
+    }
+
+    .dschErrorContainer > p {
+        font-size:13px;
+    }
+
+    .dschErrorActions {
+        width:100%;
+        flex-direction:column;
+    }
+
+    .dschErrorPrimaryBtn,
+    .dschErrorSecondaryBtn {
+        width:100%;
+    }
+
+}
+
+@media(max-width:380px) {
+
+    .dschErrorContainer {
+        padding:30px 17px;
+    }
+
+    .dschErrorContainer h1 {
+        font-size:25px;
+    }
+
+    .dschErrorIconCircle {
+        width:90px;
+        height:90px;
+        border-width:7px;
+        font-size:27px;
+    }
+
+}

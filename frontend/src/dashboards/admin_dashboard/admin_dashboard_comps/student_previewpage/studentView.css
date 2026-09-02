@@ -1,0 +1,730 @@
+/* =====================================================
+   STUDENT VIEW PAGE
+===================================================== */
+
+.studentViewPage {
+    width: 100%;
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding-bottom: 50px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.studentViewHeader {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+.studentViewEyebrow {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    color: #059669;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+}
+
+.studentViewHeader h1 {
+    margin: 0 0 6px;
+
+    color: #111827;
+
+    font-size: 27px;
+
+    font-weight: 700;
+}
+
+.studentViewHeader p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.studentBackBtn {
+    height: 39px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.studentBackBtn:hover {
+    background: #ecfdf5;
+
+    border-color: #10b981;
+
+    color: #059669;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.studentReviewStatus {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+
+    padding: 17px 19px;
+
+    border: 1px solid #fde68a;
+
+    border-radius: 11px;
+
+    background: #fffbeb;
+}
+
+.reviewStatusContent {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+.reviewStatusIcon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #fef3c7;
+
+    color: #d97706;
+
+    font-size: 15px;
+}
+
+.reviewStatusContent strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #92400e;
+
+    font-size: 12px;
+}
+
+.reviewStatusContent p {
+    margin: 0;
+
+    color: #a16207;
+
+    font-size: 9px;
+}
+
+.studentPendingBadge {
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.studentViewCard {
+    padding: 22px;
+
+    margin-bottom: 17px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 12px rgba(17, 24, 39, 0.025);
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.studentSectionHeading {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.studentSectionIcon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #ecfdf5;
+
+    color: #059669;
+
+    font-size: 13px;
+}
+
+.studentSectionHeading h2 {
+    margin: 0 0 4px;
+
+    color: #111827;
+
+    font-size: 15px;
+}
+
+.studentSectionHeading p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   INFO GRID
+===================================================== */
+
+.studentInfoGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+/* =====================================================
+   INFO ITEM
+===================================================== */
+
+.studentInfoItem {
+    padding: 12px 13px;
+
+    border: 1px solid #f3f4f6;
+
+    border-radius: 8px;
+
+    background: #f9fafb;
+}
+
+.studentInfoItem span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #9ca3af;
+
+    font-size: 8px;
+}
+
+.studentInfoItem strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   DOCUMENTS
+===================================================== */
+
+.studentDocumentsGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.studentDocumentCard {
+    overflow: hidden;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+}
+
+.studentDocumentHeader {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 10px 12px;
+
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.studentDocumentHeader h3 {
+    margin: 0;
+
+    color: #374151;
+
+    font-size: 10px;
+}
+
+.studentDocumentHeader span {
+    color: #9ca3af;
+
+    font-size: 7px;
+}
+
+.studentDocumentImage {
+    height: 200px;
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    background: #f9fafb;
+}
+
+.studentDocumentImage img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+}
+
+
+/* =====================================================
+   REJECTION CARD
+===================================================== */
+
+.studentRejectCard {
+    padding: 20px;
+
+    margin-bottom: 17px;
+
+    background: #ffffff;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 12px rgba(17, 24, 39, 0.025);
+}
+
+.studentRejectCard h2 {
+    margin: 0 0 5px;
+
+    color: #b91c1c;
+
+    font-size: 15px;
+}
+
+.studentRejectCard > p {
+    margin: 0 0 14px;
+
+    color: #6b7280;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+.studentRejectCard textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    resize: vertical;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.studentRejectCard textarea:focus {
+    border-color: #ef4444;
+
+    box-shadow:
+        0 0 0 3px rgba(239, 68, 68, 0.07);
+}
+
+
+/* =====================================================
+   REJECTION ACTIONS
+===================================================== */
+
+.rejectionActions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.cancelRejectBtn,
+.confirmRejectBtn {
+    height: 38px;
+
+    padding: 0 14px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.cancelRejectBtn {
+    border: 1px solid #d1d5db;
+
+    background: #ffffff;
+
+    color: #4b5563;
+}
+
+.cancelRejectBtn:hover {
+    background: #f3f4f6;
+}
+
+.confirmRejectBtn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    border: 1px solid #dc2626;
+
+    background: #dc2626;
+
+    color: #ffffff;
+}
+
+.confirmRejectBtn:hover {
+    background: #b91c1c;
+
+    border-color: #b91c1c;
+}
+
+
+/* =====================================================
+   DECISION BAR
+===================================================== */
+
+.studentDecisionBar {
+    position: sticky;
+
+    bottom: 12px;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 17px 20px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 35px rgba(17, 24, 39, 0.10);
+
+    backdrop-filter: blur(8px);
+}
+
+.studentDecisionBar h2 {
+    margin: 0 0 4px;
+
+    color: #111827;
+
+    font-size: 13px;
+}
+
+.studentDecisionBar p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+}
+
+.studentDecisionButtons {
+    display: flex;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.studentRejectBtn,
+.studentApproveBtn {
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 15px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.studentRejectBtn {
+    border: 1px solid #fecaca;
+
+    background: #ffffff;
+
+    color: #dc2626;
+}
+
+.studentRejectBtn:hover {
+    background: #fef2f2;
+
+    border-color: #fca5a5;
+}
+
+.studentApproveBtn {
+    border: 1px solid #10b981;
+
+    background: #10b981;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 15px rgba(16, 185, 129, 0.18);
+}
+
+.studentApproveBtn:hover {
+    background: #059669;
+
+    border-color: #059669;
+
+    transform: translateY(-1px);
+}
+
+.studentRejectBtn:disabled,
+.studentApproveBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .studentDocumentsGrid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .studentDecisionBar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .studentDecisionButtons {
+        width: 100%;
+    }
+
+    .studentRejectBtn,
+    .studentApproveBtn {
+        flex: 1;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .studentViewHeader {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .studentBackBtn {
+        width: 100%;
+    }
+
+    .studentReviewStatus {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .studentViewCard {
+        padding: 17px;
+    }
+
+    .studentInfoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .studentDocumentsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .rejectionActions {
+        flex-direction: column;
+    }
+
+    .cancelRejectBtn,
+    .confirmRejectBtn {
+        width: 100%;
+    }
+
+    .studentDecisionButtons {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .studentRejectBtn,
+    .studentApproveBtn {
+        width: 100%;
+    }
+
+}

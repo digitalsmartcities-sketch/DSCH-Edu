@@ -1,0 +1,434 @@
+/* =====================================================
+   GENERATE FEE MODAL
+===================================================== */
+
+.generateFeeModalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(17, 24, 39, .55);
+    backdrop-filter: blur(4px);
+    animation: generateFeeOverlay .2s ease;
+}
+
+.generateFeeModal {
+    width: 100%;
+    max-width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 13px;
+    box-shadow: 0 25px 70px rgba(17, 24, 39, .20);
+    animation: generateFeeModalIn .25s ease;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.generateFeeModalHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.generateFeeModalHeader span {
+    display: block;
+    margin-bottom: 5px;
+    color: #059669;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.generateFeeModalHeader h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.generateFeeCloseBtn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #6b7280;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.generateFeeCloseBtn:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.generateFeeCloseBtn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   GENERATION MODE
+===================================================== */
+
+.generateFeeMode {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin: 18px 22px 0;
+    padding: 13px;
+    border: 1px solid #d1fae5;
+    border-radius: 9px;
+    background: #ecfdf5;
+}
+
+.generateFeeModeIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #dcfce7;
+    color: #059669;
+    font-size: 13px;
+}
+
+.generateFeeMode>div:last-child {
+    min-width: 0;
+}
+
+.generateFeeMode span {
+    display: block;
+    margin-bottom: 3px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.generateFeeMode strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #166534;
+    font-size: 11px;
+}
+
+.generateFeeMode p {
+    margin: 0;
+    color: #4b5563;
+    font-size: 8px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   STUDENT
+===================================================== */
+
+.generateFeeStudent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 22px 0;
+    padding: 11px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.generateFeeStudentAvatar {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.generateFeeStudent>div:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.generateFeeStudent span {
+    margin-bottom: 2px;
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+.generateFeeStudent strong {
+    color: #374151;
+    font-size: 10px;
+}
+
+.generateFeeStudent p {
+    margin: 3px 0 0;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.generateFeeModal form {
+    padding: 20px 22px 22px;
+}
+
+.generateFeeFields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.generateFeeField {
+    min-width: 0;
+}
+
+.generateFeeField label {
+    display: block;
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.generateFeeSelect {
+    position: relative;
+}
+
+.generateFeeSelect>svg:first-child {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+.generateFeeSelect select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 32px 0 31px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    appearance: none;
+    background: #ffffff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.generateFeeSelect select:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .08);
+}
+
+.generateFeeSelect>svg:last-child {
+    position: absolute;
+    top: 50%;
+    right: 11px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   INFO MESSAGE
+===================================================== */
+
+.generateFeeInfo {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 11px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.generateFeeInfo>svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #059669;
+    font-size: 11px;
+}
+
+.generateFeeInfo p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 8px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.generateFeeModalActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.generateFeeCancelBtn,
+.generateFeeSubmitBtn {
+    height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 14px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.generateFeeCancelBtn {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #4b5563;
+}
+
+.generateFeeCancelBtn:hover:not(:disabled) {
+    background: #f3f4f6;
+}
+
+.generateFeeSubmitBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #ffffff;
+    box-shadow: 0 5px 14px rgba(16, 185, 129, .14);
+}
+
+.generateFeeSubmitBtn:hover:not(:disabled) {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+.generateFeeSubmitBtn:disabled,
+.generateFeeCancelBtn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes generateFeeOverlay {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes generateFeeModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 650px) {
+    .generateFeeModalOverlay {
+        padding: 12px;
+    }
+
+    .generateFeeModal {
+        max-height: 94vh;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 520px) {
+    .generateFeeModalHeader {
+        padding: 17px;
+    }
+
+    .generateFeeMode,
+    .generateFeeStudent {
+        margin-left: 17px;
+        margin-right: 17px;
+    }
+
+    .generateFeeModal form {
+        padding: 17px;
+    }
+
+    .generateFeeFields {
+        grid-template-columns: 1fr;
+    }
+
+    .generateFeeModalActions {
+        flex-direction: column-reverse;
+    }
+
+    .generateFeeCancelBtn,
+    .generateFeeSubmitBtn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,752 @@
+.enrollmentPaymentView{
+    width:100%;
+    max-width:1050px;
+    margin:0 auto;
+    padding:5px 0 45px;
+    font-family:"Outfit",sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.enrollmentViewHeader{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.enrollmentViewBackBtn{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:17px;
+    padding:7px 10px;
+    border:1px solid #d1d5db;
+    border-radius:7px;
+    background:#fff;
+    color:#374151;
+    font-family:inherit;
+    font-size:9px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.enrollmentViewBackBtn:hover{
+    border-color:#10b981;
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.enrollmentViewEyebrow{
+    display:block;
+    margin-bottom:5px;
+    color:#059669;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.enrollmentViewHeader h1{
+    margin:0 0 5px;
+    color:#111827;
+    font-size:27px;
+}
+
+.enrollmentViewHeader p{
+    margin:0;
+    color:#6b7280;
+    font-size:10px;
+    line-height:1.6;
+}
+
+.enrollmentViewStatuses{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.viewStatusBadge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:7px 9px;
+    border-radius:999px;
+    font-size:8px;
+    font-weight:700;
+}
+
+.viewStatusBadge.pending{
+    background:#fffbeb;
+    color:#b45309;
+}
+
+.viewStatusBadge.approved,
+.viewStatusBadge.paid{
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.viewStatusBadge.rejected{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+.viewStatusBadge.submitted{
+    background:#fffbeb;
+    color:#b45309;
+}
+
+.viewStatusBadge svg{
+    font-size:8px;
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.enrollmentEditNotice{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:15px;
+    padding:13px;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    background:#f9fafb;
+}
+
+.enrollmentEditNotice.editable{
+    border-color:#fde68a;
+    background:#fffbeb;
+}
+
+.enrollmentEditNotice>svg{
+    flex-shrink:0;
+    margin-top:2px;
+    color:#9ca3af;
+    font-size:12px;
+}
+
+.enrollmentEditNotice.editable>svg{
+    color:#d97706;
+}
+
+.enrollmentEditNotice strong{
+    display:block;
+    margin-bottom:3px;
+    color:#374151;
+    font-size:10px;
+}
+
+.enrollmentEditNotice p{
+    margin:0;
+    color:#6b7280;
+    font-size:9px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.enrollmentViewForm{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.enrollmentViewSection{
+    padding:22px;
+    border:1px solid #e5e7eb;
+    border-radius:11px;
+    background:#fff;
+    box-shadow:0 4px 14px rgba(17,24,39,.025);
+}
+
+.enrollmentViewSectionHeading{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.enrollmentViewSectionIcon{
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    border-radius:8px;
+    background:#ecfdf5;
+    color:#059669;
+    font-size:13px;
+}
+
+.enrollmentViewSectionHeading h2{
+    margin:0 0 3px;
+    color:#111827;
+    font-size:15px;
+}
+
+.enrollmentViewSectionHeading p{
+    margin:0;
+    color:#9ca3af;
+    font-size:8px;
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.enrollmentViewGrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+
+.enrollmentViewField{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.enrollmentViewField.full{
+    grid-column:1/-1;
+}
+
+.enrollmentViewField label{
+    color:#374151;
+    font-size:9px;
+    font-weight:650;
+}
+
+.enrollmentViewField label span{
+    margin-left:3px;
+    color:#dc2626;
+}
+
+.enrollmentViewField input,
+.enrollmentViewField select,
+.enrollmentViewField textarea{
+    width:100%;
+    box-sizing:border-box;
+    border:1px solid #d1d5db;
+    border-radius:7px;
+    outline:none;
+    background:#fff;
+    color:#111827;
+    font-family:inherit;
+    font-size:10px;
+    transition:.2s ease;
+}
+
+.enrollmentViewField input,
+.enrollmentViewField select{
+    height:41px;
+    padding:0 10px;
+}
+
+.enrollmentViewField textarea{
+    padding:10px;
+    resize:vertical;
+    line-height:1.6;
+}
+
+.enrollmentViewField input:focus,
+.enrollmentViewField select:focus,
+.enrollmentViewField textarea:focus{
+    border-color:#10b981;
+    box-shadow:0 0 0 3px rgba(16,185,129,.06);
+}
+
+.enrollmentViewField input:disabled,
+.enrollmentViewField select:disabled,
+.enrollmentViewField textarea:disabled{
+    background:#f3f4f6;
+    color:#6b7280;
+    cursor:not-allowed;
+    opacity:1;
+}
+
+
+/* =====================================================
+   COURSE
+===================================================== */
+
+.enrollmentCourseView{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:15px;
+    border:1px solid #d1fae5;
+    border-radius:9px;
+    background:#ecfdf5;
+}
+
+.enrollmentCourseView>div:first-child>span{
+    display:block;
+    margin-bottom:4px;
+    color:#059669;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.enrollmentCourseView h3{
+    margin:0 0 5px;
+    color:#111827;
+    font-size:14px;
+}
+
+.enrollmentCourseView p{
+    margin:3px 0;
+    color:#6b7280;
+    font-size:8px;
+}
+
+.enrollmentCourseView p strong{
+    color:#374151;
+}
+
+.courseLockedLabel{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex-shrink:0;
+    padding:7px 9px;
+    border-radius:6px;
+    background:#fff;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.courseLockedLabel svg{
+    font-size:8px;
+}
+
+
+/* =====================================================
+   PAYMENT
+===================================================== */
+
+.enrollmentPaymentAmount{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:17px;
+    padding:14px 16px;
+    border:1px solid #d1fae5;
+    border-radius:8px;
+    background:#ecfdf5;
+}
+
+.enrollmentPaymentAmount span{
+    color:#6b7280;
+    font-size:9px;
+}
+
+.enrollmentPaymentAmount strong{
+    color:#059669;
+    font-size:18px;
+}
+
+
+/* =====================================================
+   PAYMENT PROOF
+===================================================== */
+
+.paymentProofView{
+    margin-top:17px;
+    padding:14px;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    background:#f9fafb;
+}
+
+.paymentProofHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.paymentProofHeader>div{
+    display:flex;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:3px;
+}
+
+.paymentProofHeader span{
+    color:#9ca3af;
+    font-size:7px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.paymentProofHeader strong{
+    color:#374151;
+    font-size:9px;
+}
+
+.proofViewBtn{
+    min-height:30px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:0 9px;
+    border:1px solid #d1d5db;
+    border-radius:6px;
+    background:#fff;
+    color:#374151;
+    font-family:inherit;
+    font-size:8px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.proofViewBtn:hover{
+    border-color:#10b981;
+    background:#ecfdf5;
+    color:#059669;
+}
+
+.paymentProofReplace{
+    min-height:40px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:11px;
+    padding:0 10px;
+    border:1px dashed #cbd5e1;
+    border-radius:7px;
+    background:#fff;
+    color:#6b7280;
+    cursor:pointer;
+}
+
+.paymentProofReplace input{
+    display:none;
+}
+
+.paymentProofReplace svg{
+    color:#10b981;
+    font-size:12px;
+}
+
+.paymentProofReplace span{
+    color:#6b7280;
+    font-size:8px;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.enrollmentViewMessage{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:11px 13px;
+    border-radius:8px;
+    font-size:9px;
+}
+
+.enrollmentViewMessage.success{
+    border:1px solid #bbf7d0;
+    background:#ecfdf5;
+    color:#166534;
+}
+
+.enrollmentViewMessage.error{
+    border:1px solid #fecaca;
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.enrollmentViewActions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.enrollmentCancelBtn,
+.enrollmentRejectBtn,
+.enrollmentApproveBtn,
+.enrollmentResubmitBtn{
+    min-height:41px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:0 14px;
+    border-radius:7px;
+    font-family:inherit;
+    font-size:9px;
+    font-weight:650;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.enrollmentCancelBtn{
+    border:1px solid #d1d5db;
+    background:#fff;
+    color:#374151;
+}
+
+.enrollmentCancelBtn:hover{
+    border-color:#10b981;
+    color:#059669;
+}
+
+.enrollmentRejectBtn{
+    border:1px solid #fecaca;
+    background:#fff;
+    color:#dc2626;
+}
+
+.enrollmentRejectBtn:hover{
+    background:#fef2f2;
+}
+
+.enrollmentApproveBtn,
+.enrollmentResubmitBtn{
+    border:1px solid #10b981;
+    background:#10b981;
+    color:#fff;
+}
+
+.enrollmentApproveBtn:hover,
+.enrollmentResubmitBtn:hover:not(:disabled){
+    border-color:#059669;
+    background:#059669;
+}
+
+.enrollmentResubmitBtn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+
+/* =====================================================
+   PROOF MODAL
+===================================================== */
+
+.enrollmentProofOverlay{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(17,24,39,.65);
+}
+
+.enrollmentProofModal{
+    width:100%;
+    max-width:750px;
+    max-height:90vh;
+    overflow:hidden;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 25px 60px rgba(0,0,0,.2);
+}
+
+.enrollmentProofModalHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:14px 16px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.enrollmentProofModalHeader span{
+    display:block;
+    margin-bottom:3px;
+    color:#059669;
+    font-size:7px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.enrollmentProofModalHeader h3{
+    margin:0;
+    color:#111827;
+    font-size:13px;
+}
+
+.enrollmentProofModalHeader button{
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #e5e7eb;
+    border-radius:6px;
+    background:#fff;
+    color:#6b7280;
+    cursor:pointer;
+}
+
+.enrollmentProofModalHeader button:hover{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+.enrollmentProofContent{
+    max-height:calc(90vh - 70px);
+    overflow:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:#f3f4f6;
+}
+
+.enrollmentProofContent img{
+    max-width:100%;
+    max-height:70vh;
+    display:block;
+    object-fit:contain;
+    border-radius:5px;
+    box-shadow:0 8px 25px rgba(0,0,0,.1);
+}
+
+.enrollmentProofContent a{
+    color:#059669;
+    font-size:11px;
+    font-weight:600;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.enrollmentViewEmpty{
+    min-height:400px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:10px;
+}
+
+.enrollmentViewEmpty h2{
+    margin:0;
+    color:#111827;
+    font-size:20px;
+}
+
+.enrollmentViewEmpty button{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 13px;
+    border:0;
+    border-radius:7px;
+    background:#10b981;
+    color:#fff;
+    font-family:inherit;
+    font-size:9px;
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px){
+
+    .enrollmentViewHeader{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .enrollmentViewStatuses{
+        justify-content:flex-start;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .enrollmentPaymentView{
+        padding:5px 0 35px;
+    }
+
+    .enrollmentViewSection{
+        padding:17px;
+    }
+
+    .enrollmentViewGrid{
+        grid-template-columns:1fr;
+    }
+
+    .enrollmentViewField.full{
+        grid-column:auto;
+    }
+
+    .enrollmentCourseView{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .enrollmentViewActions{
+        align-items:stretch;
+        flex-direction:column;
+    }
+
+    .enrollmentCancelBtn,
+    .enrollmentRejectBtn,
+    .enrollmentApproveBtn,
+    .enrollmentResubmitBtn{
+        width:100%;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .enrollmentViewHeader h1{
+        font-size:23px;
+    }
+
+    .enrollmentViewHeader p{
+        font-size:9px;
+    }
+
+    .enrollmentViewSectionHeading h2{
+        font-size:14px;
+    }
+
+    .enrollmentViewSectionHeading p{
+        font-size:8px;
+    }
+
+}

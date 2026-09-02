@@ -1,0 +1,1950 @@
+.educationAboutPage {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #f8fafc;
+    color: #111827;
+}
+
+
+/* =====================================================
+   ABOUT HERO
+===================================================== */
+
+.educationAboutHero {
+    position: relative;
+    min-height: 540px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    overflow: hidden;
+    padding: 70px 7%;
+    background:
+        linear-gradient(
+            135deg,
+            #064e3b 0%,
+            #047857 52%,
+            #059669 100%
+        );
+}
+
+/* =====================================================
+   HERO BACKGROUND EFFECTS
+===================================================== */
+
+.educationAboutHero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    top: -280px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(167, 243, 208, .12);
+
+    filter: blur(50px);
+
+    pointer-events: none;
+}
+
+.educationAboutHero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    bottom: -230px;
+    left: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(110, 231, 183, .08);
+
+    filter: blur(45px);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.aboutHeroContent {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    max-width: 650px;
+}
+
+.aboutHeroEyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 8px 15px;
+    margin-bottom: 20px;
+
+    border: 1px solid rgba(167, 243, 208, .35);
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, .08);
+
+    color: #a7f3d0;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+
+.aboutHeroContent h1 {
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size: 56px;
+    line-height: 1.08;
+
+    letter-spacing: -1.8px;
+
+    font-weight: 750;
+}
+
+.aboutHeroContent h1 span {
+    display: block;
+
+    color: #a7f3d0;
+}
+
+
+.aboutHeroContent p {
+    max-width: 620px;
+
+    margin: 0;
+
+    color: #ecfdf5;
+
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   HERO BUTTONS
+===================================================== */
+
+.aboutHeroActions {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 30px;
+}
+
+
+.aboutHeroPrimaryBtn,
+.aboutHeroSecondaryBtn {
+    min-height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 22px;
+
+    border-radius: 9px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    transition: .25s ease;
+}
+
+
+.aboutHeroPrimaryBtn {
+    background: #ffffff;
+    color: #059669;
+}
+
+
+.aboutHeroPrimaryBtn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, .16);
+}
+
+
+.aboutHeroSecondaryBtn {
+    border: 1px solid rgba(255, 255, 255, .35);
+
+    background: rgba(255, 255, 255, .07);
+
+    color: #ffffff;
+}
+
+
+.aboutHeroSecondaryBtn:hover {
+    background: rgba(255, 255, 255, .14);
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   HERO VISUAL
+===================================================== */
+
+.aboutHeroVisual {
+    position: relative;
+
+    width: 100%;
+    min-height: 390px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 3;
+}
+
+
+/* =====================================================
+   HERO MAIN ICON
+===================================================== */
+
+.aboutHeroMainIcon {
+    width: 260px;
+    height: 260px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, .16),
+            rgba(167, 243, 208, .10)
+        );
+
+    border: 1px solid rgba(255, 255, 255, .22);
+
+    color: #d1fae5;
+
+    font-size: 105px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, .16),
+        inset 0 0 50px rgba(255, 255, 255, .05);
+
+    backdrop-filter: blur(10px);
+
+    animation: aboutHeroFloat 5s ease-in-out infinite;
+}
+
+
+@keyframes aboutHeroFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+}
+
+
+/* =====================================================
+   HERO FLOATING CARD
+===================================================== */
+
+.aboutHeroFloatingCard {
+    position: absolute;
+
+    right: 3%;
+    bottom: 35px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 13px 17px;
+
+    border: 1px solid rgba(167, 243, 208, .35);
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, .96);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .15);
+
+    z-index: 10;
+}
+
+
+.aboutHeroFloatingCard > svg {
+    flex-shrink: 0;
+
+    color: #10b981;
+
+    font-size: 19px;
+}
+
+
+.aboutHeroFloatingCard strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #111827;
+
+    font-size: 13px;
+}
+
+
+.aboutHeroFloatingCard span {
+    color: #6b7280;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   HERO FLOATING ICONS
+===================================================== */
+
+.aboutHeroIcon {
+    position: absolute;
+
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, .10);
+
+    border: 1px solid rgba(255, 255, 255, .22);
+
+    color: #d1fae5;
+
+    font-size: 19px;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, .12);
+
+    animation: aboutIconFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes aboutIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* =====================================================
+   HERO ICON POSITIONS
+===================================================== */
+
+.aboutIcon1 {
+    top: 28px;
+    left: 7%;
+
+    animation-delay: .2s;
+}
+
+
+.aboutIcon2 {
+    top: 75px;
+    right: 8%;
+
+    animation-delay: .8s;
+}
+
+
+.aboutIcon3 {
+    left: 0;
+    bottom: 105px;
+
+    animation-delay: 1.3s;
+}
+
+
+.aboutIcon4 {
+    right: 0;
+    bottom: 135px;
+
+    animation-delay: 1.8s;
+}
+
+
+.aboutIcon5 {
+    left: 20%;
+    bottom: 18px;
+
+    animation-delay: 2.2s;
+}
+
+
+.aboutIcon6 {
+    right: 25%;
+    top: 5px;
+
+    animation-delay: 2.7s;
+}
+
+
+/* =====================================================
+   COMMON SECTION HEADING
+===================================================== */
+
+.aboutSectionHeading {
+    width: 100%;
+    max-width: 720px;
+
+    margin: 0 auto 44px;
+
+    text-align: center;
+}
+
+
+.aboutSectionHeading > span,
+.aboutIntroContent > .aboutSectionEyebrow {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: #059669;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+
+.aboutSectionHeading h2 {
+    margin: 0 0 12px;
+
+    color: #111827;
+
+    font-size: 34px;
+    line-height: 1.2;
+
+    letter-spacing: -.6px;
+}
+
+
+.aboutSectionHeading p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.aboutIntro {
+    width: 100%;
+    max-width: 1140px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+
+    margin: 0 auto;
+
+    padding: 90px 24px;
+}
+
+
+.aboutIntroImage {
+    position: relative;
+
+    min-height: 380px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.aboutIntroImageMain {
+    width: 300px;
+    height: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 34px;
+
+    border: 1px dashed #047857;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ecfdf5,
+            #d1fae5
+        );
+
+    color: #059669;
+
+    font-size: 100px;
+
+    box-shadow:
+        0 25px 55px rgba(16, 185, 129, .12);
+}
+
+
+.aboutFloatingCard {
+    position: absolute;
+
+    right: 5%;
+    bottom: 20px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 16px;
+
+    border: 1px solid #d1fae5;
+
+    border-radius: 12px;
+
+    background: #fff;
+
+    box-shadow:
+        0 10px 25px rgba(17, 24, 39, .09);
+}
+
+
+.aboutFloatingCard > svg {
+    flex-shrink: 0;
+
+    color: #10b981;
+
+    font-size: 18px;
+}
+
+
+.aboutFloatingCard strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #111827;
+
+    font-size: 13px;
+}
+
+
+.aboutFloatingCard span {
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+.aboutIntroContent h2 {
+    margin: 0 0 16px;
+
+    color: #111827;
+
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+
+.aboutIntroContent > p {
+    margin: 0 0 14px;
+
+    color: #6b7280;
+
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+
+.aboutIntroPoints {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+
+.aboutIntroPoints div {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.aboutIntroPoints svg {
+    flex-shrink: 0;
+
+    color: #10b981;
+
+    font-size: 14px;
+}
+
+
+.aboutIntroPoints span {
+    color: #374151;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   VISION / MISSION
+===================================================== */
+
+.aboutVisionMission {
+    padding: 90px 24px;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(16, 185, 129, .07),
+            transparent 25%
+        ),
+        #fff;
+
+    border-top: 1px solid #e5e7eb;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.visionMissionGrid {
+    width: 100%;
+    max-width: 1140px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 24px;
+
+    margin: 0 auto;
+}
+
+
+.visionMissionCard {
+    padding: 30px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    background: #fff;
+
+    box-shadow:
+        0 8px 22px rgba(17, 24, 39, .035);
+}
+
+
+.visionMissionCard.vision {
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #f0fdf4
+        );
+}
+
+
+.visionMissionCard.mission {
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #ecfdf5
+        );
+}
+
+
+.visionMissionIcon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    background: #ecfdf5;
+
+    color: #059669;
+
+    font-size: 20px;
+}
+
+
+.visionMissionCard > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #059669;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+.visionMissionCard h3 {
+    margin: 0 0 10px;
+
+    color: #111827;
+
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+
+.visionMissionCard p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+
+/* =====================================================
+   PLATFORM FEATURES
+===================================================== */
+
+.platformFeatures {
+    width: 100%;
+    max-width: 1140px;
+
+    margin: 0 auto;
+
+    padding: 90px 24px;
+}
+
+
+.platformFeatureGrid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+.platformFeatureCard {
+    min-height: 220px;
+
+    padding: 24px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    background: #fff;
+
+    box-shadow:
+        0 6px 20px rgba(17, 24, 39, .03);
+
+    transition: .25s ease;
+}
+
+
+.platformFeatureCard:hover {
+    border-color: #a7f3d0;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 26px rgba(16, 185, 129, .07);
+}
+
+
+.platformFeatureIcon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    background: #ecfdf5;
+
+    color: #059669;
+
+    font-size: 18px;
+}
+
+
+.platformFeatureCard h3 {
+    margin: 0 0 8px;
+
+    color: #111827;
+
+    font-size: 18px;
+}
+
+
+.platformFeatureCard p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   CONNECTION
+===================================================== */
+
+.educationConnection {
+    padding: 90px 24px;
+
+    background: #f8fafc;
+
+    border-top: 1px solid #e5e7eb;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.connectionGrid {
+    width: 100%;
+    max-width: 1040px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 120px 1fr;
+
+    gap: 20px;
+
+    align-items: center;
+
+    margin: 0 auto;
+}
+
+
+.connectionCard {
+    padding: 28px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    background: #fff;
+
+    box-shadow:
+        0 8px 22px rgba(17, 24, 39, .035);
+}
+
+
+.connectionCardIcon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 12px;
+
+    background: #ecfdf5;
+
+    color: #059669;
+
+    font-size: 18px;
+}
+
+
+.connectionCard > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #059669;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+.connectionCard h3 {
+    margin: 0 0 10px;
+
+    color: #111827;
+
+    font-size: 20px;
+}
+
+
+.connectionCard p {
+    margin: 0 0 18px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+.connectionCard a {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    color: #059669;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+
+.connectionCard a svg {
+    font-size: 11px;
+
+    transition: .2s ease;
+}
+
+
+.connectionCard a:hover svg {
+    transform: translateX(3px);
+}
+
+
+.connectionCenter {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.connectionCenterIcon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 7px solid #d1fae5;
+
+    border-radius: 50%;
+
+    background: #10b981;
+
+    color: #fff;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 0 0 7px #ecfdf5;
+}
+
+
+.connectionCenter span {
+    color: #059669;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    letter-spacing: 1.1px;
+}
+
+
+/* =====================================================
+   VALUES
+===================================================== */
+
+.aboutValues {
+    width: 100%;
+    max-width: 1140px;
+
+    margin: 0 auto;
+
+    padding: 90px 24px;
+}
+
+
+.aboutValuesGrid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.aboutValueCard {
+    padding: 26px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    background: #fff;
+
+    transition: .25s ease;
+}
+
+
+.aboutValueCard:hover {
+    border-color: #a7f3d0;
+
+    transform: translateY(-4px);
+}
+
+
+.aboutValueIcon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 12px;
+
+    background: #ecfdf5;
+
+    color: #059669;
+
+    font-size: 18px;
+}
+
+
+.aboutValueCard h3 {
+    margin: 0 0 8px;
+
+    color: #111827;
+
+    font-size: 19px;
+}
+
+
+.aboutValueCard p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.aboutCta {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 90px 24px;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(16, 185, 129, .18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(110, 231, 183, .10),
+            transparent 32%
+        ),
+        #064e3be1;
+
+    text-align: center;
+}
+
+
+.aboutCta > div {
+    width: 100%;
+    max-width: 720px;
+
+    margin: 0 auto;
+}
+
+
+.aboutCta > div > span {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #a7f3d0;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+
+.aboutCta h2 {
+    margin: 0 0 12px;
+
+    color: #fff;
+
+    font-size: 36px;
+
+    line-height: 1.2;
+}
+
+
+.aboutCta p {
+    margin: 0 auto 24px;
+
+    color: #d1fae5;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+.aboutCtaActions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+.aboutCtaPrimary,
+.aboutCtaSecondary {
+    min-height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0 20px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 650;
+
+    transition: .2s ease;
+}
+
+
+.aboutCtaPrimary {
+    background: #fff;
+
+    color: #059669;
+}
+
+
+.aboutCtaPrimary:hover {
+    transform: translateY(-2px);
+}
+
+
+.aboutCtaSecondary {
+    border: 1px solid rgba(255, 255, 255, .3);
+
+    background: rgba(255, 255, 255, .06);
+
+    color: #fff;
+}
+
+
+.aboutCtaSecondary:hover {
+    background: rgba(255, 255, 255, .12);
+}
+
+
+/* =====================================================
+   LARGE TABLET / SMALL DESKTOP
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .educationAboutHero {
+        grid-template-columns: 1fr 0.85fr;
+
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .aboutHeroContent h1 {
+        font-size: 48px;
+    }
+
+    .aboutHeroMainIcon {
+        width: 230px;
+        height: 230px;
+
+        font-size: 90px;
+    }
+
+    .aboutHeroIcon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 17px;
+    }
+
+    .aboutIcon1 {
+        left: 3%;
+    }
+
+    .aboutIcon2 {
+        right: 3%;
+    }
+
+    .platformFeatureGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    /* HERO */
+
+    .educationAboutHero {
+        min-height: 500px;
+
+        grid-template-columns: 1fr;
+
+        padding: 70px 6%;
+    }
+
+    .aboutHeroContent {
+        max-width: 700px;
+
+        margin: 0 auto;
+
+        text-align: center;
+    }
+
+    .aboutHeroContent h1 {
+        font-size: 44px;
+    }
+
+    .aboutHeroContent p {
+        margin-left: auto;
+        margin-right: auto;
+
+        font-size: 16px;
+    }
+
+    .aboutHeroActions {
+        justify-content: center;
+    }
+
+    .aboutHeroVisual {
+        display: none;
+    }
+
+
+    /* INTRO */
+
+    .aboutIntro {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+
+    .aboutIntroImage {
+        min-height: 330px;
+    }
+
+    .aboutIntroContent {
+        max-width: 700px;
+
+        margin: 0 auto;
+    }
+
+
+    /* VISION MISSION */
+
+    .visionMissionGrid {
+        grid-template-columns: 1fr;
+
+        max-width: 700px;
+    }
+
+
+    /* CONNECTION */
+
+    .connectionGrid {
+        grid-template-columns: 1fr;
+
+        max-width: 650px;
+    }
+
+    .connectionCenter {
+        margin: 10px 0;
+    }
+
+
+    /* VALUES */
+
+    .aboutValuesGrid {
+        grid-template-columns: 1fr;
+
+        max-width: 650px;
+
+        margin: 0 auto;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET / LARGE MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    /* HERO */
+
+    .educationAboutHero {
+        min-height: auto;
+
+        padding: 65px 24px 75px;
+    }
+
+    .aboutHeroContent h1 {
+        font-size: 38px;
+
+        letter-spacing: -1px;
+    }
+
+    .aboutHeroContent p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    /* SECTION HEADINGS */
+
+    .aboutSectionHeading {
+        margin-bottom: 34px;
+    }
+
+    .aboutSectionHeading h2 {
+        font-size: 30px;
+    }
+
+    .aboutSectionHeading p {
+        font-size: 15px;
+    }
+
+
+    /* INTRO */
+
+    .aboutIntro {
+        padding: 70px 24px;
+    }
+
+    .aboutIntroImage {
+        min-height: 300px;
+    }
+
+    .aboutIntroImageMain {
+        width: 260px;
+        height: 260px;
+
+        font-size: 85px;
+    }
+
+    .aboutIntroContent h2 {
+        font-size: 30px;
+    }
+
+
+    /* VISION */
+
+    .aboutVisionMission {
+        padding: 70px 24px;
+    }
+
+
+    /* FEATURES */
+
+    .platformFeatures {
+        padding: 70px 24px;
+    }
+
+    .platformFeatureGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .platformFeatureCard {
+        min-height: auto;
+    }
+
+
+    /* CONNECTION */
+
+    .educationConnection {
+        padding: 70px 24px;
+    }
+
+
+    /* VALUES */
+
+    .aboutValues {
+        padding: 70px 24px;
+    }
+
+
+    /* CTA */
+
+    .aboutCta {
+        padding: 70px 24px;
+    }
+
+    .aboutCta h2 {
+        font-size: 30px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 550px) {
+
+    /* =================================================
+       HERO
+    ================================================= */
+
+    .educationAboutHero {
+        padding: 55px 18px 65px;
+    }
+
+    .aboutHeroEyebrow {
+        padding: 7px 12px;
+
+        margin-bottom: 17px;
+
+        font-size: 10px;
+
+        letter-spacing: 1px;
+    }
+
+    .aboutHeroContent h1 {
+        margin-bottom: 17px;
+
+        font-size: 32px;
+
+        line-height: 1.12;
+
+        letter-spacing: -.7px;
+    }
+
+    .aboutHeroContent p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =================================================
+       HERO BUTTONS
+    ================================================= */
+
+    .aboutHeroActions {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        margin-top: 25px;
+    }
+
+    .aboutHeroPrimaryBtn,
+    .aboutHeroSecondaryBtn {
+        width: 100%;
+
+        min-height: 47px;
+    }
+
+
+    /* =================================================
+       COMMON HEADINGS
+    ================================================= */
+
+    .aboutSectionHeading {
+        margin-bottom: 30px;
+    }
+
+    .aboutSectionHeading > span,
+    .aboutIntroContent > .aboutSectionEyebrow {
+        font-size: 10px;
+
+        letter-spacing: 1.1px;
+    }
+
+    .aboutSectionHeading h2 {
+        font-size: 26px;
+
+        line-height: 1.25;
+    }
+
+    .aboutSectionHeading p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =================================================
+       INTRO
+    ================================================= */
+
+    .aboutIntro {
+        gap: 35px;
+
+        padding: 60px 18px;
+    }
+
+    .aboutIntroImage {
+        min-height: 245px;
+    }
+
+    .aboutIntroImageMain {
+        width: 210px;
+        height: 210px;
+
+        border-radius: 26px;
+
+        font-size: 70px;
+    }
+
+    .aboutFloatingCard {
+        right: 0;
+        bottom: 5px;
+
+        padding: 10px 12px;
+
+        gap: 8px;
+    }
+
+    .aboutFloatingCard > svg {
+        font-size: 15px;
+    }
+
+    .aboutFloatingCard strong {
+        font-size: 11px;
+    }
+
+    .aboutFloatingCard span {
+        font-size: 9px;
+    }
+
+    .aboutIntroContent h2 {
+        font-size: 26px;
+    }
+
+    .aboutIntroContent > p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+    .aboutIntroPoints {
+        grid-template-columns: 1fr;
+
+        gap: 11px;
+
+        margin-top: 20px;
+    }
+
+    .aboutIntroPoints span {
+        font-size: 12px;
+    }
+
+
+    /* =================================================
+       VISION / MISSION
+    ================================================= */
+
+    .aboutVisionMission {
+        padding: 60px 18px;
+    }
+
+    .visionMissionGrid {
+        gap: 15px;
+    }
+
+    .visionMissionCard {
+        padding: 22px;
+
+        border-radius: 14px;
+    }
+
+    .visionMissionIcon {
+        width: 44px;
+        height: 44px;
+
+        margin-bottom: 15px;
+
+        font-size: 17px;
+    }
+
+    .visionMissionCard > span {
+        font-size: 10px;
+    }
+
+    .visionMissionCard h3 {
+        font-size: 19px;
+    }
+
+    .visionMissionCard p {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =================================================
+       FEATURES
+    ================================================= */
+
+    .platformFeatures {
+        padding: 60px 18px;
+    }
+
+    .platformFeatureGrid {
+        gap: 14px;
+    }
+
+    .platformFeatureCard {
+        padding: 21px;
+
+        border-radius: 13px;
+    }
+
+    .platformFeatureIcon {
+        width: 43px;
+        height: 43px;
+
+        margin-bottom: 15px;
+
+        font-size: 17px;
+    }
+
+    .platformFeatureCard h3 {
+        font-size: 17px;
+    }
+
+    .platformFeatureCard p {
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =================================================
+       CONNECTION
+    ================================================= */
+
+    .educationConnection {
+        padding: 60px 18px;
+    }
+
+    .connectionGrid {
+        gap: 14px;
+    }
+
+    .connectionCard {
+        padding: 22px;
+
+        border-radius: 14px;
+    }
+
+    .connectionCardIcon {
+        width: 44px;
+        height: 44px;
+
+        margin-bottom: 14px;
+
+        font-size: 17px;
+    }
+
+    .connectionCard > span {
+        font-size: 10px;
+    }
+
+    .connectionCard h3 {
+        font-size: 19px;
+    }
+
+    .connectionCard p {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+    .connectionCenter {
+        margin: 12px 0;
+    }
+
+    .connectionCenterIcon {
+        width: 55px;
+        height: 55px;
+
+        border-width: 6px;
+
+        font-size: 19px;
+
+        box-shadow:
+            0 0 0 6px #ecfdf5;
+    }
+
+
+    /* =================================================
+       VALUES
+    ================================================= */
+
+    .aboutValues {
+        padding: 60px 18px;
+    }
+
+    .aboutValuesGrid {
+        gap: 14px;
+    }
+
+    .aboutValueCard {
+        padding: 22px;
+
+        border-radius: 13px;
+    }
+
+    .aboutValueIcon {
+        width: 43px;
+        height: 43px;
+
+        margin-bottom: 14px;
+
+        font-size: 17px;
+    }
+
+    .aboutValueCard h3 {
+        font-size: 18px;
+    }
+
+    .aboutValueCard p {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =================================================
+       CTA
+    ================================================= */
+
+    .aboutCta {
+        padding: 60px 18px;
+    }
+
+    .aboutCta > div > span {
+        font-size: 10px;
+    }
+
+    .aboutCta h2 {
+        font-size: 26px;
+
+        line-height: 1.25;
+    }
+
+    .aboutCta p {
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+    .aboutCtaActions {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .aboutCtaPrimary,
+    .aboutCtaSecondary {
+        width: 100%;
+
+        min-height: 47px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .educationAboutHero {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .aboutHeroContent h1 {
+        font-size: 29px;
+    }
+
+    .aboutHeroContent p {
+        font-size: 13px;
+    }
+
+    .aboutIntro,
+    .aboutVisionMission,
+    .platformFeatures,
+    .educationConnection,
+    .aboutValues {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .aboutSectionHeading h2 {
+        font-size: 24px;
+    }
+
+    .aboutIntroContent h2 {
+        font-size: 24px;
+    }
+
+    .aboutIntroImageMain {
+        width: 190px;
+        height: 190px;
+
+        font-size: 62px;
+    }
+
+    .aboutFloatingCard {
+        right: -2px;
+
+        padding: 8px 10px;
+    }
+
+    .visionMissionCard,
+    .connectionCard,
+    .platformFeatureCard,
+    .aboutValueCard {
+        padding: 19px;
+    }
+
+    .aboutCta h2 {
+        font-size: 24px;
+    }
+
+}

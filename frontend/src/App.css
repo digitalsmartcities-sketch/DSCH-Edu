@@ -1,0 +1,1499 @@
+/* =====================================================
+   DSCH-EDU HERO
+===================================================== */
+.dschHeroSection {
+    position: relative;
+    min-height: 32rem;
+    display: flex;
+    padding-top: 10px;
+    align-items: center;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            #f8fffc 0%,
+            #f5faf8 52%,
+            #ecfdf5 100%
+        );
+}
+
+.dschHeroGlow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(10px);
+}
+
+.dschHeroGlowPrimary {
+    width: 38rem;
+    height: 38rem;
+    top: -18rem;
+    right: -8rem;
+    background: radial-gradient(
+        circle,
+        rgba(16, 185, 129, 0.14) 0%,
+        rgba(16, 185, 129, 0) 70%
+    );
+}
+
+.dschHeroGlowSecondary {
+    width: 28rem;
+    height: 28rem;
+    left: -18rem;
+    bottom: -16rem;
+    background: radial-gradient(
+        circle,
+        rgba(5, 150, 105, 0.09) 0%,
+        rgba(5, 150, 105, 0) 70%
+    );
+}
+
+.dschHeroContainer {
+    position: relative;
+    z-index: 2;
+    width: min(92%, 86rem);
+    min-height: auto;
+    margin: 0 auto;
+    padding: 1rem 0 2rem;
+    display: grid;
+    grid-template-columns:
+        minmax(0, 0.92fr)
+        minmax(34rem, 1.08fr);
+    align-items: center;
+    gap: 2rem;
+}
+
+.dschHeroContent {
+    position: relative;
+    z-index: 3;
+    max-width: 43rem;
+}
+
+.dschHeroBadge {
+    width: max-content;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1.2rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid #c7f7df;
+    border-radius: 999px;
+    background: rgba(236, 253, 245, 0.9);
+    color: #059669;
+    font-size: 0.875rem;
+    font-weight: 650;
+    letter-spacing: 0.01em;
+    box-shadow:
+        0 5px 18px rgba(5, 150, 105, 0.06);
+}
+
+.dschHeroBadge svg {
+    flex-shrink: 0;
+    color: #059669;
+    font-size: 1rem;
+}
+
+.dschHeroTitle {
+    max-width: 43rem;
+    margin: 0 0 1.35rem;
+    color: #111827;
+    font-size: clamp(3rem, 5vw, 4.15rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+}
+
+.dschHeroTitle span {
+    display: block;
+    font-family: "EB Garamond";
+    color: #10b981;
+}
+
+.dschHeroDescription {
+    max-width: 39rem;
+    margin: 0;
+    color: #5f7080;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+.dschHeroActions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-top: 2rem;
+}
+
+.dschHeroPrimaryButton,
+.dschHeroSecondaryButton {
+    min-height: 3.35rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0 1.65rem;
+    border-radius: 0.8rem;
+    font-size: 0.95rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease;
+}
+
+.dschHeroPrimaryButton {
+    border: 1px solid #059669;
+    background: #059669;
+    color: #ffffff;
+    box-shadow:
+        0 10px 24px rgba(5, 150, 105, 0.16);
+}
+
+.dschHeroPrimaryButton:hover {
+    background: #047857;
+    border-color: #047857;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow:
+        0 14px 28px rgba(5, 150, 105, 0.2);
+}
+
+.dschHeroPrimaryButton svg {
+    font-size: 0.8rem;
+    transition:
+        transform 0.2s ease;
+}
+
+.dschHeroPrimaryButton:hover svg {
+    transform: translateX(0.25rem);
+}
+
+.dschHeroSecondaryButton {
+    border: 1px solid #059669;
+    background: #ffffff;
+    color: #059669;
+}
+
+.dschHeroSecondaryButton:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #047857;
+    transform: translateY(-2px);
+}
+
+.dschHeroExploreLinks {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.65rem;
+}
+
+.dschHeroExploreLabel {
+    margin-right: 0.2rem;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+
+.dschHeroExploreLinks a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.48rem 0.7rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.55rem;
+    background: rgba(255, 255, 255, 0.75);
+    color: #4b5563;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        0.2s ease;
+}
+
+.dschHeroExploreLinks a:hover {
+    border-color: #a7f3d0;
+    background: #ecfdf5;
+    color: #059669;
+    transform: translateY(-1px);
+}
+
+.dschHeroExploreLinks svg {
+    color: #10b981;
+    font-size: 0.9rem;
+}
+
+.dschHeroVisual {
+    position: relative;
+    min-height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dschHeroVisualGlow {
+    position: absolute;
+    width: 32rem;
+    height: 32rem;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(16, 185, 129, 0.12) 0%,
+            rgba(16, 185, 129, 0.045) 42%,
+            rgba(16, 185, 129, 0) 72%
+        );
+    filter: blur(4px);
+    z-index: 0;
+}
+
+.dschHeroArtwork {
+    position: relative;
+    width: 100%;
+    max-width: 46rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation:
+        dschHeroArtworkFloat 6s ease-in-out infinite;
+}
+
+.dschHeroArtwork img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter:
+        drop-shadow(
+            0 22px 32px rgba(5, 150, 105, 0.09)
+        );
+    transition:
+        transform 0.45s ease,
+        filter 0.45s ease;
+}
+
+.dschHeroVisual:hover .dschHeroArtwork img {
+    transform: translateY(-5px) scale(1.015);
+    filter:
+        drop-shadow(
+            0 28px 42px rgba(5, 150, 105, 0.13)
+        );
+}
+
+.dschHeroAccentLine {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    right: 1rem;
+    top: 3rem;
+    border-top: 1px solid rgba(16, 185, 129, 0.2);
+    border-right: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 0 1.5rem 0 0;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+@keyframes dschHeroArtworkFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+@media (max-width: 70rem) {
+    .dschHeroContainer {
+        grid-template-columns:
+            minmax(0, 0.9fr)
+            minmax(29rem, 1.1fr);
+        gap: 1rem;
+    }
+
+    .dschHeroTitle {
+        font-size: 3.35rem;
+    }
+
+    .dschHeroDescription {
+        font-size: 1rem;
+    }
+
+    .dschHeroVisual {
+        min-height: 28rem;
+    }
+
+    .dschHeroArtwork {
+        max-width: 41rem;
+    }
+}
+
+@media (max-width: 56.25rem) {
+    .dschHeroSection {
+        min-height: auto;
+    }
+
+    .dschHeroContainer {
+        width: min(92%, 45rem);
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding:
+            1.5rem 0
+            3rem;
+    }
+
+    .dschHeroContent {
+        max-width: 42rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .dschHeroBadge {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .dschHeroTitle {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 3.1rem;
+    }
+
+    .dschHeroDescription {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .dschHeroActions,
+    .dschHeroExploreLinks {
+        justify-content: center;
+    }
+
+    .dschHeroVisual {
+        min-height: auto;
+        margin-top: 0.5rem;
+    }
+
+    .dschHeroArtwork {
+        max-width: 42rem;
+    }
+
+    .dschHeroVisualGlow {
+        width: 27rem;
+        height: 27rem;
+    }
+
+    .dschHeroAccentLine {
+        display: none;
+    }
+}
+
+@media (max-width: 40.625rem) {
+    .dschHeroContainer {
+        width: calc(100% - 2rem);
+        padding:
+            1rem 0
+            2.5rem;
+    }
+
+    .dschHeroBadge {
+        max-width: 100%;
+        padding:
+            0.55rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .dschHeroTitle {
+        font-size: 2.45rem;
+        line-height: 1.08;
+    }
+
+    .dschHeroDescription {
+        font-size: 0.92rem;
+        line-height: 1.65;
+    }
+
+    .dschHeroActions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .dschHeroPrimaryButton,
+    .dschHeroSecondaryButton {
+        width: 100%;
+    }
+
+    .dschHeroExploreLinks {
+        gap: 0.45rem;
+    }
+
+    .dschHeroExploreLabel {
+        width: 100%;
+        margin-bottom: 0.15rem;
+    }
+
+    .dschHeroVisual {
+        margin-top: 0.25rem;
+    }
+
+    .dschHeroArtwork {
+        width: 115%;
+        max-width: none;
+        margin-left: -7.5%;
+    }
+
+    .dschHeroVisualGlow {
+        width: 20rem;
+        height: 20rem;
+    }
+}
+
+@media (max-width: 26.25rem) {
+    .dschHeroTitle {
+        font-size: 2.15rem;
+    }
+
+    .dschHeroArtwork {
+        width: 125%;
+        margin-left: -12.5%;
+    }
+
+    .dschHeroExploreLinks a {
+        font-size: 0.73rem;
+        padding: 0.45rem 0.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dschHeroArtwork {
+        animation: none;
+    }
+
+    .dschHeroArtwork img {
+        transition: none;
+    }
+
+    .dschHeroPrimaryButton,
+    .dschHeroSecondaryButton,
+    .dschHeroExploreLinks a {
+        transition: none;
+    }
+}
+
+/* ============================ */
+/* Categories */
+/* ============================ */
+
+.categories {
+    width: 90%;
+    max-width: 1300px;
+    margin: 80px auto;
+}
+
+.sectionHeading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sectionHeading span {
+    color: #10B981;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.sectionHeading h2 {
+    font-size: 38px;
+    color: #1c1a1ad8;
+    margin: 12px 0;
+    font-weight: 800;
+}
+
+.sectionHeading p {
+    max-width: 650px;
+    margin: auto;
+    color: #64748b;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.categoryCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-decoration: none;
+    transition: .35s;
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(5, 150, 105, 0.1);
+    border-color: #10B981;
+}
+
+.categoryIcon {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    background: #ECFDF5;
+    color: #059669;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    margin-bottom: 24px;
+    transition: .3s;
+}
+
+.categoryCard:hover .categoryIcon {
+    background: #059669;
+    color: #ffffff;
+}
+
+.categoryCard h3 {
+    color: #0f172a;
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.categoryCard p {
+    color: #64748b;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    font-size: 15px;
+    flex-grow: 1;
+}
+
+.categoryCard span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #059669;
+    font-weight: 600;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.categoryCard:hover span {
+    gap: 14px;
+    color: #10B981;
+}
+
+@media(max-width:992px) {
+    .categoryGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sectionHeading h2 {
+        font-size: 32px;
+    }
+}
+
+/* ============================== */
+/* What DSCH-Edu Offers (Services) */
+/* ============================== */
+
+.whatWeOfferSection {
+    width: 90%;
+    max-width: 1300px;
+    margin: 90px auto;
+}
+
+.servicesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin-top: 40px;
+}
+
+.serviceCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 32px 26px;
+    transition: .3s;
+}
+
+.serviceCard:hover {
+    transform: translateY(-6px);
+    border-color: #10B981;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+}
+
+.serviceIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #ECFDF5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.serviceCard h3 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.serviceCard p {
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 14.5px;
+}
+
+@media(max-width:1100px) {
+    .servicesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:640px) {
+    .servicesGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================== */
+/* How DSCH-Edu Works Pipeline */
+/* ============================== */
+
+.howItWorksOverviewSec {
+    background: #f8fafc;
+    padding: 80px 5%;
+    margin: 80px 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.stepsPipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    max-width: 1300px;
+    margin: 40px auto 0;
+}
+
+.stepPipelineCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 28px 20px;
+    position: relative;
+    transition: .3s;
+}
+
+.stepPipelineCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    border-color: #059669;
+}
+
+.stepNum {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 800;
+    color: #059669;
+    margin-bottom: 14px;
+}
+
+.stepPipelineCard h3 {
+    font-size: 18px;
+    color: #0f172a;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.stepPipelineCard p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.howItWorksCtaRow {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.howItWorksFullBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: #059669;
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.howItWorksFullBtn:hover {
+    background: #10B981;
+    color: #ffffff;
+}
+
+@media(max-width:1024px) {
+    .stepsPipeline {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width:640px) {
+    .stepsPipeline {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================== */
+/* Two Distinct Workflows */
+/* ============================== */
+
+.twoWorkflowsSection {
+    width: 90%;
+    max-width: 1300px;
+    margin: 90px auto;
+}
+
+.workflowsCompareGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+    margin-top: 40px;
+}
+
+.workflowCompareCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    transition: .3s;
+}
+
+.workflowCompareCard:hover {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
+}
+
+.workflowHeader {
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.workflowBadge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+}
+
+.admissionBadge {
+    background: #EFF6FF;
+    color: #2563EB;
+}
+
+.courseBadge {
+    background: #ECFDF5;
+    color: #059669;
+}
+
+.workflowHeader h3 {
+    font-size: 24px;
+    color: #0f172a;
+    margin-bottom: 6px;
+    font-weight: 800;
+}
+
+.workflowHeader p {
+    font-size: 14.5px;
+    color: #64748b;
+}
+
+.workflowChecklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex-grow: 1;
+}
+
+.workflowChecklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.workflowChecklist li svg {
+    color: #059669;
+    font-size: 16px;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.workflowChecklist li strong {
+    display: block;
+    color: #1e293b;
+    font-size: 15px;
+    margin-bottom: 3px;
+}
+
+.workflowChecklist li p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.workflowFooterLink a {
+    display: inline-flex;
+    align-items: center;
+    color: #059669;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .2s;
+}
+
+.workflowFooterLink a:hover {
+    color: #10B981;
+    text-decoration: underline;
+}
+
+@media(max-width:860px) {
+    .workflowsCompareGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================== */
+/* Informative Fallback Boxes */
+/* ========================== */
+
+.informativeFeatureBox {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.coursesFallbackBox {
+    background: #f8fafc;
+}
+
+.informativeHeader {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.informativeEyebrow {
+    color: #059669;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.informativeHeader h2 {
+    font-size: 32px;
+    color: #0f172a;
+    margin: 10px 0;
+    font-weight: 800;
+}
+
+.informativeHeader p {
+    color: #64748b;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.informativeHighlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin-bottom: 20px;
+}
+
+.infoHighlightCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: .3s;
+}
+
+.infoHighlightCard:hover {
+    border-color: #10B981;
+    transform: translateY(-4px);
+}
+
+.infoHighlightCard svg {
+    font-size: 32px;
+    color: #059669;
+    margin-bottom: 18px;
+}
+
+.infoHighlightCard h4 {
+    font-size: 18px;
+    color: #0f172a;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.infoHighlightCard p {
+    color: #64748b;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+
+.infoHighlightCard a {
+    color: #059669;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.infoHighlightCard a:hover {
+    text-decoration: underline;
+}
+
+.fallbackActionRow {
+    text-align: center;
+    margin-top: 30px;
+}
+
+@media(max-width:920px) {
+    .informativeHighlights {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================= */
+/* Submission Transparency / Statuses */
+/* ========================================= */
+
+.submissionTransparencySection {
+    width: 90%;
+    max-width: 1300px;
+    margin: 90px auto;
+}
+
+.statusExplanationsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+}
+
+.statusCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 26px 20px;
+    transition: .3s;
+}
+
+.statusCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
+}
+
+.statusBadgeTitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.statusCard.pending .statusBadgeTitle {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+.statusCard.submitted .statusBadgeTitle {
+    background: #EFF6FF;
+    color: #2563EB;
+}
+
+.statusCard.approved .statusBadgeTitle {
+    background: #ECFDF5;
+    color: #059669;
+}
+
+.statusCard.rejected .statusBadgeTitle {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.statusCard h4 {
+    font-size: 17px;
+    color: #0f172a;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.statusCard p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+@media(max-width:1024px) {
+    .statusExplanationsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px) {
+    .statusExplanationsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================= */
+/* Partner CTA */
+/* ================================= */
+
+.partnerCTA {
+    width: 90%;
+    max-width: 1300px;
+    margin: 90px auto;
+    background: #059669;
+    border-radius: 28px;
+    overflow: hidden;
+}
+
+.partnerContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 60px;
+}
+
+.partnerLeft span {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.partnerLeft h2 {
+    color: #ffffff;
+    font-size: 40px;
+    margin: 16px 0;
+    line-height: 1.25;
+    font-weight: 800;
+}
+
+.partnerLeft p {
+    color: #ecfdf5;
+    line-height: 1.8;
+    max-width: 650px;
+    font-size: 16px;
+}
+
+.partnerButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 36px;
+}
+
+.registerInstituteBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #ffffff;
+    color: #059669;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.registerInstituteBtn:hover {
+    background: #10B981;
+    color: #ffffff;
+}
+
+.contactSalesBtn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.contactSalesBtn:hover {
+    background: #ffffff;
+    color: #059669;
+}
+
+.partnerRight {
+    display: flex;
+    justify-content: center;
+}
+
+.partnerCard {
+    width: 220px;
+    height: 220px;
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.partnerCard svg {
+    font-size: 56px;
+    color: #ffffff;
+    margin-bottom: 14px;
+}
+
+.partnerCard h3 {
+    color: #ffffff;
+    font-size: 32px;
+    margin-bottom: 4px;
+    font-weight: 800;
+}
+
+.partnerCard p {
+    color: #ecfdf5;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media(max-width:992px) {
+    .partnerContent {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 50px 30px;
+    }
+
+    .partnerButtons {
+        justify-content: center;
+    }
+
+    .partnerLeft h2 {
+        font-size: 32px;
+    }
+}
+
+/* ================================= */
+/* Final CTA */
+/* ================================= */
+
+.finalCtaSection {
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.finalCtaContainer {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.finalCtaContainer h2 {
+    font-size: 36px;
+    color: #0f172a;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.finalCtaContainer p {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.finalCtaButtons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* ========================== */
+/* Featured Institutes (Dynamic Grid) */
+/* ========================== */
+
+.featuredInstitutesSection {
+    width: 90%;
+    max-width: 1300px;
+    margin: 80px auto;
+}
+
+.featuredGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.featuredInstitutes_instituteCard {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    transition: .35s;
+}
+
+.featuredInstitutes_instituteCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+}
+
+.featuredInstitutes_cardImage {
+    height: 220px;
+    overflow: hidden;
+}
+
+.featuredInstitutes_cardImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .4s;
+}
+
+.featuredInstitutes_instituteCard:hover img {
+    transform: scale(1.06);
+}
+
+.featuredInstitutes_cardBody {
+    padding: 24px;
+}
+
+.verifiedBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #dcfce7;
+    color: #059669;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.featuredInstitutes_cardBody h3 {
+    color: #0f172a;
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.featuredInstitutes_location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-size: 14.5px;
+}
+
+.featuredInstitutes_cardBody p {
+    color: #059669;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.featuredInstitutes_viewProfileBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background: #059669;
+    color: #ffffff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.featuredInstitutes_viewProfileBtn:hover {
+    background: #10B981;
+    color: #ffffff;
+}
+
+/* =================================== */
+/* Latest Courses (Dynamic Grid) */
+/* =================================== */
+
+.latestCourses {
+    width: 90%;
+    max-width: 1300px;
+    margin: 80px auto;
+}
+
+.courseGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.courseCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: .35s;
+}
+
+.courseCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .08);
+}
+
+.courseImage {
+    height: 200px;
+    overflow: hidden;
+}
+
+.courseImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .35s;
+}
+
+.courseCard:hover img {
+    transform: scale(1.06);
+}
+
+.courseContent {
+    padding: 24px;
+}
+
+.courseBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ECFDF5;
+    color: #059669;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.courseContent h3 {
+    color: #0f172a;
+    font-size: 20px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.courseContent h4 {
+    color: #64748b;
+    font-size: 14.5px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.courseFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 16px;
+}
+
+.courseFooter span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.courseFooter a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #059669;
+    font-weight: 600;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.courseFooter a:hover {
+    color: #10B981;
+}
+
+@media(max-width:992px) {
+    .featuredGrid,
+    .courseGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:640px) {
+    .featuredGrid,
+    .courseGrid {
+        grid-template-columns: 1fr;
+    }
+}

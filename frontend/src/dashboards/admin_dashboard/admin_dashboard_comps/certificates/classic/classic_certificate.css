@@ -1,0 +1,342 @@
+.classicCertificatePage {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 18px;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #f3f4f6;
+}
+
+.classicCertificate {
+    width: 100%;
+    max-width: 1050px;
+    padding: 12px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 15px 40px rgba(17, 24, 39, .10);
+}
+
+.classicOuterBorder {
+    padding: 6px;
+    border: 4px double #059669;
+}
+
+.classicInnerBorder {
+    box-sizing: border-box;
+    padding: 38px 55px 32px;
+    border: 1px solid #9ca3af;
+    background: #fff;
+}
+
+.classicHeader {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.classicLogo {
+    color: #059669;
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.classicHeader h1 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.classicHeader p {
+    margin: 0 0 3px;
+    color: #4b5563;
+    font-size: 10px;
+}
+
+.classicHeader span {
+    color: #6b7280;
+    font-size: 9px;
+}
+
+.classicTitle {
+    text-align: center;
+    padding: 24px 0 18px;
+}
+
+.classicTitle span {
+    color: #6b7280;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+}
+
+.classicTitle h2 {
+    margin: 10px 0 6px;
+    color: #111827;
+    font-family: Georgia, serif;
+    font-size: 29px;
+}
+
+.classicTitle div {
+    width: 220px;
+    height: 1px;
+    margin: 0 auto 13px;
+    background: #059669;
+}
+
+.classicTitle h3 {
+    margin: 0;
+    color: #059669;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    letter-spacing: .8px;
+}
+
+.classicBody {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.classicBody>p {
+    margin: 0;
+    color: #374151;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.85;
+}
+
+.classicDetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+    margin-top: 22px;
+    padding: 12px 15px;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.classicDetails p {
+    margin: 0;
+    color: #4b5563;
+    font-size: 9px;
+}
+
+.classicDetails strong {
+    color: #111827;
+}
+
+.classicFooter {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    align-items: end;
+    gap: 25px;
+    margin-top: 48px;
+    text-align: center;
+}
+
+.classicFooter span {
+    display: block;
+    width: 135px;
+    height: 1px;
+    margin: 0 auto 6px;
+    background: #374151;
+}
+
+.classicFooter p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 9px;
+}
+
+.classicSeal {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    box-sizing: border-box;
+    border: 2px solid #059669;
+    border-radius: 50%;
+    color: #059669;
+    font-family: Georgia, serif;
+    font-size: 7px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.certificateActionsBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.certificatePrintButton,
+.certificateDownloadButton {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.certificatePrintButton {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+    box-shadow: 0 5px 14px rgba(16, 185, 129, .16);
+}
+
+.certificatePrintButton:hover {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+.certificateDownloadButton {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+}
+
+.certificateDownloadButton:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #059669;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   TABLET / MOBILE
+===================================================== */
+
+@media(max-width:700px) {
+
+    .classicCertificatePage {
+        padding: 10px;
+    }
+
+    .classicCertificate {
+        padding: 6px;
+    }
+
+    .classicInnerBorder {
+        min-height: auto;
+        padding: 28px 20px;
+    }
+
+    .classicHeader h1 {
+        font-size: 21px;
+    }
+
+    .classicTitle {
+        padding: 21px 0 16px;
+    }
+
+    .classicTitle h2 {
+        font-size: 24px;
+    }
+
+    .classicTitle h3 {
+        font-size: 16px;
+    }
+
+    .classicBody>p {
+        font-size: 11px;
+    }
+
+    .classicDetails {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .classicFooter {
+        grid-template-columns: 1fr;
+        margin-top: 38px;
+    }
+
+    .classicSeal {
+        display: none;
+    }
+
+    .certificateActionsBar {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .certificatePrintButton,
+    .certificateDownloadButton {
+        width: 100%;
+    }
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print {
+
+    body * {
+        visibility: hidden !important;
+    }
+
+    .classicCertificatePage,
+    .classicCertificate,
+    .classicCertificate *,
+    .classicOuterBorder,
+    .classicInnerBorder {
+        visibility: visible !important;
+    }
+
+    .classicCertificatePage {
+        position: absolute !important;
+        inset: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        background: #fff !important;
+    }
+
+    .classicCertificate {
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 6.5in !important;
+        padding: 12px !important;
+        box-shadow: none !important;
+    }
+
+    .classicOuterBorder {
+        min-height: 18mm;
+        box-sizing: border-box;
+    }
+
+    .certificateActionsBar {
+        display: none !important;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+}

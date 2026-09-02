@@ -1,0 +1,660 @@
+/* =====================================================
+   ADMIN FEES PAGE
+===================================================== */
+
+.adminFeesPage {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 45px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.adminFeesHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.adminFeesEyebrow {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.adminFeesHeader h1 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.adminFeesHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.adminFeesSummary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 15px;
+    background: #ecfdf5;
+    border: 1px solid #d1fae5;
+    border-radius: 10px;
+}
+
+.adminFeesSummaryIcon {
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #dcfce7;
+    color: #059669;
+    font-size: 14px;
+}
+
+.adminFeesSummary div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.adminFeesSummary strong {
+    color: #111827;
+    font-size: 17px;
+    line-height: 1;
+}
+
+.adminFeesSummary span {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   FILTER CARD
+===================================================== */
+
+.feeFilterCard {
+    padding: 20px;
+    margin-bottom: 16px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17,24,39,.025);
+}
+
+.feeFilterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.feeFilterTitle {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+}
+
+.feeFilterIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 13px;
+}
+
+.feeFilterTitle h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.feeFilterTitle p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   GENERATE BUTTON
+===================================================== */
+
+.generateFeeBtn {
+    height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 0 14px;
+    border: 1px solid #10b981;
+    border-radius: 8px;
+    background: #10b981;
+    color: #fff;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    box-shadow: 0 5px 14px rgba(16,185,129,.15);
+    transition: .2s ease;
+}
+
+.generateFeeBtn:hover:not(:disabled) {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(16,185,129,.20);
+}
+
+.generateFeeBtn:disabled {
+    background: #d1d5db;
+    border-color: #d1d5db;
+    color: #6b7280;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+.feeFilters {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr)) minmax(220px,1.4fr);
+    gap: 12px;
+}
+
+.feeFilterGroup,
+.feeSearchGroup {
+    min-width: 0;
+}
+
+.feeFilterGroup label,
+.feeSearchGroup label {
+    display: block;
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.feeSelectWrapper,
+.feeSearch {
+    position: relative;
+}
+
+.feeSelectWrapper select,
+.feeSearch input {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+    transition: .2s ease;
+}
+
+.feeSelectWrapper select {
+    appearance: none;
+    padding: 0 34px 0 11px;
+    cursor: pointer;
+}
+
+.feeSearch input {
+    padding: 0 12px 0 33px;
+}
+
+.feeSearch input::placeholder {
+    color: #9ca3af;
+}
+
+.feeSelectWrapper select:focus,
+.feeSearch input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,.08);
+}
+
+.feeSelectWrapper > svg {
+    position: absolute;
+    top: 50%;
+    right: 11px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.feeSearch > svg {
+    position: absolute;
+    top: 50%;
+    left: 11px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   ACTIVE FILTERS
+===================================================== */
+
+.activeFeeFilters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.activeFeeFilters > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 9px;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    background: #fff;
+}
+
+.activeFeeFilters span {
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+.activeFeeFilters strong {
+    color: #059669;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.feesTableCard {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17,24,39,.025);
+}
+
+.feesTableHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.feesTableHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 15px;
+}
+
+.feesTableHeader p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.feesTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.feesTable {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: collapse;
+}
+
+.feesTable th {
+    padding: 12px 14px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    color: #6b7280;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.feesTable td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+    font-size: 9px;
+    vertical-align: middle;
+}
+
+.feesTable tbody tr {
+    transition: background .2s ease;
+}
+
+.feesTable tbody tr:hover {
+    background: #fafffc;
+}
+
+.feesTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   STUDENT INFO
+===================================================== */
+
+.feeStudentInfo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.feeStudentAvatar {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.feeStudentInfo > div:last-child {
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+}
+
+.feeStudentInfo strong {
+    color: #374151;
+    font-size: 9px;
+}
+
+.feeStudentInfo span {
+    margin-top: 3px;
+    color: #9ca3af;
+    font-size: 7px;
+}
+
+.feeAmount {
+    color: #111827 !important;
+    font-weight: 650;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.feeStatus {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.feeStatus > span {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.feeStatus.not-paid {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.feeStatus.not-paid > span {
+    background: #6b7280;
+}
+
+.feeStatus.pending {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.feeStatus.pending > span {
+    background: #f59e0b;
+}
+
+.feeStatus.paid {
+    background: #ecfdf5;
+    color: #166534;
+}
+
+.feeStatus.paid > span {
+    background: #10b981;
+}
+
+.feeStatus.rejected {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.feeStatus.rejected > span {
+    background: #ef4444;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.feeTableActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.feePreviewBtn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #059669;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.feePreviewBtn:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+    transform: translateY(-1px);
+}
+
+.feeApproveBtn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #059669;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.feeApproveBtn:hover {
+    border-color: #10b981;
+    transform: translateY(-1px);
+}
+
+.feeApproveBtn:disabled,
+.feePreviewBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.feesEmptyCell {
+    height: 320px;
+    padding: 0 !important;
+}
+
+.feesEmptyState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.feesEmptyIcon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    color: #9ca3af;
+    font-size: 20px;
+}
+
+.feesEmptyState h3 {
+    margin: 0 0 5px;
+    color: #374151;
+    font-size: 13px;
+}
+
+.feesEmptyState p {
+    max-width: 300px;
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1050px) {
+    .feeFilters {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .feeSearchGroup {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width:750px) {
+    .adminFeesHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .adminFeesSummary {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .feeFilterHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .generateFeeBtn {
+        width: 100%;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:600px) {
+    .adminFeesHeader h1 {
+        font-size: 23px;
+    }
+
+    .feeFilterCard {
+        padding: 17px;
+    }
+
+    .feeFilters {
+        grid-template-columns: 1fr;
+    }
+
+    .feeSearchGroup {
+        grid-column: auto;
+    }
+
+    .activeFeeFilters {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .feesTableHeader {
+        padding: 16px;
+    }
+}

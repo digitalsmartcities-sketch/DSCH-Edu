@@ -1,0 +1,641 @@
+.howItWorksPage {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #f8fafc;
+    color: #111827;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.howWorksHero {
+    position: relative;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 80px 24px 70px;
+    text-align: center;
+}
+
+.heroBackgroundShape {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    top: -360px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(16, 185, 129, .10);
+    filter: blur(80px);
+}
+
+.howWorksHero > *:not(.heroBackgroundShape) {
+    position: relative;
+    z-index: 1;
+}
+
+.howWorksEyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    margin-bottom: 20px;
+    border: 1px solid #a7f3d0;
+    border-radius: 30px;
+    background: rgba(236, 253, 245, .85);
+    color: #059669;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.howWorksHero h1 {
+    max-width: 950px;
+    margin: 0 auto 20px;
+    color: #0f172a;
+    font-size: 52px;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.howWorksHero h1 span {
+    color: #059669;
+}
+
+.howWorksHero p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #64748b;
+    font-size: 17.5px;
+    line-height: 1.8;
+}
+
+/* =====================================================
+   SECTIONS & TITLES
+===================================================== */
+
+.howWorksSection {
+    max-width: 1250px;
+    margin: 80px auto;
+    padding: 0 24px;
+}
+
+.howWorksSectionTitle {
+    max-width: 780px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.howWorksSectionTitle > span {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #059669;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.howWorksSectionTitle h2 {
+    margin: 0 0 14px;
+    color: #0f172a;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.howWorksSectionTitle p {
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 0;
+}
+
+/* =====================================================
+   SECTION 2: FEATURES OVERVIEW GRID
+===================================================== */
+
+.featuresOverviewGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+
+.featureItemCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 32px 26px;
+    transition: .3s;
+}
+
+.featureItemCard:hover {
+    transform: translateY(-5px);
+    border-color: #10B981;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+}
+
+.featureItemIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #ECFDF5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.featureItemCard h3 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.featureItemCard p {
+    font-size: 14.5px;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+@media(max-width:992px) {
+    .featuresOverviewGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px) {
+    .featuresOverviewGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
+   SECTION 3 & 4: VERTICAL STEPS LIST
+===================================================== */
+
+.verticalStepsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stepListItem {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 26px 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    transition: .3s;
+}
+
+.stepListItem:hover {
+    transform: translateX(6px);
+    border-color: #059669;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+.stepBadgeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.stepNumBadge {
+    font-size: 13px;
+    font-weight: 800;
+    color: #059669;
+    background: #ECFDF5;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.stepNumBadge.courseBadge {
+    color: #2563EB;
+    background: #EFF6FF;
+}
+
+.stepIconBubble {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: #059669;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.stepIconBubble.courseBubble {
+    background: #2563EB;
+}
+
+.stepBody h3 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.stepBody p {
+    font-size: 15px;
+    color: #64748b;
+    line-height: 1.7;
+    margin: 0;
+}
+
+@media(max-width:640px) {
+    .stepListItem {
+        flex-direction: column;
+        gap: 16px;
+        padding: 22px;
+    }
+
+    .stepBadgeContainer {
+        flex-direction: row;
+    }
+}
+
+/* =====================================================
+   COURSE NOTICE BANNER
+===================================================== */
+
+.courseNoticeBanner {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 18px;
+    padding: 20px 26px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto 36px;
+    color: #1E40AF;
+}
+
+.courseNoticeBanner svg {
+    font-size: 32px;
+    color: #2563EB;
+    flex-shrink: 0;
+}
+
+.courseNoticeBanner strong {
+    font-size: 15px;
+    color: #1E3A8A;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.courseNoticeBanner span {
+    font-size: 14px;
+    color: #1E40AF;
+    line-height: 1.6;
+}
+
+/* =====================================================
+   SECTION CTA BANNERS
+===================================================== */
+
+.sectionCtaBanner {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 900px;
+    margin: 40px auto 0;
+}
+
+.sectionCtaBanner h4 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.sectionCtaBanner p {
+    color: #64748b;
+    font-size: 14.5px;
+    margin: 0;
+}
+
+.primarySectionBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    background: #059669;
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: .3s;
+}
+
+.primarySectionBtn:hover {
+    background: #10B981;
+    color: #ffffff;
+}
+
+.secondarySectionBtn {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 24px;
+    border: 1.5px solid #059669;
+    color: #059669;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: .3s;
+}
+
+.secondarySectionBtn:hover {
+    background: #059669;
+    color: #ffffff;
+}
+
+.bannerButtons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@media(max-width:768px) {
+    .sectionCtaBanner {
+        flex-direction: column;
+        text-align: center;
+        padding: 26px;
+    }
+
+    .bannerButtons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .primarySectionBtn,
+    .secondarySectionBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* =====================================================
+   SECTION 5: INSTITUTE OWNER GRID
+===================================================== */
+
+.instituteGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.instituteFlowCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 28px 24px;
+    transition: .3s;
+}
+
+.instituteFlowCard:hover {
+    transform: translateY(-5px);
+    border-color: #059669;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.05);
+}
+
+.flowCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.flowCardIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #ECFDF5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.flowCardNum {
+    font-size: 18px;
+    font-weight: 800;
+    color: #94a3b8;
+}
+
+.instituteFlowCard h3 {
+    font-size: 19px;
+    color: #0f172a;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.instituteFlowCard p {
+    color: #64748b;
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 0;
+}
+
+@media(max-width:992px) {
+    .instituteGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px) {
+    .instituteGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
+   SECTION 6: REJECTION & CORRECTIONS
+===================================================== */
+
+.rejectionCardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.rejectionCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 32px 26px;
+    transition: .3s;
+}
+
+.rejectionCard:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+    border-color: #cbd5e1;
+}
+
+.rejectionIcon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: #FEF3C7;
+    color: #D97706;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.rejectionCard h3 {
+    font-size: 20px;
+    color: #0f172a;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.rejectionCard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rejectionCard li {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 18px;
+}
+
+.rejectionCard li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #059669;
+    font-size: 18px;
+}
+
+.rejectionCard code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+@media(max-width:992px) {
+    .rejectionCardsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
+   FINAL CTA
+===================================================== */
+
+.howWorksCTA {
+    background: #059669;
+    border-radius: 28px;
+    max-width: 1250px;
+    margin: 90px auto 100px;
+    padding: 60px 40px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.howWorksCTAInner span {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #a7f3d0;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.howWorksCTAInner h2 {
+    font-size: 38px;
+    color: #ffffff;
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.25;
+}
+
+.howWorksCTAInner p {
+    font-size: 16.5px;
+    color: #ecfdf5;
+    max-width: 680px;
+    margin: 0 auto 36px;
+    line-height: 1.8;
+}
+
+.ctaButtonsRow {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.primaryCtaBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    background: #ffffff;
+    color: #059669;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.primaryCtaBtn:hover {
+    background: #10B981;
+    color: #ffffff;
+}
+
+.secondaryCtaBtn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.secondaryCtaBtn:hover {
+    background: #ffffff;
+    color: #059669;
+}

@@ -1,0 +1,444 @@
+/* =====================================================
+   STUDENT PROFILE
+===================================================== */
+
+.studentProfilePage {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.studentProfileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.studentProfileEyebrow {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.studentProfileHeader h1 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.studentProfileHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.studentProfileBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border: 1px solid #dcfce7;
+    border-radius: 20px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.studentProfileCard {
+    padding: 21px;
+    margin-bottom: 17px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .025);
+}
+
+
+/* =====================================================
+   PROFILE OVERVIEW
+===================================================== */
+
+.profileOverviewCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ecfdf5, #fff);
+    border-color: #d1fae5;
+}
+
+.studentProfileAvatar {
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #10b981;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.profileOverviewInfo h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 18px;
+}
+
+.profileOverviewInfo p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.profileOverviewMeta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.profileOverviewMeta span {
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.activeStatus {
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #166534 !important;
+    font-size: 7px !important;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.profileSectionHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding-bottom: 15px;
+    margin-bottom: 17px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.profileSectionIcon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.profileSectionIcon.green {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.profileSectionIcon.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.profileSectionIcon.purple {
+    background: #faf5ff;
+    color: #9333ea;
+}
+
+.profileSectionIcon.orange {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.profileSectionIcon.red {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.profileSectionHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.profileSectionHeader p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.studentProfileGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+
+/* =====================================================
+   FIELD
+===================================================== */
+
+.studentProfileField {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.studentProfileField label {
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.studentProfileField label span {
+    margin-left: 3px;
+    color: #ef4444;
+}
+
+.studentProfileField input,
+.studentProfileField select {
+    width: 100%;
+    height: 41px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 11px;
+    transition: .2s ease;
+}
+
+.studentProfileField input:focus,
+.studentProfileField select:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .08);
+}
+
+.studentProfileField input:read-only {
+    background: #f3f4f6;
+    color: #6b7280;
+    cursor: default;
+}
+
+/* =====================================================
+   SAVE BAR
+===================================================== */
+
+.studentProfileSaveBar {
+    position: sticky;
+    bottom: 12px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, .97);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(17, 24, 39, .10);
+    backdrop-filter: blur(8px);
+}
+
+.studentProfileSaveBar div {
+    display: flex;
+    flex-direction: column;
+}
+
+.studentProfileSaveBar strong {
+    margin-bottom: 3px;
+    color: #374151;
+    font-size: 10px;
+}
+
+.studentProfileSaveBar span {
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+.saveStudentProfileBtn {
+    height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 16px;
+    border: 1px solid #10b981;
+    border-radius: 7px;
+    background: #10b981;
+    color: #fff;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.saveStudentProfileBtn:hover:not(:disabled) {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+.saveStudentProfileBtn:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   LOADING / EMPTY
+===================================================== */
+
+.studentProfileLoading,
+.studentProfileEmpty {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.studentProfileLoading p,
+.studentProfileEmpty p {
+    margin: 10px 0 0;
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.studentProfileEmpty>svg {
+    color: #10b981;
+    font-size: 25px;
+}
+
+.studentProfileEmpty h2 {
+    margin: 10px 0 0;
+    color: #374151;
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+.studentProfileLoader {
+    width: 26px;
+    height: 26px;
+    border: 3px solid #dcfce7;
+    border-top-color: #10b981;
+    border-radius: 50%;
+    animation: profileSpin .8s linear infinite;
+}
+
+@keyframes profileSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:700px) {
+    .studentProfileHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .studentProfileBadge {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+
+    .studentProfileGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:600px) {
+    .studentProfileCard {
+        padding: 17px;
+    }
+
+    .profileOverviewCard {
+        align-items: flex-start;
+    }
+
+    .studentProfileAvatar {
+        width: 52px;
+        height: 52px;
+        font-size: 18px;
+    }
+
+    .profileOverviewInfo h2 {
+        font-size: 15px;
+    }
+
+    .studentProfileSaveBar {
+        align-items: stretch;
+        flex-direction: column;
+        bottom: 8px;
+    }
+
+    .saveStudentProfileBtn {
+        width: 100%;
+    }
+
+    .securityRow {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .changePasswordBtn {
+        width: 100%;
+    }
+}

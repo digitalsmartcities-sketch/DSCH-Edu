@@ -1,0 +1,613 @@
+/* =====================================================
+   PAYMENT VIEW PAGE
+===================================================== */
+
+.paymentViewPage {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.paymentViewHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.paymentViewEyebrow {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.paymentViewHeader h1 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.paymentViewHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.paymentViewBackBtn {
+    height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.paymentViewBackBtn:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #059669;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.paymentReviewStatus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+    padding: 17px 19px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 11px;
+}
+
+.paymentReviewStatusLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.paymentReviewStatusIcon {
+    width: 41px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #fef3c7;
+    color: #d97706;
+    font-size: 16px;
+}
+
+.paymentReviewStatusLeft div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.paymentReviewStatusLeft span {
+    margin-bottom: 3px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.paymentReviewStatusLeft strong {
+    margin-bottom: 4px;
+    color: #92400e;
+    font-size: 11px;
+}
+
+.paymentReviewStatusLeft p {
+    margin: 0;
+    color: #a16207;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.paymentPendingBadgeLarge {
+    padding: 7px 11px;
+    border-radius: 20px;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.paymentViewCard {
+    padding: 21px;
+    margin-bottom: 17px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17,24,39,.025);
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.paymentViewSectionHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding-bottom: 15px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.paymentViewSectionIcon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.paymentViewSectionIcon.green {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.paymentViewSectionIcon.blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.paymentViewSectionIcon.purple {
+    background: #faf5ff;
+    color: #9333ea;
+}
+
+.paymentViewSectionIcon.orange {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.paymentViewSectionHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.paymentViewSectionHeader p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   INFO GRID
+===================================================== */
+
+.paymentInfoGrid,
+.receiptReviewGrid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 10px;
+}
+
+.paymentInfoItem {
+    padding: 12px 13px;
+    border: 1px solid #f3f4f6;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+.paymentInfoItem span {
+    display: block;
+    margin-bottom: 4px;
+    color: #9ca3af;
+    font-size: 8px;
+}
+
+.paymentInfoItem strong {
+    display: block;
+    color: #374151;
+    font-size: 10px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   PAYMENT PROOF
+===================================================== */
+
+.paymentProofReview {
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(260px,.6fr);
+    gap: 18px;
+}
+
+.paymentProofImageBox {
+    min-height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #f9fafb;
+    overflow: hidden;
+}
+
+.paymentProofImageBox img {
+    width: 100%;
+    height: 310px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.paymentProofMissing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.paymentProofMissing svg {
+    font-size: 25px;
+}
+
+
+/* =====================================================
+   REJECTION
+===================================================== */
+
+.paymentRejectCard {
+    padding: 20px;
+    margin-bottom: 17px;
+    background: #fff;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+}
+
+.paymentRejectCard h2 {
+    margin: 0 0 5px;
+    color: #b91c1c;
+    font-size: 15px;
+}
+
+.paymentRejectCard > p {
+    margin: 0 0 14px;
+    color: #6b7280;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.paymentRejectCard textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    resize: vertical;
+    color: #374151;
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.paymentRejectCard textarea:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239,68,68,.07);
+}
+
+.paymentRejectActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.cancelPaymentRejectBtn,
+.confirmPaymentRejectBtn {
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 14px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.cancelPaymentRejectBtn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #4b5563;
+}
+
+.cancelPaymentRejectBtn:hover {
+    background: #f3f4f6;
+}
+
+.confirmPaymentRejectBtn {
+    border: 1px solid #dc2626;
+    background: #dc2626;
+    color: #fff;
+}
+
+.confirmPaymentRejectBtn:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+
+/* =====================================================
+   DECISION BAR
+===================================================== */
+
+.paymentDecisionBar {
+    position: sticky;
+    bottom: 12px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 17px 20px;
+    background: rgba(255,255,255,.97);
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(17,24,39,.10);
+    backdrop-filter: blur(8px);
+}
+
+.paymentDecisionBar h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 13px;
+}
+
+.paymentDecisionBar p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.paymentDecisionButtons {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.paymentRejectBtn,
+.paymentApproveBtn {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 15px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.paymentRejectBtn {
+    border: 1px solid #fecaca;
+    background: #fff;
+    color: #dc2626;
+}
+
+.paymentRejectBtn:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+}
+
+.paymentApproveBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(16,185,129,.18);
+}
+
+.paymentApproveBtn:hover {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+.paymentRejectBtn:disabled,
+.paymentApproveBtn:disabled,
+.cancelPaymentRejectBtn:disabled,
+.confirmPaymentRejectBtn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   LOADING / EMPTY
+===================================================== */
+
+.paymentViewLoading,
+.paymentViewEmpty {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.paymentViewLoading svg,
+.paymentViewEmpty > svg {
+    margin-bottom: 10px;
+    color: #10b981;
+    font-size: 24px;
+}
+
+.paymentViewLoading p,
+.paymentViewEmpty p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 11px;
+}
+
+.paymentViewEmpty h2 {
+    margin: 0 0 6px;
+    color: #374151;
+    font-size: 16px;
+}
+
+.paymentViewEmpty button {
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 15px;
+    padding: 0 14px;
+    border: 1px solid #10b981;
+    border-radius: 7px;
+    background: #10b981;
+    color: #fff;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:850px) {
+    .paymentProofReview {
+        grid-template-columns: 1fr;
+    }
+
+    .paymentProofDetails {
+        display: grid;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 10px;
+    }
+
+    .paymentDecisionBar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .paymentDecisionButtons {
+        width: 100%;
+    }
+
+    .paymentRejectBtn,
+    .paymentApproveBtn {
+        flex: 1;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:600px) {
+    .paymentViewHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .paymentViewHeader h1 {
+        font-size: 23px;
+    }
+
+    .paymentViewBackBtn {
+        width: 100%;
+    }
+
+    .paymentReviewStatus {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .paymentViewCard {
+        padding: 17px;
+    }
+
+    .paymentInfoGrid,
+    .receiptReviewGrid,
+    .paymentProofDetails {
+        grid-template-columns: 1fr;
+    }
+
+    .paymentProofImageBox {
+        min-height: 250px;
+    }
+
+    .paymentProofImageBox img {
+        height: 230px;
+    }
+
+    .paymentRejectActions,
+    .paymentDecisionButtons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cancelPaymentRejectBtn,
+    .confirmPaymentRejectBtn,
+    .paymentRejectBtn,
+    .paymentApproveBtn {
+        width: 100%;
+    }
+}

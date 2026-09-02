@@ -1,0 +1,763 @@
+.instituteProfile {
+    padding: 30px;
+}
+
+.profileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.profileHeader span {
+    color: #16A34A;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profileHeader h1 {
+    margin: 10px 0;
+    font-size: 36px;
+    color: #111827;
+}
+
+.profileHeader p {
+    color: #6B7280;
+    max-width: 650px;
+    line-height: 1.7;
+}
+
+
+
+.webHeroSectionHandling {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.webHeroSectionHandling div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.webHeroSectionHandling label {
+    color: #374151;
+    font-weight: 600;
+}
+
+.webHeroSectionHandling input {
+    width: 100%;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    padding: 14px;
+    outline: none;
+    font-size: 15px;
+}
+
+.webHeroSectionHandling input:focus {
+    border-color: #16A34A;
+}
+
+.webHeroSectionHandling img{
+    width:  100%;
+}
+
+.profileCard {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileCard h2 {
+    color: #111827;
+}
+
+.profileCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.profileCardHeader h2 {
+    margin-bottom: 0;
+}
+
+.saveSectionBtn {
+    height: 42px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.saveSectionBtn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.saveSectionBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+.saveSectionBtn:hover::after {
+    opacity: 1;
+}
+
+.saveSectionBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+}
+
+.profileGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.profileGrid .fullWidth {
+    grid-column: 1 / -1;
+}
+
+.profileGrid div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profileGrid label {
+    color: #374151;
+    font-weight: 600;
+}
+
+.profileGrid input,
+.profileGrid select,
+.profileCard textarea {
+    width: 100%;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    padding: 14px;
+    outline: none;
+    font-size: 15px;
+}
+
+.profileGrid input:focus,
+.profileCard textarea:focus {
+    border-color: #16A34A;
+}
+
+.profileCard textarea {
+    resize: vertical;
+}
+
+.tableResponsiveWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.adm_academic_program_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    min-width: 600px; /* Ensure table doesn't squish too much on mobile */
+}
+
+.adm_academic_program_table thead {
+    background: #F3F4F6;
+}
+
+.adm_academic_program_table thead th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #111827;
+}
+
+.adm_academic_program_table tbody tr {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.adm_academic_program_table tbody td {
+    padding: 12px 15px;
+}
+
+.adm_academic_program_table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.adm_academic_program_table tbody tr:hover {
+    background: #F9FAFB;
+}
+
+.adm_academic_program_table .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.adm_academic_program_table .actions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.adm_academic_program_table .editBtn {
+    background: #16A34A;
+    color: #FFFFFF;
+}
+
+.adm_academic_program_table .deleteBtn {
+    background: #ef4444;
+    color: #FFFFFF;
+}
+
+.adm_academic_program_table .editBtn:hover {
+    background: #15803d;
+}
+
+.adm_academic_program_table .deleteBtn:hover {
+    background: #dc2626;
+}
+
+/* ==============================
+ACADEMIC PROGRAM SECTION 
+================================*/
+
+.editAcademicProgramOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(17, 24, 39, 0.35);
+    backdrop-filter: blur(4px);
+    animation: editOverlayFade 0.2s ease;
+}
+
+.editAcademicProgram {
+    width: 100%;
+    max-width: 590px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow:
+        0 25px 70px rgba(17, 24, 39, 0.18);
+    overflow: hidden;
+    animation: editProgramAppear 0.25s ease;
+}
+
+.editAcademicProgramHeader {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 25px 20px;
+    background:
+        linear-gradient(135deg,
+            #ecfdf5 0%,
+            #ffffff 70%);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.editProgramEyebrow {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.editAcademicProgramHeader h3 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.editAcademicProgramHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.editProgramCloseBtn {
+    width: 31px;
+    height: 31px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #6b7280;
+    font-family: inherit;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.editProgramCloseBtn:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+.editAcademicProgramBody {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    padding: 25px;
+}
+
+.editProgramField {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.editProgramField.fullWidth {
+    grid-column: 1 / -1;
+}
+
+
+.editProgramField label {
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.editProgramField input,
+.editProgramField select {
+    width: 100%;
+    height: 43px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+    color: #111827;
+    font-family: inherit;
+    font-size: 12px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.editProgramField input::placeholder {
+    color: #9ca3af;
+}
+
+.editProgramField input:focus,
+.editProgramField select:focus {
+    border-color: #10b981;
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.09);
+    background: #ffffff;
+}
+
+.feeInput {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.feeInput span {
+    position: absolute;
+    left: 12px;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.feeInput input {
+    padding-left: 39px;
+}
+
+.feeInput input::-webkit-outer-spin-button,
+.feeInput input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+.feeInput input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.adm_academic_program_table_editActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 17px 25px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+.adm_academic_program_table_editActions button {
+    height: 40px;
+    padding: 0 17px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 650;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.adm_academic_program_table_editActions .cancelBtn {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #4b5563;
+}
+
+
+.adm_academic_program_table_editActions .cancelBtn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+    color: #374151;
+}
+
+.adm_academic_program_table_editActions .saveBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #ffffff;
+    box-shadow:
+        0 6px 15px rgba(16, 185, 129, 0.17);
+}
+
+.adm_academic_program_table_editActions .saveBtn:hover {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+    box-shadow:
+        0 8px 20px rgba(16, 185, 129, 0.23);
+}
+
+
+.adm_academic_program_table_editActions .saveBtn:active,
+.adm_academic_program_table_editActions .cancelBtn:active {
+    transform: translateY(0);
+}
+
+@keyframes editOverlayFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes editProgramAppear {
+    from {
+        opacity: 0;
+        transform:
+            translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 650px) {
+    .editAcademicProgram {
+        max-width: 530px;
+    }
+
+    .editAcademicProgramBody {
+        grid-template-columns: 1fr;
+    }
+
+    .editProgramField.fullWidth {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .editAcademicProgramOverlay {
+        padding: 12px;
+    }
+
+    .editAcademicProgram {
+        border-radius: 13px;
+    }
+
+    .editAcademicProgramHeader {
+        padding: 20px 18px 17px;
+    }
+
+    .editAcademicProgramHeader h3 {
+        font-size: 18px;
+    }
+
+    .editAcademicProgramBody {
+        padding: 19px 18px;
+        gap: 14px;
+    }
+
+    .adm_academic_program_table_editActions {
+        padding: 14px 18px;
+        flex-direction: column-reverse;
+    }
+
+    .adm_academic_program_table_editActions button {
+        width: 100%;
+    }
+}
+
+.facilityCount {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #16A34A;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: 10px;
+    align-self: flex-end;
+}
+
+.addMoreBtn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #16A34A;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    align-self: flex-start;
+    transition: background-color 0.2s;
+}
+
+.addMoreBtn:hover {
+    background: #15803d;
+}
+
+.removeBtn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #ef4444;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 15px;
+    outline: none;
+    border: none;
+    align-self: flex-start;
+    margin-top: 5px;
+    transition: background-color 0.2s;
+}
+
+.removeBtn:hover {
+    background: #dc2626;
+}
+
+@media(max-width:768px) {
+    .profileGrid,
+    .webHeroSectionHandling {
+        grid-template-columns: 1fr;
+    }
+
+    .profileHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profileCardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .saveSectionBtn {
+        align-self: flex-start;
+    }
+}
+
+/* ==============================
+   BRANDING & TIMETABLE IMAGES
+================================ */
+
+.profileCardDesc {
+    margin: 4px 0 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.brandingImagesGrid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.brandingImageItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brandingLabel {
+    color: #374151;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.brandingHint {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.brandingPreviewCircle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #d1fae5;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.18);
+    align-self: flex-start;
+}
+
+.brandingLogoPreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.brandingPreviewCirclePlaceholder {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    border: 2px dashed #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+}
+
+.brandingPreviewCirclePlaceholder span {
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.brandingTimetablePreview {
+    width: 100%;
+    max-height: 340px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.brandingTimetablePlaceholder {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    border: 2px dashed #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brandingTimetablePlaceholder span {
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.brandingImageItem input[type="file"] {
+    font-size: 13px;
+    color: #374151;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .brandingImagesGrid {
+        grid-template-columns: 1fr;
+    }
+}

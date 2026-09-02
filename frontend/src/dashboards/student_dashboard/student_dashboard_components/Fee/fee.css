@@ -1,0 +1,850 @@
+/* =====================================================
+   STUDENT FEES PAGE
+===================================================== */
+
+.studentFeesPage {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-bottom: 45px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.studentFeesHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.studentFeesEyebrow {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: #059669;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.studentFeesHeader h1 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.studentFeesHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.studentFeesCount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #ecfdf5;
+    border: 1px solid #d1fae5;
+    border-radius: 10px;
+}
+
+.studentFeesCount>svg {
+    color: #059669;
+    font-size: 18px;
+}
+
+.studentFeesCount div {
+    display: flex;
+    flex-direction: column;
+}
+
+.studentFeesCount strong {
+    color: #111827;
+    font-size: 16px;
+}
+
+.studentFeesCount span {
+    margin-top: 2px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   FILTER CARD
+===================================================== */
+
+.studentFeeFilterCard {
+    margin-bottom: 18px;
+    padding: 18px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .025);
+}
+
+.studentFeeFilterTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.studentFeeFilterIcon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 12px;
+}
+
+.studentFeeFilterTitle h2 {
+    margin: 0 0 3px;
+    color: #374151;
+    font-size: 12px;
+}
+
+.studentFeeFilterTitle p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.studentFeeFilters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 220px));
+    gap: 12px;
+}
+
+.studentFeeSelect {
+    display: flex;
+    flex-direction: column;
+}
+
+.studentFeeSelect label {
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.studentFeeSelect select {
+    width: 100%;
+    height: 40px;
+    padding: 0 11px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.studentFeeSelect select:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .08);
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.studentFeesTableCard {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .025);
+}
+
+.studentFeesTableHeader {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.studentFeesTableHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 15px;
+}
+
+.studentFeesTableHeader p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.studentFeesTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.studentFeesTable {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: collapse;
+}
+
+.studentFeesTable th {
+    padding: 12px 14px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    color: #6b7280;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.studentFeesTable td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+    font-size: 10px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.studentFeesTable tbody tr:hover {
+    background: #fafffc;
+}
+
+.studentFeesTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.feeAmount {
+    color: #111827;
+    font-size: 10px;
+}
+
+.feeTypeBadge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: 20px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 8px;
+    font-weight: 650;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.studentFeeStatus {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.studentFeeStatus.not_paid {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.studentFeeStatus.pending {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.studentFeeStatus.paid {
+    background: #ecfdf5;
+    color: #166534;
+}
+
+.studentFeeStatus.rejected {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.studentFeeActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.studentPayFeeBtn,
+.studentViewReceiptBtn {
+    height: 31px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.studentPayFeeBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+}
+
+.studentPayFeeBtn:hover {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+.studentPayFeeBtn.rejected {
+    border-color: #dc2626;
+    background: #dc2626;
+}
+
+.studentPayFeeBtn.rejected:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+}
+
+.studentViewReceiptBtn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #059669;
+}
+
+.studentViewReceiptBtn:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+}
+
+.studentPendingAction {
+    height: 31px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 9px;
+    border-radius: 7px;
+    background: #fffbeb;
+    color: #92400e;
+    font-size: 8px;
+    font-weight: 650;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.studentFeesEmptyCell {
+    height: 300px;
+    padding: 0 !important;
+}
+
+.studentFeesEmpty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.studentFeesEmpty>svg {
+    margin-bottom: 11px;
+    color: #9ca3af;
+    font-size: 25px;
+}
+
+.studentFeesEmpty h3 {
+    margin: 0 0 5px;
+    color: #374151;
+    font-size: 13px;
+}
+
+.studentFeesEmpty p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.studentDashboardLoading {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.studentDashboardLoading p {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.studentDashboardLoader {
+    width: 26px;
+    height: 26px;
+    border: 3px solid #dcfce7;
+    border-top-color: #10b981;
+    border-radius: 50%;
+    animation: feeLoaderSpin .8s linear infinite;
+}
+
+@keyframes feeLoaderSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =====================================================
+   RECEIPT MODAL
+===================================================== */
+
+.monthlyFeeReceiptOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(17, 24, 39, .55);
+    backdrop-filter: blur(5px);
+}
+
+.monthlyFeeReceiptModal {
+    width: 100%;
+    max-width: 720px;
+    max-height: 94vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: 0 25px 70px rgba(17, 24, 39, .25);
+}
+
+
+/* =====================================================
+   RECEIPT HEADER
+===================================================== */
+
+.monthlyFeeReceiptModalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.monthlyFeeReceiptModalHeader span {
+    display: block;
+    margin-bottom: 3px;
+    color: #059669;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .7px;
+}
+
+.monthlyFeeReceiptModalHeader h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 16px;
+}
+
+.monthlyFeeReceiptClose {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    background: #fff;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.monthlyFeeReceiptClose:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+
+/* =====================================================
+   PRINTABLE RECEIPT
+===================================================== */
+
+.printableMonthlyReceipt {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 34px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background: #fff;
+    color: #111827;
+}
+
+.monthlyReceiptInstitute {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid #10b981;
+}
+
+.monthlyReceiptLogo {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 21px;
+    overflow: hidden;
+    border: 2px solid #d1fae5;
+}
+
+.receiptLogoImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.monthlyReceiptInstituteInfo {
+    min-width: 0;
+}
+
+.monthlyReceiptInstituteInfo h1 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.monthlyReceiptInstituteInfo p {
+    margin: 0 0 5px;
+    color: #4b5563;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.monthlyReceiptInstituteInfo div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.monthlyReceiptInstituteInfo span {
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.monthlyReceiptTitle {
+    padding: 18px 0;
+    text-align: center;
+}
+
+.monthlyReceiptTitle span {
+    display: block;
+    margin-bottom: 4px;
+    color: #059669;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .9px;
+}
+
+.monthlyReceiptTitle h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 19px;
+    letter-spacing: .8px;
+}
+
+
+.monthlyReceiptMeta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.monthlyReceiptMeta>div {
+    padding: 10px 12px;
+    background: #f9fafb;
+}
+
+.monthlyReceiptMeta>div+div {
+    border-left: 1px solid #d1d5db;
+}
+
+.monthlyReceiptMeta span {
+    display: block;
+    margin-bottom: 4px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.monthlyReceiptMeta strong {
+    color: #111827;
+    font-size: 10px;
+}
+
+.monthlyReceiptSection {
+    margin-top: 19px;
+}
+
+.monthlyReceiptSection h3 {
+    margin: 0 0 8px;
+    padding: 7px 10px;
+    background: #ecfdf5;
+    border-left: 3px solid #10b981;
+    color: #166534;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.monthlyReceiptRows {
+    display: grid;
+    gap: 8px;
+}
+
+.monthlyReceiptRows>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+}
+
+.monthlyReceiptRows span {
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.monthlyReceiptRows strong {
+    color: #111827;
+    font-size: 9px;
+    text-align: right;
+}
+
+.monthlyReceiptAdmissionNote {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 11px 12px;
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    border-radius: 7px;
+}
+
+.monthlyReceiptAdmissionNote svg {
+    flex-shrink: 0;
+    color: #059669;
+    font-size: 11px;
+}
+
+.monthlyReceiptAdmissionNote p {
+    margin: 0;
+    color: #166534;
+    font-size: 8px;
+    line-height: 1.6;
+}
+
+.monthlyReceiptFooter {
+    margin-top: 22px;
+    padding-top: 13px;
+    border-top: 1px dashed #d1d5db;
+    text-align: center;
+}
+
+.monthlyReceiptFooter p {
+    margin: 0 0 5px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.monthlyReceiptFooter span {
+    color: #9ca3af;
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   RECEIPT ACTIONS
+===================================================== */
+
+.monthlyFeeReceiptActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 13px 20px;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.monthlyFeeReceiptCloseBtn,
+.monthlyFeeReceiptPrintBtn {
+    height: 37px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 14px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.monthlyFeeReceiptCloseBtn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #4b5563;
+}
+
+.monthlyFeeReceiptPrintBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:700px) {
+    .studentFeesHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .studentFeesCount {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .studentFeeFilters {
+        grid-template-columns: 1fr;
+    }
+
+    .monthlyFeeReceiptOverlay {
+        padding: 10px;
+    }
+
+    .printableMonthlyReceipt {
+        padding: 22px 18px;
+    }
+
+    .monthlyReceiptMeta {
+        grid-template-columns: 1fr;
+    }
+
+    .monthlyReceiptMeta>div+div {
+        border-left: none;
+        border-top: 1px solid #d1d5db;
+    }
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    .monthlyFeeReceiptOverlay,
+    .monthlyFeeReceiptModal,
+    .printableMonthlyReceipt,
+    .printableMonthlyReceipt * {
+        visibility: visible !important;
+    }
+
+    .monthlyFeeReceiptOverlay {
+        position: absolute !important;
+        inset: 0 !important;
+        display: block !important;
+        padding: 0 !important;
+        background: #fff !important;
+        backdrop-filter: none !important;
+    }
+
+    .monthlyFeeReceiptModal {
+        width: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        display: block !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    .monthlyFeeReceiptModalHeader,
+    .monthlyFeeReceiptActions {
+        display: none !important;
+    }
+
+    .printableMonthlyReceipt {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 18mm !important;
+        box-sizing: border-box !important;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}

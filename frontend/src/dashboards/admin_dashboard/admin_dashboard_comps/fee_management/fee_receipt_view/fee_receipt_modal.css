@@ -1,0 +1,651 @@
+/* =====================================================
+   FEE RECEIPT MODAL
+===================================================== */
+
+.feeReceiptModalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(17,24,39,.58);
+    backdrop-filter: blur(5px);
+    animation: feeReceiptOverlay .2s ease;
+}
+
+.feeReceiptModal {
+    width: 100%;
+    max-width: 780px;
+    max-height: 94vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: 0 25px 70px rgba(17,24,39,.25);
+    animation: feeReceiptAppear .25s ease;
+}
+
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.feeReceiptModalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+}
+
+.feeReceiptModalHeader span {
+    display: block;
+    margin-bottom: 3px;
+    color: #059669;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .7px;
+}
+
+.feeReceiptModalHeader h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 16px;
+}
+
+.feeReceiptCloseBtn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    background: #fff;
+    color: #6b7280;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.feeReceiptCloseBtn:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+
+/* =====================================================
+   PRINTABLE RECEIPT
+===================================================== */
+
+.printableFeeReceipt {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 32px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background: #fff;
+}
+
+
+/* =====================================================
+   INSTITUTE
+===================================================== */
+
+.feeReceiptInstitute {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid #10b981;
+}
+
+.feeReceiptInstituteIcon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 22px;
+}
+
+.feeReceiptInstitute h1 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 20px;
+}
+
+.feeReceiptInstitute p {
+    margin: 0 0 4px;
+    color: #4b5563;
+    font-size: 9px;
+}
+
+.feeReceiptInstitute span {
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.feeReceiptTitle {
+    padding: 19px 0;
+    text-align: center;
+}
+
+.feeReceiptTitle span {
+    display: block;
+    margin-bottom: 5px;
+    color: #059669;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.feeReceiptTitle h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 20px;
+    letter-spacing: .8px;
+}
+
+
+/* =====================================================
+   META
+===================================================== */
+
+.feeReceiptMeta {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-bottom: 19px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.feeReceiptMeta > div {
+    padding: 11px 12px;
+    background: #f9fafb;
+}
+
+.feeReceiptMeta > div + div {
+    border-left: 1px solid #d1d5db;
+}
+
+.feeReceiptMeta span {
+    display: block;
+    margin-bottom: 4px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.feeReceiptMeta strong {
+    display: block;
+    color: #111827;
+    font-size: 9px;
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.feeReceiptSection {
+    margin-bottom: 18px;
+}
+
+.feeReceiptSectionTitle {
+    padding: 8px 11px;
+    margin-bottom: 9px;
+    background: #ecfdf5;
+    border-left: 3px solid #10b981;
+    color: #166534;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+
+/* =====================================================
+   FIELDS
+===================================================== */
+
+.feeReceiptFields {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 9px;
+}
+
+.feeReceiptField {
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+}
+
+.feeReceiptField span {
+    display: block;
+    margin-bottom: 4px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.feeReceiptField strong {
+    display: block;
+    color: #111827;
+    font-size: 9px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+
+/* =====================================================
+   FEE TABLE
+===================================================== */
+
+.feeReceiptTable {
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.feeReceiptRow {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+    align-items: center;
+    min-height: 38px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.feeReceiptRow:last-child {
+    border-bottom: none;
+}
+
+.feeReceiptRow span,
+.feeReceiptRow strong {
+    padding: 9px 12px;
+    font-size: 9px;
+}
+
+.feeReceiptRow strong {
+    text-align: right;
+    color: #111827;
+}
+
+.feeReceiptHeader {
+    background: #f3f4f6;
+}
+
+.feeReceiptHeader span {
+    color: #6b7280;
+    font-weight: 700;
+}
+
+.feeReceiptTotal {
+    background: #f9fafb;
+}
+
+.feeReceiptTotal span {
+    color: #374151;
+    font-weight: 700;
+}
+
+.feeReceiptTotal strong {
+    color: #059669;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.feeReceiptStatus {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px;
+    margin-top: 3px;
+    border-radius: 8px;
+}
+
+.feeReceiptStatusIcon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.feeReceiptStatus > div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.feeReceiptStatus span {
+    margin-bottom: 3px;
+    font-size: 8px;
+}
+
+.feeReceiptStatus strong {
+    font-size: 10px;
+}
+
+.feeReceiptStatus.paid {
+    background: #ecfdf5;
+    color: #166534;
+}
+
+.feeReceiptStatus.paid .feeReceiptStatusIcon {
+    background: #dcfce7;
+    color: #059669;
+}
+
+.feeReceiptStatus.pending {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.feeReceiptStatus.pending .feeReceiptStatusIcon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.feeReceiptStatus.rejected {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.feeReceiptStatus.rejected .feeReceiptStatusIcon {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.feeReceiptStatus.not-paid {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.feeReceiptStatus.not-paid .feeReceiptStatusIcon {
+    background: #e5e7eb;
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   REJECTION
+===================================================== */
+
+.feeReceiptRejection {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 7px;
+}
+
+.feeReceiptRejection strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #b91c1c;
+    font-size: 9px;
+}
+
+.feeReceiptRejection p {
+    margin: 0;
+    color: #7f1d1d;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   ADMISSION NOTE
+===================================================== */
+
+.feeReceiptAdmissionNote {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 11px 13px;
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+    border-radius: 7px;
+}
+
+.feeReceiptAdmissionNote svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #059669;
+    font-size: 12px;
+}
+
+.feeReceiptAdmissionNote p {
+    margin: 0;
+    color: #166534;
+    font-size: 8px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.feeReceiptFooter {
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px dashed #d1d5db;
+    text-align: center;
+}
+
+.feeReceiptFooter p {
+    margin: 0 0 5px;
+    color: #6b7280;
+    font-size: 8px;
+}
+
+.feeReceiptFooter span {
+    color: #9ca3af;
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   MODAL ACTIONS
+===================================================== */
+
+.feeReceiptModalActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 13px 20px;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.feeReceiptCloseAction,
+.feeReceiptPrintBtn {
+    height: 37px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 14px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.feeReceiptCloseAction {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #4b5563;
+}
+
+.feeReceiptCloseAction:hover {
+    background: #f3f4f6;
+}
+
+.feeReceiptPrintBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+    box-shadow: 0 5px 14px rgba(16,185,129,.16);
+}
+
+.feeReceiptPrintBtn:hover {
+    background: #059669;
+    border-color: #059669;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes feeReceiptOverlay {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes feeReceiptAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:600px) {
+    .feeReceiptModalOverlay {
+        padding: 10px;
+    }
+
+    .feeReceiptModal {
+        max-height: 96vh;
+    }
+
+    .printableFeeReceipt {
+        padding: 22px 17px;
+    }
+
+    .feeReceiptMeta {
+        grid-template-columns: 1fr;
+    }
+
+    .feeReceiptMeta > div + div {
+        border-left: none;
+        border-top: 1px solid #d1d5db;
+    }
+
+    .feeReceiptFields {
+        grid-template-columns: 1fr;
+    }
+
+    .feeReceiptRow {
+        grid-template-columns: 1fr 110px;
+    }
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    .feeReceiptModalOverlay,
+    .feeReceiptModal,
+    .printableFeeReceipt,
+    .printableFeeReceipt * {
+        visibility: visible !important;
+    }
+
+    .feeReceiptModalOverlay {
+        position: absolute !important;
+        inset: 0 !important;
+        display: block !important;
+        padding: 0 !important;
+        background: #fff !important;
+        backdrop-filter: none !important;
+    }
+
+    .feeReceiptModal {
+        width: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        display: block !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    .feeReceiptModalHeader,
+    .feeReceiptModalActions {
+        display: none !important;
+    }
+
+    .printableFeeReceipt {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 18mm !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }
+
+    .feeReceiptSection,
+    .feeReceiptMeta,
+    .feeReceiptFields,
+    .feeReceiptTable,
+    .feeReceiptStatus {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}

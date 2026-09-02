@@ -1,0 +1,307 @@
+.adminRejectedEditPage {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 45px;
+}
+
+.rejectedEditHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.rejectedEditHeader span {
+    display: block;
+    margin-bottom: 6px;
+    color: #dc2626;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+.rejectedEditHeader h1 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 26px;
+}
+
+.rejectedEditHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.rejectedEditBadge {
+    padding: 7px 11px;
+    border-radius: 20px;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.rejectedEditCard {
+    padding: 20px;
+    margin-bottom: 17px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .025);
+}
+
+.rejectedSectionHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.rejectedSectionIcon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 13px;
+}
+
+.rejectedSectionHeader h2 {
+    margin: 0 0 4px;
+    color: #111827;
+    font-size: 14px;
+}
+
+.rejectedSectionHeader p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.rejectedEditGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.rejectedFormGroup {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.rejectedFormGroup.full {
+    grid-column: 1/-1;
+}
+
+.rejectedFormGroup label {
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 9px;
+    font-weight: 650;
+}
+
+.rejectedFormGroup input,
+.rejectedFormGroup select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 10px;
+    transition: .2s ease;
+}
+
+.rejectedFormGroup input:focus,
+.rejectedFormGroup select:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .08);
+}
+
+
+/* DOCUMENTS */
+
+.rejectedDocumentsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.rejectedDocument {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.rejectedDocumentHeader {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.rejectedDocumentHeader span {
+    display: block;
+    margin-bottom: 3px;
+    color: #9ca3af;
+    font-size: 7px;
+}
+
+.rejectedDocumentHeader h3 {
+    margin: 0;
+    color: #374151;
+    font-size: 9px;
+}
+
+.rejectedDocumentPreview {
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+}
+
+.rejectedDocumentPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.noDocumentPreview {
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.replaceDocumentBtn {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 9px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #fff;
+    color: #4b5563;
+    font-size: 8px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.replaceDocumentBtn:hover {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #059669;
+}
+
+
+/* ACTIONS */
+
+.rejectedEditActions {
+    position: sticky;
+    bottom: 12px;
+    z-index: 20;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, .97);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(17, 24, 39, .10);
+    backdrop-filter: blur(8px);
+}
+
+.rejectedCancelBtn,
+.rejectedSaveBtn {
+    height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 14px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.rejectedCancelBtn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #4b5563;
+}
+
+.rejectedCancelBtn:hover {
+    background: #f3f4f6;
+}
+
+.rejectedSaveBtn {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+}
+
+.rejectedSaveBtn:hover {
+    background: #059669;
+    border-color: #059669;
+}
+
+.rejectedCancelBtn:disabled,
+.rejectedSaveBtn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+@media(max-width:850px) {
+    .rejectedDocumentsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media(max-width:600px) {
+    .rejectedEditHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .rejectedEditCard {
+        padding: 16px;
+    }
+
+    .rejectedEditGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .rejectedFormGroup.full {
+        grid-column: auto;
+    }
+
+    .rejectedDocumentsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .rejectedEditActions {
+        flex-direction: column;
+    }
+
+    .rejectedCancelBtn,
+    .rejectedSaveBtn {
+        width: 100%;
+    }
+}

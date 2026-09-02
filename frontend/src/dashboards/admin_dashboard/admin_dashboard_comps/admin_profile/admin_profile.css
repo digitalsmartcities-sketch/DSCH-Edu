@@ -1,0 +1,488 @@
+.adminProfilePage {
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    padding-bottom:45px;
+}
+
+.adminProfileHeader {
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.adminProfileEyebrow {
+    display:block;
+    margin-bottom:6px;
+    color:#059669;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.adminProfileHeader h1 {
+    margin:0 0 6px;
+    color:#111827;
+    font-size:27px;
+    font-weight:700;
+}
+
+.adminProfileHeader p {
+    margin:0;
+    color:#6b7280;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.adminProfileBackBtn {
+    height:39px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:0 14px;
+    border:1px solid #d1d5db;
+    border-radius:7px;
+    background:#fff;
+    color:#374151;
+    font-family:inherit;
+    font-size:9px;
+    font-weight:650;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.adminProfileBackBtn:hover {
+    background:#ecfdf5;
+    border-color:#10b981;
+    color:#059669;
+}
+
+
+/* SUMMARY */
+
+.adminProfileSummary {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:18px 20px;
+    margin-bottom:17px;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(17,24,39,.025);
+}
+
+.adminProfileIdentity {
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.adminProfileAvatar {
+    width:58px;
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    flex-shrink:0;
+    border-radius:50%;
+    background:#ecfdf5;
+    color:#059669;
+    font-size:20px;
+    font-weight:700;
+}
+
+.adminProfileAvatar img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.adminProfileIdentity > div:last-child > span {
+    display:block;
+    margin-bottom:3px;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.adminProfileIdentity h2 {
+    margin:0 0 4px;
+    color:#111827;
+    font-size:18px;
+}
+
+.adminProfileIdentity p {
+    margin:0;
+    color:#6b7280;
+    font-size:9px;
+}
+
+.adminProfileBadges {
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.adminProfileBadge {
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:8px;
+    font-weight:700;
+}
+
+.adminProfileBadge.approved {
+    background:#ecfdf5;
+    color:#166534;
+}
+
+.adminProfileBadge.active {
+    background:#f9fafb;
+    color:#4b5563;
+}
+
+.statusDot {
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#10b981;
+}
+
+
+/* CARD */
+
+.adminProfileCard {
+    padding:21px;
+    margin-bottom:17px;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(17,24,39,.025);
+}
+
+.adminProfileSectionHeader {
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding-bottom:15px;
+    margin-bottom:16px;
+    border-bottom:1px solid #f3f4f6;
+}
+
+.adminProfileSectionIcon {
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    border-radius:8px;
+    background:#ecfdf5;
+    color:#059669;
+    font-size:13px;
+}
+
+.adminProfileSectionHeader h2 {
+    margin:0 0 4px;
+    color:#111827;
+    font-size:15px;
+}
+
+.adminProfileSectionHeader p {
+    margin:0;
+    color:#9ca3af;
+    font-size:9px;
+}
+
+
+/* INFO GRID */
+
+.adminProfileInfoGrid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+}
+
+.adminProfileInfoItem {
+    min-width:0;
+    padding:12px 13px;
+    background:#f9fafb;
+    border:1px solid #f3f4f6;
+    border-radius:8px;
+}
+
+.adminProfileInfoItem.full {
+    grid-column:1/-1;
+}
+
+.adminProfileInfoItem span {
+    display:block;
+    margin-bottom:4px;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.adminProfileInfoItem strong {
+    display:block;
+    color:#374151;
+    font-size:10px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
+}
+
+
+/* SECURITY */
+
+.adminSecurityNotice {
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin-top:13px;
+    padding:12px 14px;
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+}
+
+.adminSecurityNotice > svg {
+    margin-top:2px;
+    color:#6b7280;
+    font-size:12px;
+}
+
+.adminSecurityNotice strong {
+    display:block;
+    margin-bottom:3px;
+    color:#374151;
+    font-size:9px;
+}
+
+.adminSecurityNotice p {
+    margin:0;
+    color:#9ca3af;
+    font-size:8px;
+    line-height:1.5;
+}
+
+
+/* DOCUMENTS */
+
+.adminProfileDocuments {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:13px;
+}
+
+.adminDocumentCard {
+    overflow:hidden;
+    border:1px solid #e5e7eb;
+    border-radius:9px;
+    background:#fff;
+}
+
+.adminDocumentHeader {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:10px 11px;
+    border-bottom:1px solid #f3f4f6;
+}
+
+.adminDocumentHeader h3 {
+    margin:0;
+    color:#374151;
+    font-size:9px;
+}
+
+.adminDocumentHeader button {
+    padding:4px 7px;
+    border:1px solid #d1d5db;
+    border-radius:5px;
+    background:#fff;
+    color:#059669;
+    font-family:inherit;
+    font-size:7px;
+    cursor:pointer;
+}
+
+.adminDocumentHeader button:hover {
+    background:#ecfdf5;
+    border-color:#10b981;
+}
+
+.adminDocumentPreview {
+    height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f9fafb;
+}
+
+.adminDocumentPreview img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.adminDocumentMissing {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:7px;
+    color:#9ca3af;
+    font-size:9px;
+}
+
+.adminDocumentMissing svg {
+    font-size:21px;
+}
+
+
+/* ACTIONS */
+
+.adminProfileActions {
+    display:flex;
+    justify-content:flex-end;
+    margin-top:5px;
+}
+
+.adminProfileEditBtn {
+    height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:0 15px;
+    border:1px solid #10b981;
+    border-radius:7px;
+    background:#10b981;
+    color:#fff;
+    font-family:inherit;
+    font-size:9px;
+    font-weight:650;
+    cursor:pointer;
+    box-shadow:0 5px 14px rgba(16,185,129,.14);
+    transition:.2s ease;
+}
+
+.adminProfileEditBtn:hover {
+    background:#059669;
+    border-color:#059669;
+    transform:translateY(-1px);
+}
+
+
+/* LOADING / EMPTY */
+
+.adminProfileLoading,
+.adminProfileEmpty {
+    min-height:400px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+.adminProfileLoading p,
+.adminProfileEmpty p {
+    margin:10px 0 0;
+    color:#6b7280;
+    font-size:10px;
+}
+
+.adminProfileEmpty > svg {
+    color:#059669;
+    font-size:28px;
+}
+
+.adminProfileEmpty h2 {
+    margin:10px 0 0;
+    color:#374151;
+    font-size:16px;
+}
+
+.adminProfileLoader {
+    width:27px;
+    height:27px;
+    border:3px solid #d1fae5;
+    border-top-color:#10b981;
+    border-radius:50%;
+    animation:adminProfileSpin .8s linear infinite;
+}
+
+@keyframes adminProfileSpin {
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+
+    .adminProfileDocuments {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .adminProfileHeader {
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .adminProfileHeader h1 {
+        font-size:23px;
+    }
+
+    .adminProfileBackBtn {
+        width:100%;
+    }
+
+    .adminProfileSummary {
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .adminProfileBadges {
+        width:100%;
+    }
+
+    .adminProfileInfoGrid {
+        grid-template-columns:1fr;
+    }
+
+    .adminProfileInfoItem.full {
+        grid-column:auto;
+    }
+
+    .adminProfileCard {
+        padding:17px;
+    }
+
+    .adminProfileDocuments {
+        grid-template-columns:1fr;
+    }
+
+    .adminProfileActions {
+        width:100%;
+    }
+
+    .adminProfileEditBtn {
+        width:100%;
+    }
+
+}

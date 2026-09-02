@@ -1,0 +1,549 @@
+.superAdminEnrollments {
+    width: 100%;
+    padding: 5px 0 40px;
+    color: #111827;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.enrollmentsHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 23px;
+}
+
+.enrollmentsEyebrow {
+    display: block;
+    margin-bottom: 5px;
+    color: #059669;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.enrollmentsHeader h1 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 27px;
+}
+
+.enrollmentsHeader p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.enrollmentHeaderCount {
+    min-width: 100px;
+    padding: 12px 15px;
+    border: 1px solid #d1fae5;
+    border-radius: 9px;
+    background: #ecfdf5;
+    text-align: center;
+}
+
+.enrollmentHeaderCount strong {
+    display: block;
+    margin-bottom: 2px;
+    color: #059669;
+    font-size: 20px;
+}
+
+.enrollmentHeaderCount span {
+    color: #6b7280;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+.enrollmentFilters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.3fr 1.2fr;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(17, 24, 39, .025);
+}
+
+.enrollmentSearch,
+.enrollmentFilterItem {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.enrollmentSearch {
+    padding: 0 11px;
+}
+
+.enrollmentSearch:focus-within,
+.enrollmentFilterItem:focus-within {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, .06);
+}
+
+.enrollmentSearch svg,
+.enrollmentFilterItem svg {
+    flex-shrink: 0;
+    color: #10b981;
+    font-size: 10px;
+}
+
+.enrollmentSearch input,
+.enrollmentFilterItem select {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #374151;
+    font-family: inherit;
+    font-size: 9px;
+}
+
+.enrollmentFilterItem {
+    padding: 0 10px;
+}
+
+.enrollmentFilterItem select {
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   RESULT BAR
+===================================================== */
+
+.enrollmentResultsBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.enrollmentResultsBar>div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.enrollmentResultsBar strong {
+    color: #059669;
+    font-size: 12px;
+}
+
+.enrollmentResultsBar span {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.clearEnrollmentFilters {
+    padding: 6px 9px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #059669;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.clearEnrollmentFilters:hover {
+    border-color: #10b981;
+    background: #ecfdf5;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.enrollmentsTableCard {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(17, 24, 39, .025);
+}
+
+.enrollmentsTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.enrollmentsTable {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.enrollmentsTable thead {
+    background: #f9fafb;
+}
+
+.enrollmentsTable th {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-size: 8px;
+    font-weight: 700;
+    text-align: left;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.enrollmentsTable td {
+    padding: 14px;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+}
+
+.enrollmentsTable tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.enrollmentsTable tbody tr {
+    transition: .15s ease;
+}
+
+.enrollmentsTable tbody tr:hover {
+    background: #fafffd;
+}
+
+
+/* =====================================================
+   APPLICANT
+===================================================== */
+
+.applicantCell {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 190px;
+}
+
+.applicantAvatar {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 12px;
+}
+
+.applicantCell>div:last-child {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.applicantCell strong {
+    margin-bottom: 2px;
+    color: #374151;
+    font-size: 10px;
+}
+
+.applicantCell span {
+    max-width: 180px;
+    overflow: hidden;
+    color: #6b7280;
+    font-size: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.applicantCell small {
+    margin-top: 2px;
+    color: #9ca3af;
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   COURSE
+===================================================== */
+
+.courseCell {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 170px;
+}
+
+.courseCell strong {
+    color: #374151;
+    font-size: 9px;
+}
+
+.courseCell span {
+    color: #059669;
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+.tableDate {
+    color: #6b7280;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.enrollmentStatusBadge,
+.paymentStatusBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 999px;
+    font-size: 7px;
+    font-weight: 700;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.enrollmentStatusBadge {
+    padding: 6px 8px;
+}
+
+.paymentStatusBadge {
+    padding: 5px 7px;
+}
+
+.enrollmentStatusBadge svg,
+.paymentStatusBadge svg {
+    font-size: 8px;
+}
+
+
+/* PENDING */
+
+.enrollmentStatusBadge.pending,
+.paymentStatusBadge.submitted,
+.paymentStatusBadge.not-submitted {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+
+/* APPROVED */
+
+.enrollmentStatusBadge.approved,
+.paymentStatusBadge.paid {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+
+/* REJECTED */
+
+.enrollmentStatusBadge.rejected,
+.paymentStatusBadge.rejected {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+
+/* COMPLETED */
+
+.enrollmentStatusBadge.completed {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+/* =====================================================
+   PAYMENT CELL
+===================================================== */
+
+.paymentCell {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.paymentCell small {
+    color: #9ca3af;
+    font-size: 7px;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.enrollmentActions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.enrollmentActionBtn {
+    min-height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 9px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 8px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+.enrollmentActionBtn.preview {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #374151;
+}
+
+.enrollmentActionBtn.preview:hover {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.enrollmentActionBtn.certificate {
+    border: 1px solid #10b981;
+    background: #10b981;
+    color: #fff;
+}
+
+.enrollmentActionBtn.certificate:hover {
+    border-color: #059669;
+    background: #059669;
+}
+
+.enrollmentActionBtn svg {
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.enrollmentsEmpty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 55px 20px;
+    text-align: center;
+}
+
+.enrollmentsEmptyIcon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 16px;
+}
+
+.enrollmentsEmpty h3 {
+    margin: 0 0 6px;
+    color: #111827;
+    font-size: 16px;
+}
+
+.enrollmentsEmpty p {
+    margin: 0 0 14px;
+    color: #9ca3af;
+    font-size: 9px;
+}
+
+.enrollmentsEmpty button {
+    height: 35px;
+    padding: 0 12px;
+    border: 1px solid #10b981;
+    border-radius: 7px;
+    background: #10b981;
+    color: #fff;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:950px) {
+
+    .enrollmentFilters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .enrollmentSearch {
+        grid-column: 1/-1;
+    }
+
+}
+
+@media(max-width:650px) {
+
+    .enrollmentsHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .enrollmentHeaderCount {
+        min-width: 80px;
+    }
+
+    .enrollmentFilters {
+        grid-template-columns: 1fr;
+    }
+
+    .enrollmentSearch {
+        grid-column: auto;
+    }
+
+    .enrollmentResultsBar {
+        align-items: flex-start;
+    }
+
+}

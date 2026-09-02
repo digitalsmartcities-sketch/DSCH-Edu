@@ -1,0 +1,951 @@
+/* =====================================================
+   CERTIFICATE PAGE
+===================================================== */
+
+.courseCertificatePage {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background: #eef2f1;
+
+    font-family: "Outfit", sans-serif;
+}
+
+
+/* =====================================================
+   ACTION BAR
+===================================================== */
+
+.certificateActionBar {
+    width: 1120px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.certificateCloseBtn,
+.certificatePrintBtn {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.certificateCloseBtn {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    color: #374151;
+}
+
+.certificateCloseBtn:hover {
+    border-color: #10b981;
+    background: #ecfdf5;
+    color: #059669;
+    transform: translateY(-1px);
+}
+
+.certificatePrintBtn {
+    border: 1px solid #059669;
+    background: #059669;
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 16px rgba(5, 150, 105, .15);
+}
+
+.certificatePrintBtn:hover {
+    background: #047857;
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   CERTIFICATE SHEET
+   SCREEN SIZE
+===================================================== */
+
+.courseCertificate {
+    position: relative;
+    aspect-ratio: 297 / 210;
+    box-sizing: border-box;
+    padding: 9px;
+    background: #ffffff;
+    box-shadow: 0 25px 65px rgba(17, 24, 39, .13);
+}
+
+
+/* =====================================================
+   OUTER FRAME
+===================================================== */
+
+.certificateOuterFrame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 7px;
+    border: 2px solid #059669;
+    background:
+        linear-gradient(135deg,
+            rgba(16, 185, 129, .025),
+            rgba(255, 255, 255, 0) 40%,
+            rgba(16, 185, 129, .025));
+}
+
+/* =====================================================
+   INNER FRAME
+===================================================== */
+.certificateInnerFrame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 36px 58px 25px;
+    border: 1px solid #a7f3d0;
+    background:
+        radial-gradient(circle at center,
+            rgba(16, 185, 129, .025),
+            transparent 55%),
+        #ffffff;
+}
+
+/* =====================================================
+   DECORATIVE CORNERS
+===================================================== */
+.certificateCorner {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-style: solid;
+    border-color: #10b981;
+    opacity: .85;
+}
+
+.certificateCorner.topLeft {
+    top: 9px;
+    left: 9px;
+    border-width: 2px 0 0 2px;
+}
+
+.certificateCorner.topRight {
+    top: 9px;
+    right: 9px;
+    border-width: 2px 2px 0 0;
+}
+
+.certificateCorner.bottomLeft {
+    bottom: 9px;
+    left: 9px;
+    border-width: 0 0 2px 2px;
+}
+
+.certificateCorner.bottomRight {
+    right: 9px;
+    bottom: 9px;
+    border-width: 0 2px 2px 0;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+.certificateHeader {
+    display: grid;
+    grid-template-columns: 85px 1fr 85px;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #d1fae5;
+}
+
+
+/* =====================================================
+   INSTITUTE LOGO
+===================================================== */
+
+.certificateLogoArea {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.certificateInstituteLogo,
+.certificateInstituteLogoPlaceholder {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    box-sizing: border-box;
+    background: #ecfdf5;
+    box-shadow:
+        0 5px 14px rgba(5, 150, 105, .10);
+}
+
+.certificateInstituteLogoPlaceholder {
+    color: #059669;
+    font-size: 26px;
+}
+
+/* =====================================================
+   INSTITUTE
+===================================================== */
+
+.certificateInstitute {
+    min-width: 0;
+
+    text-align: center;
+}
+
+.certificatePlatform {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #059669;
+
+    font-size: 8px;
+    font-weight: 750;
+
+    letter-spacing: 2px;
+}
+
+.certificateInstitute h1 {
+    margin: 0;
+
+    color: #111827;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 26px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+.certificateInstitute p {
+    margin: 5px 0 0;
+
+    color: #6b7280;
+
+    font-size: 8px;
+
+    letter-spacing: .5px;
+}
+
+
+/* =====================================================
+   TOP SEAL
+===================================================== */
+
+.certificateSeal {
+    width: 62px;
+    height: 62px;
+
+    justify-self: end;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    border: 1.5px solid #10b981;
+
+    border-radius: 50%;
+
+    background: #f0fdf4;
+
+    color: #059669;
+}
+
+.certificateSeal svg {
+    margin-bottom: 2px;
+
+    font-size: 17px;
+}
+
+.certificateSeal span {
+    font-size: 7px;
+
+    font-weight: 750;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   TITLE SECTION
+===================================================== */
+
+.certificateTitleSection {
+    margin-top: 20px;
+
+    text-align: center;
+}
+
+.certificateSmallTitle {
+    color: #059669;
+
+    font-size: 8px;
+
+    font-weight: 750;
+
+    letter-spacing: 3px;
+}
+
+.certificateTitleLine {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin: 8px auto 6px;
+}
+
+.certificateTitleLine span {
+    width: 62px;
+    height: 1px;
+
+    background: #a7f3d0;
+}
+
+.certificateTitleLine svg {
+    color: #10b981;
+
+    font-size: 10px;
+}
+
+.certificateTitleSection h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 42px;
+
+    line-height: 1;
+
+    letter-spacing: 1px;
+}
+
+.certificateTitleSection p {
+    margin: 8px 0 0;
+
+    color: #6b7280;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    font-style: italic;
+}
+
+
+/* =====================================================
+   STUDENT NAME
+===================================================== */
+
+.certificateRecipient {
+    margin-top: 13px;
+
+    text-align: center;
+}
+
+.certificateRecipient h3 {
+    display: inline-block;
+
+    max-width: 850px;
+
+    margin: 0;
+
+    color: #064e3b;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 31px;
+
+    line-height: 1.15;
+
+    font-weight: 700;
+}
+
+.recipientUnderline {
+    width: 280px;
+
+    max-width: 70%;
+
+    height: 2px;
+
+    margin: 6px auto 0;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            #10b981,
+            transparent);
+}
+
+
+/* =====================================================
+   CERTIFICATE STATEMENT
+===================================================== */
+
+.certificateStatement {
+    max-width: 760px;
+
+    margin: 11px auto 0;
+
+    text-align: center;
+}
+
+.certificateStatement p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+.certificateStatement h4 {
+    margin: 5px 0 5px;
+
+    color: #111827;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 20px;
+
+    line-height: 1.2;
+}
+
+.certificateStatement .certificateCompletionText {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #6b7280;
+
+    font-family: "Outfit", sans-serif;
+
+    font-size: 8px;
+
+    line-height: 1.55;
+}
+
+
+/* =====================================================
+   COURSE META
+===================================================== */
+
+.certificateCourseMeta {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    max-width: 760px;
+
+    margin: 16px auto 0;
+
+    border-top: 1px solid #e5e7eb;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.certificateCourseMeta>div {
+    min-width: 0;
+
+    padding: 8px 12px;
+
+    text-align: center;
+}
+
+.certificateCourseMeta>div+div {
+    border-left: 1px solid #e5e7eb;
+}
+
+.certificateCourseMeta span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #059669;
+
+    font-size: 6px;
+
+    font-weight: 750;
+
+    letter-spacing: 1px;
+}
+
+.certificateCourseMeta strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #374151;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   FOOTER / SIGNATURES
+===================================================== */
+
+.certificateFooter {
+    display: grid;
+
+    grid-template-columns:
+        1fr 75px 1fr;
+
+    align-items: end;
+
+    gap: 25px;
+
+    max-width: 780px;
+
+    margin: 19px auto 0;
+}
+
+.certificateSignature {
+    text-align: center;
+}
+
+.signatureLine {
+    width: 135px;
+    max-width: 100%;
+
+    height: 1px;
+
+    margin: 0 auto 4px;
+
+    background: #6b7280;
+}
+
+.certificateSignature strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #374151;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 7px;
+}
+
+.certificateSignature span {
+    color: #9ca3af;
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   CENTER VERIFICATION SEAL
+===================================================== */
+
+.certificateFooterSeal {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.footerSealCircle {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1.5px solid #10b981;
+
+    border-radius: 50%;
+
+    background: #ecfdf5;
+
+    color: #059669;
+}
+
+.footerSealCircle svg {
+    font-size: 13px;
+}
+
+.certificateFooterSeal>span {
+    color: #059669;
+
+    font-size: 5px;
+
+    font-weight: 750;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   VERIFICATION INFORMATION
+===================================================== */
+
+.certificateVerification {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-top: 12px;
+}
+
+.certificateVerification>div:not(.verificationDivider) {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.certificateVerification span {
+    color: #9ca3af;
+
+    font-size: 5px;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+.certificateVerification strong {
+    color: #374151;
+
+    font-size: 6px;
+
+    font-weight: 650;
+}
+
+.verificationDivider {
+    width: 1px;
+
+    height: 10px;
+
+    background: #d1d5db;
+}
+
+
+/* =====================================================
+   BOTTOM NOTE
+===================================================== */
+
+.certificateBottomNote {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    margin-top: 7px;
+}
+
+.certificateBottomNote svg {
+    color: #10b981;
+
+    font-size: 6px;
+}
+
+.certificateBottomNote span {
+    color: #9ca3af;
+
+    font-size: 5px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   PRINT
+   TRUE A4 LANDSCAPE
+===================================================== */
+@media print {
+
+    /* Hide the entire dashboard/page */
+    body * {
+        visibility: hidden !important;
+    }
+
+    /* Show only the course certificate */
+    .courseCertificatePage,
+    .courseCertificate,
+    .courseCertificate * {
+        visibility: visible !important;
+    }
+
+    /* Make certificate the printable area */
+    .courseCertificatePage {
+        position: absolute !important;
+        inset: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+
+        display: block !important;
+
+        padding: 0 !important;
+        margin: 0 !important;
+
+        background: #ffffff !important;
+    }
+
+    .courseCertificate {
+        width: 100% !important;
+        max-width: none !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        aspect-ratio: auto !important;
+
+        margin: 0 !important;
+        padding: 12mm !important;
+
+        box-sizing: border-box !important;
+
+        background: #ffffff !important;
+
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    /* Hide buttons */
+    .certificateActionBar,
+    .noPrint {
+        display: none !important;
+    }
+
+    /* Keep certificate frames visible */
+    .certificateOuterFrame,
+    .certificateInnerFrame {
+        visibility: visible !important;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+}
+
+/* =====================================================
+   TABLET PREVIEW
+===================================================== */
+
+@media(max-width:900px) {
+
+    .courseCertificatePage {
+        padding: 20px 10px;
+    }
+
+    .courseCertificate {
+        aspect-ratio: 297 / 210;
+    }
+
+    .certificateInnerFrame {
+        padding: 28px 35px 20px;
+    }
+
+    .certificateHeader {
+        grid-template-columns: 68px 1fr 68px;
+    }
+
+    .certificateInstituteLogo,
+    .certificateInstituteLogoPlaceholder {
+        width: 55px;
+        height: 55px;
+    }
+
+    .certificateSeal {
+        width: 52px;
+        height: 52px;
+    }
+
+    .certificateTitleSection h2 {
+        font-size: 34px;
+    }
+
+    .certificateRecipient h3 {
+        font-size: 27px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE PREVIEW
+===================================================== */
+
+@media(max-width:650px) {
+
+    .courseCertificatePage {
+        padding: 12px 7px;
+    }
+
+    .certificateActionBar {
+        justify-content: stretch;
+    }
+
+    .certificateCloseBtn,
+    .certificatePrintBtn {
+        flex: 1;
+    }
+
+    .courseCertificate {
+        aspect-ratio: auto;
+        height: auto;
+
+        padding: 5px;
+    }
+
+    .certificateOuterFrame {
+        padding: 4px;
+    }
+
+    .certificateInnerFrame {
+        height: auto;
+        min-height: 700px;
+
+        padding: 25px 18px 20px;
+    }
+
+    .certificateHeader {
+        grid-template-columns: 1fr;
+
+        justify-items: center;
+
+        gap: 9px;
+    }
+
+    .certificateLogoArea,
+    .certificateSeal {
+        justify-self: center;
+    }
+
+    .certificateInstitute h1 {
+        font-size: 21px;
+    }
+
+    .certificateTitleSection h2 {
+        font-size: 30px;
+    }
+
+    .certificateTitleLine span {
+        width: 42px;
+    }
+
+    .certificateRecipient h3 {
+        font-size: 24px;
+    }
+
+    .certificateStatement h4 {
+        font-size: 18px;
+    }
+
+    .certificateCourseMeta {
+        grid-template-columns: 1fr;
+    }
+
+    .certificateCourseMeta>div+div {
+        border-top: 1px solid #e5e7eb;
+        border-left: 0;
+    }
+
+    .certificateFooter {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .certificateFooterSeal {
+        order: -1;
+    }
+
+    .certificateVerification {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .verificationDivider {
+        width: 55px;
+        height: 1px;
+    }
+}

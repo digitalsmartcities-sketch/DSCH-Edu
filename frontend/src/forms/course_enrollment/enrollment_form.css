@@ -1,0 +1,571 @@
+/* =====================================================
+   COURSE ENROLLMENT PAGE
+===================================================== */
+
+.courseEnrollmentPage{
+    width:100%;
+    /* max-width:950px; */
+    margin:0 auto;
+    padding:20px 16px 60px 60px;
+    font-family:"Outfit",sans-serif;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.courseEnrollmentHeader{
+    margin-bottom:32px;
+}
+
+.courseEnrollmentBackBtn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:20px;
+    padding:8px 16px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    background:#fff;
+    color:#374151;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.courseEnrollmentBackBtn:hover{
+    border-color:#10b981;
+    color:#059669;
+    background:#ecfdf5;
+}
+
+.courseEnrollmentHeader>span{
+    display:block;
+    margin-bottom:8px;
+    color:#059669;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.courseEnrollmentHeader h1{
+    margin:0 0 10px;
+    color:#111827;
+    font-size:32px;
+    line-height:1.25;
+    font-weight:700;
+}
+
+.courseEnrollmentHeader p{
+    max-width:650px;
+    margin:0;
+    color:#6b7280;
+    font-size:15px;
+    line-height:1.6;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.courseEnrollmentForm{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.courseEnrollmentSection{
+    padding:28px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 4px 16px rgba(17,24,39,.025);
+}
+
+.enrollmentSectionHeading{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:24px;
+}
+
+.enrollmentSectionIcon{
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    border-radius:10px;
+    background:#ecfdf5;
+    color:#059669;
+    font-size:18px;
+}
+
+.enrollmentSectionHeading h2{
+    margin:0 0 4px;
+    color:#111827;
+    font-size:18px;
+    line-height:1.3;
+}
+
+.enrollmentSectionHeading p{
+    margin:0;
+    color:#6b7280;
+    font-size:13px;
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.enrollmentFormGrid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+}
+
+
+/* =====================================================
+   FORM GROUP
+===================================================== */
+
+.enrollmentFormGroup{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.enrollmentFormGroup label,
+.enrollmentFileGroup>label{
+    color:#374151;
+    font-size:14px;
+    font-weight:600;
+}
+
+.enrollmentFormGroup label span,
+.enrollmentFileGroup>label span{
+    margin-left:4px;
+    color:#dc2626;
+    font-size:13px;
+}
+
+.enrollmentFormGroup label span:has(+ *){
+    font-weight:500;
+}
+
+.enrollmentFormGroup input,
+.enrollmentFormGroup select,
+.enrollmentFormGroup textarea{
+    width:100%;
+    box-sizing:border-box;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    color:#111827;
+    font-family:inherit;
+    font-size:14px;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.enrollmentFormGroup input,
+.enrollmentFormGroup select{
+    height:44px;
+    padding:0 14px;
+}
+
+.enrollmentFormGroup textarea{
+    min-height:120px;
+    padding:12px 14px;
+    resize:vertical;
+    line-height:1.6;
+}
+
+.enrollmentFormGroup input::placeholder,
+.enrollmentFormGroup textarea::placeholder{
+    color:#9ca3af;
+}
+
+.enrollmentFormGroup input:focus,
+.enrollmentFormGroup select:focus,
+.enrollmentFormGroup textarea:focus{
+    border-color:#10b981;
+    box-shadow:0 0 0 3px rgba(16,185,129,.1);
+}
+
+.enrollmentFormGroup select{
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   COURSE INFORMATION
+===================================================== */
+
+.enrollmentCourseSummary{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:16px;
+    border:1px solid #d1fae5;
+    border-radius:10px;
+    background:#ecfdf5;
+}
+
+.enrollmentCourseSummary img{
+    width:120px;
+    height:80px;
+    flex-shrink:0;
+    display:block;
+    object-fit:cover;
+    border-radius:8px;
+    background:#fff;
+}
+
+.enrollmentCourseSummary>div{
+    min-width:0;
+}
+
+.enrollmentCourseSummary>div>span{
+    display:block;
+    margin-bottom:4px;
+    color:#059669;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+}
+
+.enrollmentCourseSummary h3{
+    margin:0 0 6px;
+    color:#111827;
+    font-size:17px;
+    line-height:1.35;
+}
+
+.enrollmentCourseSummary p{
+    margin:4px 0;
+    color:#4b5563;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.enrollmentCourseSummary p strong{
+    color:#111827;
+    font-weight:600;
+}
+
+
+/* =====================================================
+   FEE
+===================================================== */
+
+.enrollmentFeeBox{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:20px;
+    padding:16px 20px;
+    border:1px solid #d1fae5;
+    border-radius:10px;
+    background:#ecfdf5;
+}
+
+.enrollmentFeeBox span{
+    color:#374151;
+    font-size:14px;
+    font-weight:500;
+}
+
+.enrollmentFeeBox strong{
+    color:#059669;
+    font-size:22px;
+    font-weight:700;
+}
+
+
+/* =====================================================
+   PAYMENT GRID
+===================================================== */
+
+.enrollmentPaymentGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+
+/* =====================================================
+   FILE UPLOAD
+===================================================== */
+
+.enrollmentFileGroup{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.paymentProofUpload{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    box-sizing:border-box;
+    padding:0 14px;
+    border:1px dashed #cbd5e1;
+    border-radius:8px;
+    background:#f9fafb;
+    color:#6b7280;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.paymentProofUpload:hover{
+    border-color:#10b981;
+    background:#ecfdf5;
+}
+
+.paymentProofUpload input{
+    display:none;
+}
+
+.paymentProofUpload>svg{
+    flex-shrink:0;
+    color:#10b981;
+    font-size:16px;
+}
+
+.paymentProofUpload span{
+    flex:1;
+    overflow:hidden;
+    color:#4b5563;
+    font-size:13px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.paymentProofUpload small{
+    flex-shrink:0;
+    color:#9ca3af;
+    font-size:11px;
+}
+
+
+/* =====================================================
+   AGREEMENT
+===================================================== */
+
+.enrollmentAgreement{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:14px 16px;
+    border:1px solid #e5e7eb;
+    border-radius:8px;
+    background:#f9fafb;
+    cursor:pointer;
+}
+
+.enrollmentAgreement input{
+    width:18px;
+    height:18px;
+    margin-top:2px;
+    flex-shrink:0;
+    accent-color:#10b981;
+    cursor:pointer;
+}
+
+.enrollmentAgreement span{
+    color:#4b5563;
+    font-size:13px;
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.enrollmentMessage{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.enrollmentMessage.success{
+    border:1px solid #bbf7d0;
+    background:#ecfdf5;
+    color:#166534;
+}
+
+.enrollmentMessage.error{
+    border:1px solid #fecaca;
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+.enrollmentMessage svg{
+    flex-shrink:0;
+}
+
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+.enrollmentSubmitArea{
+    padding-top:8px;
+    text-align:right;
+}
+
+.enrollmentSubmitBtn{
+    min-width:200px;
+    height:46px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:0 24px;
+    border:1px solid #10b981;
+    border-radius:8px;
+    background:#10b981;
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(16,185,129,.2);
+    transition:.2s ease;
+}
+
+.enrollmentSubmitBtn:hover:not(:disabled){
+    border-color:#059669;
+    background:#059669;
+    transform:translateY(-1px);
+}
+
+.enrollmentSubmitBtn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+}
+
+.enrollmentSubmitArea>p{
+    margin:8px 0 0;
+    color:#9ca3af;
+    font-size:12px;
+}
+
+
+/* =====================================================
+   RESPONSIVE (MOBILE & TABLET)
+===================================================== */
+
+@media(max-width:700px){
+
+    .courseEnrollmentPage{
+        padding:15px 12px 40px;
+    }
+
+    .courseEnrollmentHeader h1{
+        font-size:26px;
+    }
+
+    .courseEnrollmentSection{
+        padding:20px;
+        border-radius:10px;
+    }
+
+    .enrollmentFormGrid,
+    .enrollmentPaymentGrid{
+        grid-template-columns:1fr;
+    }
+
+    .enrollmentCourseSummary{
+        align-items:flex-start;
+    }
+
+    .enrollmentCourseSummary img{
+        width:90px;
+        height:65px;
+    }
+
+    .enrollmentCourseSummary h3{
+        font-size:15px;
+    }
+
+    .enrollmentSubmitBtn{
+        width:100%;
+    }
+
+}
+
+
+@media(max-width:450px){
+
+    .courseEnrollmentHeader{
+        margin-bottom:20px;
+    }
+
+    .courseEnrollmentHeader h1{
+        font-size:22px;
+    }
+
+    .courseEnrollmentHeader p{
+        font-size:13px;
+    }
+
+    .enrollmentSectionHeading{
+        gap:10px;
+    }
+
+    .enrollmentSectionIcon{
+        width:36px;
+        height:36px;
+        font-size:16px;
+    }
+
+    .enrollmentSectionHeading h2{
+        font-size:16px;
+    }
+
+    .enrollmentSectionHeading p{
+        font-size:12px;
+    }
+
+    .enrollmentCourseSummary{
+        gap:12px;
+        padding:12px;
+    }
+
+    .enrollmentFeeBox{
+        padding:14px;
+    }
+
+    .enrollmentFeeBox strong{
+        font-size:18px;
+    }
+
+}

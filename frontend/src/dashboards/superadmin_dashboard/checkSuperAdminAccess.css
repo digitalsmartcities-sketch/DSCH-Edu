@@ -1,0 +1,571 @@
+/* =========================================
+   ACCESS CHECK PAGE
+========================================= */
+
+.access-check-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(16, 185, 129, 0.08),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(22, 163, 74, 0.06),
+            transparent 35%
+        ),
+        #f9fafb;
+}
+
+/* =========================================
+   ACCESS CHECK PAGE
+========================================= */
+
+.access-check-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(16, 185, 129, 0.10),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(5, 150, 105, 0.08),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #f9fafb 0%,
+            #ffffff 50%,
+            #f3fdf8 100%
+        );
+}
+
+
+/* =========================================
+   ACCESS CHECK BOX
+========================================= */
+
+.access-check-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 440px;
+
+    padding: 45px 40px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 25px 60px rgba(17, 24, 39, 0.08),
+        0 5px 20px rgba(16, 185, 129, 0.05);
+
+    overflow: hidden;
+
+    animation: accessCardAppear 0.45s ease-out;
+}
+
+
+/* Decorative top line */
+
+.access-check-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #059669,
+            #10b981,
+            #16a34a
+        );
+}
+
+
+/* =========================================
+   LOADER
+========================================= */
+
+.access-loader {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 24px;
+}
+
+.access-loader span {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #10b981;
+
+    box-shadow:
+        0 0 0 4px rgba(16, 185, 129, 0.08);
+
+    animation:
+        accessLoader 1.3s infinite ease-in-out;
+}
+
+.access-loader span:nth-child(2) {
+    animation-delay: 0.16s;
+}
+
+.access-loader span:nth-child(3) {
+    animation-delay: 0.32s;
+}
+
+
+/* =========================================
+   LOADER ANIMATION
+========================================= */
+
+@keyframes accessLoader {
+
+    0%,
+    80%,
+    100% {
+        transform: translateY(0) scale(0.7);
+
+        opacity: 0.35;
+    }
+
+    40% {
+        transform: translateY(-5px) scale(1);
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   ACCESS CHECK HEADING
+========================================= */
+
+.access-check-box h2 {
+    margin: 0 0 9px;
+
+    color: #111827;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* =========================================
+   ACCESS CHECK DESCRIPTION
+========================================= */
+
+.access-check-box > p {
+    margin: 0 auto;
+
+    max-width: 320px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   DASHBOARD MESSAGE CONTAINER
+========================================= */
+
+.access-check-box .dashboard-message {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin: 24px 0 14px;
+
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1.55;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+.access-check-box .dashboard-message.success {
+    color: #166534;
+
+    background: #f0fdf4;
+
+    border: 1px solid #bbf7d0;
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.access-check-box .dashboard-message.error {
+    color: #b91c1c;
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+}
+
+
+/* =========================================
+   WARNING MESSAGE
+========================================= */
+
+.access-check-box .dashboard-message.warning {
+    color: #92400e;
+
+    background: #fffbeb;
+
+    border: 1px solid #fde68a;
+}
+
+
+/* =========================================
+   GO BACK BUTTON
+========================================= */
+
+.access-check-box button {
+    width: 100%;
+
+    height: 44px;
+
+    margin-top: 5px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #10b981;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(16, 185, 129, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.access-check-box button:hover {
+    background: #059669;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 22px rgba(16, 185, 129, 0.24);
+}
+
+.access-check-box button:active {
+    transform: translateY(0);
+
+    box-shadow:
+        0 5px 12px rgba(16, 185, 129, 0.16);
+}
+
+
+/* =========================================
+   CARD APPEAR ANIMATION
+========================================= */
+
+@keyframes accessCardAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 600px) {
+
+    .access-check-page {
+        padding: 20px 15px;
+    }
+
+    .access-check-box {
+        max-width: 410px;
+
+        padding: 40px 30px;
+
+        border-radius: 19px;
+    }
+
+    .access-check-box h2 {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .access-check-page {
+        padding: 15px 10px;
+    }
+
+    .access-check-box {
+        padding: 36px 22px;
+
+        border-radius: 17px;
+    }
+
+    .access-check-box h2 {
+        font-size: 20px;
+    }
+
+    .access-check-box > p {
+        font-size: 13px;
+    }
+
+    .access-check-box .dashboard-message {
+        font-size: 12px;
+
+        padding: 12px 13px;
+    }
+
+    .access-check-box button {
+        height: 42px;
+    }
+
+}
+
+/* =========================================
+   SUPERADMIN DASHBOARD
+========================================= */
+
+.superadmin-dashboard {
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+
+    background: #f9fafb;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.superadmin-sidebar {
+    width: 240px;
+
+    flex-shrink: 0;
+
+    padding: 25px 15px;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e5e7eb;
+}
+
+
+/* =========================================
+   SIDEBAR ITEM
+========================================= */
+
+.sidebar-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 15px;
+
+    margin-bottom: 6px;
+
+    border-radius: 9px;
+
+    color: #4b5563;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background: #ecfdf5;
+
+    color: #059669;
+}
+
+.sidebar-item.active {
+    background: #ecfdf5;
+
+    color: #059669;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   SIDEBAR ICON
+========================================= */
+
+.sidebar-icon {
+    width: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.superadmin-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 30px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+    .superadmin-sidebar {
+        width: 200px;
+    }
+
+    .superadmin-content {
+        padding: 22px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .access-check-box {
+        padding: 35px 25px;
+    }
+
+    .superadmin-dashboard {
+        flex-direction: column;
+    }
+
+    .superadmin-sidebar {
+        width: 100%;
+
+        display: flex;
+
+        padding: 10px;
+
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+
+        overflow-x: auto;
+    }
+
+    .sidebar-item {
+        width: auto;
+
+        min-width: max-content;
+
+        margin-bottom: 0;
+    }
+
+    .superadmin-content {
+        padding: 18px 14px;
+    }
+
+}
