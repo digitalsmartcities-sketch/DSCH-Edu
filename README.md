@@ -157,7 +157,6 @@ Administrators can:
 * 🧭 React Router
 * 🔗 Axios
 * 🎯 React Icons
-* 🧹 ESLint
 * 📦 npm
 
 The frontend is organized around reusable components, pages, dashboards, forms, API-call modules, application context, and static assets.
