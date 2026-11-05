@@ -409,6 +409,48 @@
     color: #059669;
 }
 
+.inputField.passwordField input {
+    padding-right: 48px;
+}
+
+.passwordVisibilityBtn {
+    position: absolute;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #9ca3af;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.passwordVisibilityBtn:hover {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.inputField .passwordVisibilityBtn svg {
+    margin-left: 0;
+
+    color: inherit;
+
+    font-size: 15px;
+}
+
 .inputField input {
     width: 100%;
     height: 52px;
@@ -435,6 +477,140 @@
 .inputField input:-webkit-autofill:focus {
     -webkit-text-fill-color: #111827;
     -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+}
+
+
+/* =========================================================
+   ROLE SELECTOR
+   ========================================================= */
+
+.roleSelector {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.roleOption {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    min-height: 118px;
+    padding: 13px 12px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-family: inherit;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.roleOption:hover {
+    border-color: #a7f3d0;
+    background: #f0fdf4;
+    transform: translateY(-1px);
+}
+
+.roleOption:focus-visible {
+    outline: 3px solid rgba(16, 185, 129, 0.25);
+    outline-offset: 2px;
+}
+
+.roleOption.active {
+    border-color: #10b981;
+    background: #ecfdf5;
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.08);
+}
+
+.roleOptionIcon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f3f4f6;
+    color: #6b7280;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.roleOption.active .roleOptionIcon {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.roleOptionIcon svg {
+    font-size: 14px;
+}
+
+.roleOptionText {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.roleOptionText strong {
+    color: #111827;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.roleOptionText small {
+    color: #6b7280;
+    font-size: 10.5px;
+    line-height: 1.45;
+}
+
+.roleOptionCheck {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    width: 17px;
+    height: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d1d5db;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #ffffff;
+
+    font-size: 9px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.roleOption.active .roleOptionCheck {
+    border-color: #059669;
+    background: #059669;
 }
 
 
@@ -472,6 +648,10 @@
    ========================================================= */
 
 .loginMessage {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+
     padding: 12px 14px;
 
     border-radius: 10px;
@@ -480,6 +660,12 @@
     line-height: 1.5;
 
     animation: messageReveal 0.3s ease;
+}
+
+.loginMessage svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 14px;
 }
 
 
@@ -597,6 +783,16 @@
 
 .loginSubmit:hover svg {
     transform: translateX(4px);
+}
+
+.loginSubmit .loginSpinner {
+    animation: loginSpin 0.8s linear infinite;
+}
+
+@keyframes loginSpin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
@@ -757,8 +953,13 @@
     }
 
     .loginRight {
+        order: -1;
         max-width: 720px;
         padding: 65px 50px;
+    }
+
+    .loginIntro {
+        order: 2;
     }
 }
 
@@ -800,6 +1001,21 @@
 
     .loginRight h2 {
         font-size: 44px;
+    }
+
+    .roleSelector {
+        grid-template-columns: 1fr;
+    }
+
+    .roleOption {
+        flex-direction: row;
+        align-items: center;
+        min-height: auto;
+    }
+
+    .roleOptionText {
+        flex: 1;
+        padding-right: 22px;
     }
 }
 
@@ -941,7 +1157,8 @@
 
     .loginFeature,
     .loginSubmit,
-    .loginSubmit svg {
+    .loginSubmit svg,
+    .roleOption {
         transition: none;
     }
 }

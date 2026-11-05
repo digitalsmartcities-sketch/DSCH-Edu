@@ -308,7 +308,7 @@ export const AdmissionApplications = ({ setSubpage }) => {
                                                         !application.isAdmissionCompleted && (
                                                             <button
                                                                 className="applicationDeleteBtn"
-                                                                title="Delete Application"
+                                                                title="Delete Application & Files"
                                                                 disabled={loading}
                                                                 onClick={() =>
                                                                     handleApplicationDelete(application._id, setLoading, setApplications)

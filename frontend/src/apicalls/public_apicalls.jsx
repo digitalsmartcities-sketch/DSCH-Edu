@@ -1,406 +1,394 @@
-import axios from "axios";
-export const API_URL = import.meta.env.VITE_API_URL;
+import apiClient, { API_URL, getApiError } from "./apiClient";
 
 // =================================
 // Public Api Calls
 // =================================
 
+export { API_URL };
+
 export const getPublishedInstitutes = async (type, setInstitutes, setError, setLoading) => {
-    setLoading(true);
-    await axios.get(`${API_URL}/institutes`, {
-        params: type ? { type } : undefined
-    }).then((res) => {
+    setLoading?.(true);
+    try {
+        const res = await apiClient.get("/institutes", {
+            params: type ? { type } : undefined,
+        });
+
         if (res.data.success) {
-            setInstitutes(res.data.institutes);
+            setInstitutes(res.data.institutes || []);
+            setError?.("");
         } else {
-            setError(res.data.message);
+            setError?.(res.data.message || "Institute could not be loaded.");
         }
-    }).catch(() => {
-        setError("Institute could not be loaded.");
-    }).finally(() => setLoading(false));
+    } catch (error) {
+        setError?.(getApiError(error, "Institute could not be loaded."));
+    } finally {
+        setLoading?.(false);
+    }
 };
 
 export const getPublishedInstituteById = async (id, setInstData, setError, setLoading) => {
-    await axios.get(`${API_URL}/institutes/${id}`)
-        .then((res) => {
-            if (res.data.success) {
-                setInstData(res.data.institute);
-            } else {
-                setError(res.data.message);
-            }
-        })
-        .catch(() => {
-            setError("Institute could not be loaded.");
-        })
-        .finally(() => setLoading(false));
+    setLoading?.(true);
+    try {
+        const res = await apiClient.get(`/institutes/${id}`);
+
+        if (res.data.success) {
+            setInstData(res.data.institute);
+            setError?.("");
+        } else {
+            setError?.(res.data.message || "Institute could not be loaded.");
+        }
+    } catch (error) {
+        setError?.(getApiError(error, "Institute could not be loaded."));
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const registerAdmin = (admin_data, setLoading, setMessage) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    axios.post(`${API_URL}/reg/admin`, admin_data, {
-        withCredentials: true
-    }).then((res) => {
+export const registerAdmin = async (admin_data, setLoading, setMessage) => {
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/reg/admin", admin_data);
+
         if (res.data.success) {
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-            window.open("/");
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong. Try again.",
-            type: "error"
-        });
-    }).finally(() => {
-        setLoading(false);
-    });
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong. Try again.");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const loginApi = (formData, setLoading, setMessage, navigate, setUserState) => {
-    setLoading(true);
-    axios.post(`${API_URL}/login`, formData, {
-        withCredentials: true
-    }).then((res) => {
+export const loginApi = async (formData, setLoading, setMessage, navigate, setUserState) => {
+    setLoading?.(true);
+
+    try {
+        const res = await apiClient.post("/login", formData);
+
         if (res.data.success) {
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-            setUserState("login");
-            navigate(res.data.redirectUrl);
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setMessage?.({ text: res.data.message, type: "success" });
+            setUserState?.(res.data.user || "login");
+            navigate?.(res.data.redirectUrl);
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong.",
-            type: "error"
-        });
-    }).finally(() => setLoading(false));
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Invalid email or password.");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const verifyEmail = (email, ownerName, setOtp, setLoading, setMessage) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    axios.post(`${API_URL}/verify/email`, { email, ownerName }, {
-        withCredentials: true
-    }).then((res) => {
+export const verifyEmail = async (registrationData, setOtp, setLoading, setMessage) => {
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/verify/email", registrationData);
+
         if (res.data.success) {
-            setOtp(true);
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setOtp?.(true);
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong.",
-            type: "error"
-        });
-    }).finally(() => setLoading(false));
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong.");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
 export const getUserState = (setUserState) => {
-    axios.get(`${API_URL}/user/loginState`, {
-        withCredentials: true
-    }).then((res) => {
-        if (res.data.success) {
-            setUserState("login");
-        } else {
-            setUserState(null);
-        }
-    }).catch(() => {
-        setUserState(null);
-    });
+    apiClient
+        .get("/user/loginState")
+        .then((res) => {
+            if (res.data.success) {
+                setUserState?.(res.data.user || "login");
+            } else {
+                setUserState?.(null);
+            }
+        })
+        .catch(() => {
+            setUserState?.(null);
+        });
 };
 
 export const logOutApi = (setUserState, navigate) => {
-    axios.get(`${API_URL}/logout`, {
-        withCredentials: true
-    }).finally(() => {
-        setUserState(null);
-        navigate("/");
-    });
+    apiClient
+        .get("/logout")
+        .finally(() => {
+            setUserState?.(null);
+            navigate?.("/");
+        });
 };
 
 export const AdmissionSubmissionApi = async (formData, setLoading, setMessage) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    await axios.post(`${API_URL}/submit/admission`, formData)
-        .then((res) => {
-            if (res.data.success) {
-                setMessage({
-                    text: res.data.message,
-                    type: "success"
-                });
-            } else {
-                setMessage({
-                    text: res.data.message,
-                    type: "error"
-                });
-            }
-        }).catch(() => {
-            setMessage({
-                text: "Something went wrong.",
-                type: "error"
-            });
-        }).finally(() => setLoading(false));
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/submit/admission", formData);
+
+        if (res.data.success) {
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
+        }
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong.");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
 export const getHeroPageInstitutes = (setHeroPageInstitutes) => {
-    axios.get(`${API_URL}/hero/page/institutes`)
+    apiClient
+        .get("/hero/page/institutes")
         .then((res) => {
             if (res.data.success) {
-                setHeroPageInstitutes(res.data.institutes);
+                setHeroPageInstitutes?.(res.data.institutes || []);
             }
-        }).catch(() => { });
+        })
+        .catch(() => { });
 };
 
 // FORGET PASSWORD (RECOVERY)
-export const sendOTPToVerifyEmailToResetPass = (setLoading, setMessage, setStep, email) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    axios.post(`${API_URL}/reset_password/verify_email`, { email }, {
-        withCredentials: true
-    }).then((res) => {
+export const sendOTPToVerifyEmailToResetPass = async (setLoading, setMessage, setStep, email) => {
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/reset_password/verify_email", { email });
+
         if (res.data.success) {
-            setStep(2);
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setStep?.(2);
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong. please try again",
-            type: "error"
-        });
-    }).finally(() => setLoading(false));
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong. please try again");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const verifyOTPToResetPass = (setLoading, setMessage, setStep, otp) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    axios.post(`${API_URL}/reset_password/verify_otp`, { otp }, {
-        withCredentials: true
-    }).then((res) => {
+export const verifyOTPToResetPass = async (setLoading, setMessage, setStep, otp) => {
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/reset_password/verify_otp", { otp });
+
         if (res.data.success) {
-            setStep(3);
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setStep?.(3);
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong. please try again",
-            type: "error"
-        });
-    }).finally(() => setLoading(false));
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong. please try again");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const resetPassword = (setLoading, setMessage, setStep, password, confirmPassword, email) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    axios.post(`${API_URL}/reset_password`, { password, confirmPassword, email }, {
-        withCredentials: true
-    }).then((res) => {
+export const resetPassword = async (setLoading, setMessage, setStep, password, confirmPassword, email) => {
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/reset_password", { password, confirmPassword, email });
+
         if (res.data.success) {
-            setStep(1);
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setStep?.(4);
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong. please try again",
-            type: "error"
-        });
-    }).finally(() => setLoading(false));
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong. please try again");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
 // CHANGE PASSWORD: USER KNOWS CURRENT PASSWORD. ALTHOUGH THIS API IS ASSOCIATED WITH THE DASHBORDS BUT IT IS USED BY MORE THAN ONE DASHBOARD, THAT'S WHY PLACED IT HERE, NOT IN RESPECTIVE DASHBOARD APICALL.JSX:
-export const changePassword = (form, setLoading, setMessage) => {
-    setLoading(true);
-    setMessage({
-        text: "Processing...",
-        type: "success"
-    });
-    axios.post(`${API_URL}/change_password`, form, {
-        withCredentials: true
-    }).then((res) => {
+export const changePassword = async (form, setLoading, setMessage) => {
+    setLoading?.(true);
+    setMessage?.({ text: "Processing...", type: "info" });
+
+    try {
+        const res = await apiClient.post("/change_password", form);
+
         if (res.data.success) {
-            setMessage({
-                text: res.data.message,
-                type: "success"
-            });
-        } else {
-            setMessage({
-                text: res.data.message,
-                type: "error"
-            });
+            setMessage?.({ text: res.data.message, type: "success" });
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setMessage({
-            text: "Something went wrong. please try again",
-            type: "error"
-        });
-    }).finally(() => setLoading(false));
+
+        setMessage?.({ text: res.data.message, type: "error" });
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        const message = getApiError(error, "Something went wrong. please try again");
+        setMessage?.({ text: message, type: "error" });
+        return { success: false, message };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const handleReviewSubmission = (setLoading, setRating, setReview, rating, review, setReviews, instituteId) => {
-    setLoading(true);
-    axios.post(`${API_URL}/handle/review`, {
-        rating,
-        review,
-        instituteId
-    }, {
-        withCredentials: true
-    }).then((res) => {
+export const handleReviewSubmission = async (setLoading, setRating, setReview, rating, review, setReviews, instituteId) => {
+    setLoading?.(true);
+
+    try {
+        const res = await apiClient.post("/handle/review", { rating, review, instituteId });
+
         if (res.data.success) {
-            setRating(0);
-            setReview("");
-            setReviews((prev) => {
+            setRating?.(0);
+            setReview?.("");
+            setReviews?.((prev) => {
+                const newReview = res.data.newReview;
                 if (Array.isArray(prev)) {
-                    return [res.data.newReview, ...prev];
+                    return [newReview, ...prev];
                 }
-                return [res.data.newReview];
+                return [newReview];
             });
-        } else {
-            alert(res.data.message);
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        alert("Something went wrong, Please try again.");
-    }).finally(() => setLoading(false));
+
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        return { success: false, message: getApiError(error, "Something went wrong, Please try again.") };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const getTheReviews = (setReviews, setLoading, instituteId) => {
-    setLoading(true);
-    axios.post(`${API_URL}/get/reviews`, { instituteId })
-        .then((res) => {
-            if (res.data.success) {
-                if (res.data?.reviews) {
-                    setReviews(res.data.reviews);
-                } else {
-                    setReviews([]);
-                }
-            }
-        }).catch(() => {
-            alert("Something went wrong, Please try again.");
-        }).finally(() => {
-            setLoading(false);
-        });
-};
+export const getTheReviews = async (setReviews, setLoading, instituteId) => {
+    setLoading?.(true);
 
-export const submitContactForm = (setLoading, setFormData, formData) => {
-    setLoading(true);
-    axios.post(`${API_URL}/submit/contact-form`, formData, {
-        withCredentials: true
-    }).then((res) => {
+    try {
+        const res = await apiClient.post("/get/reviews", { instituteId });
+
         if (res.data.success) {
-            setLoading(false);
-            setFormData({
+            setReviews?.(res.data.reviews || []);
+        }
+    } catch (error) {
+        return { success: false, message: getApiError(error, "Something went wrong, Please try again.") };
+    } finally {
+        setLoading?.(false);
+    }
+
+    return { success: true };
+};
+
+export const submitContactForm = async (setLoading, setFormData, formData) => {
+    setLoading?.(true);
+
+    try {
+        const res = await apiClient.post("/submit/contact-form", formData);
+
+        if (res.data.success) {
+            setFormData?.({
                 firstName: "",
                 lastName: "",
                 email: "",
                 phone: "",
                 subject: "",
-                message: ""
+                message: "",
             });
-        } else {
-            setLoading(false);
+            return { success: true, message: res.data.message };
         }
-    }).catch(() => {
-        setLoading(false);
-    });
+
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        return { success: false, message: getApiError(error, "Something went wrong, Please try again.") };
+    } finally {
+        setLoading?.(false);
+    }
 };
 
-export const fetchAllCourses = (setCourses, setLoading) => {
-    axios.get(`${API_URL}/get/all/courses`)
-        .then((res) => {
-            if (res.data.success) {
-                setCourses(res.data.courses);
-            }
-        }).catch(() => {
-        }).finally(() => {
-            if (setLoading) setLoading(false);
-        });
-};
+export const fetchAllCourses = async (setCourses, setLoading) => {
+    try {
+        const res = await apiClient.get("/get/all/courses");
 
-export const getCourseById = (id, setCourse, setLoading) => {
-    axios.get(`${API_URL}/get/course/${id}`)
-        .then((res) => {
-            if (res.data.success) {
-                setCourse(res.data.course);
-            }
-        }).catch(() => {
-            alert("Something went wrong, Please try again.");
-        }).finally(() => {
-            setLoading(false);
-        });
-};
-
-export const submitCourseEnrollment = (formData, setLoading, navigate) => {
-    setLoading(true);
-    axios.post(`${API_URL}/submit/course/enrollment`, formData, {
-        withCredentials: true
-    }).then((res) => {
         if (res.data.success) {
-            setLoading(false);
-            navigate("/");
-        } else {
-            setLoading(false);
+            setCourses?.(res.data.courses || []);
         }
-    }).catch(() => {
-        setLoading(false);
-    });
+    } catch (error) {
+        return { success: false, message: getApiError(error, "Courses could not be loaded.") };
+    } finally {
+        setLoading?.(false);
+    }
+
+    return { success: true };
+};
+
+export const getCourseById = async (id, setCourse, setLoading, setError) => {
+    try {
+        const res = await apiClient.get(`/get/course/${id}`);
+
+        if (res.data.success) {
+            setCourse?.(res.data.course);
+            setError?.("");
+        } else {
+            setError?.(res.data.message || "Course could not be loaded.");
+        }
+    } catch (error) {
+        setError?.(getApiError(error, "Course could not be loaded."));
+    } finally {
+        setLoading?.(false);
+    }
+};
+
+export const submitCourseEnrollment = async (formData, setLoading, navigate) => {
+    setLoading?.(true);
+
+    try {
+        const res = await apiClient.post("/submit/course/enrollment", formData);
+
+        if (res.data.success) {
+            navigate?.("/");
+            return { success: true, message: res.data.message };
+        }
+
+        return { success: false, message: res.data.message };
+    } catch (error) {
+        return { success: false, message: getApiError(error, "Something went wrong, Please try again.") };
+    } finally {
+        setLoading?.(false);
+    }
 };

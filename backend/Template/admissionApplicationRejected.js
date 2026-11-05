@@ -17,7 +17,7 @@ export const studentAdmissionRejectedEmail = ({
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Admission Application Update</title>
+    <title>Admission Application Rejected</title>
 </head>
 
 <body style="
@@ -91,7 +91,7 @@ export const studentAdmissionRejectedEmail = ({
     line-height:1.4;
     font-weight:600;
 ">
-    Admission Application Update
+    Admission Application Rejected
 </h1>
 
 
@@ -132,8 +132,8 @@ export const studentAdmissionRejectedEmail = ({
 ">
 
     After reviewing the information and documents submitted,
-    the institute administration requires corrections before
-    the application can be approved.
+    we regret to inform you that your admission application
+    has been rejected.
 
 </p>
 
@@ -161,7 +161,7 @@ export const studentAdmissionRejectedEmail = ({
     font-size:11px;
     font-weight:600;
 ">
-    Required correction
+    Reason for rejection
 </p>
 
 <p style="
@@ -188,9 +188,10 @@ export const studentAdmissionRejectedEmail = ({
     line-height:1.7;
 ">
 
-    Please provide the corrected information and/or documents
-    mentioned above to the institute administration using the
-    support contact provided below.
+    Your application and the uploaded documents have been
+    removed. You should resubmit the application with the
+    correct information and documents. Please review the reason
+    above carefully before resubmitting.
 
 </p>
 
@@ -219,7 +220,7 @@ export const studentAdmissionRejectedEmail = ({
     font-size:12px;
     font-weight:600;
 ">
-    Contact for Corrections
+    Contact for Support
 </p>
 
 <p style="
@@ -228,7 +229,11 @@ export const studentAdmissionRejectedEmail = ({
     font-size:12px;
     line-height:1.7;
 ">
-    ${supportContact}
+    For any support, contact DSCH via
+    <a
+        href="mailto:${supportContact}"
+        style="color:#059669; text-decoration:none;"
+    >${supportContact}</a>.
 </p>
 
 </td>
@@ -245,7 +250,7 @@ export const studentAdmissionRejectedEmail = ({
 ">
 
     Please clearly mention your name and admission class when
-    contacting the administration so your application can be
+    contacting DSCH support so your new application can be
     identified quickly.
 
 </p>
@@ -258,9 +263,8 @@ export const studentAdmissionRejectedEmail = ({
     line-height:1.7;
 ">
 
-    Once the corrected information and documents are received,
-    the institute administration will review your application
-    again.
+    Once you resubmit a new application with the corrected
+    information and documents, it will be reviewed again.
 
 </p>
 
@@ -293,8 +297,8 @@ export const studentAdmissionRejectedEmail = ({
     <strong style="color:#374151;">
         Please note:
     </strong>
-    Providing corrected information does not guarantee approval.
-    The application will be reviewed again by the institute
+    Resubmitting an application does not guarantee approval.
+    The new application will be reviewed by the institute
     administration.
 
 </p>
@@ -312,9 +316,8 @@ export const studentAdmissionRejectedEmail = ({
     line-height:1.7;
 ">
 
-    For any questions regarding the required corrections,
-    please contact the administration of
-    <strong>${instituteName}</strong>.
+    For any questions, please contact DSCH support at
+    <strong>${supportContact}</strong>.
 
 </p>
 

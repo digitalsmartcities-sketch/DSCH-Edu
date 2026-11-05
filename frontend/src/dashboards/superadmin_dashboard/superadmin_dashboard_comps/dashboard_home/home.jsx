@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import {
-    FaArrowRight,
     FaBookOpen,
     FaClipboardList,
     FaCog,

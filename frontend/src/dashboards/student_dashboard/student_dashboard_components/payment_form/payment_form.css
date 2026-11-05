@@ -452,6 +452,17 @@
     overflow-wrap: anywhere;
 }
 
+.selectedProof a {
+    color: #047857;
+    font-size: 9px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.selectedProof a:hover {
+    text-decoration: underline;
+}
+
 .selectedProof span {
     margin-top: 2px;
     color: #6b7280;

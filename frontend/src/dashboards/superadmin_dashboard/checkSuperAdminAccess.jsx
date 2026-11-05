@@ -3,7 +3,7 @@ import "./checkSuperAdminAccess.css";
 import { Navbar } from "../../components/navbar/navbar";
 import { useNavigate } from "react-router-dom";
 import { checkSuperAdminAccess } from "../../apicalls/superadmin_apicalls";
-import { SADashboardHome } from "./superadmin_dashboard_comps/dashboard_Home/home";
+import { SADashboardHome } from "./superadmin_dashboard_comps/dashboard_home/home";
 import { AdminApplications } from "./superadmin_dashboard_comps/adminapplications/applications";
 import { AdminPreview } from "./superadmin_dashboard_comps/admin_previewpage/admin_previewpage";
 import { ManageCourses } from "./superadmin_dashboard_comps/courses/course_form";
@@ -87,7 +87,7 @@ export const CheckSuperAdminAccess = () => {
                     <>
                         <main className="superadmin-dashboard">
                             <aside className="superadmin-sidebar">
-                                <div className={subpage === "Home" ? "sidebar-item active" : "sidebar-item"} onClick={(e) => setSubpage("Home")}>
+                                <div className={subpage === "Home" ? "sidebar-item active" : "sidebar-item"} onClick={() => setSubpage("Home")}>
                                     <span className="sidebar-icon">
                                         🏠
                                     </span>
@@ -95,7 +95,7 @@ export const CheckSuperAdminAccess = () => {
                                         Dashboard
                                     </span>
                                 </div>
-                                <div className={subpage === "Applications" ? "sidebar-item active" : "sidebar-item"} onClick={(e) => setSubpage("Applications")}>
+                                <div className={subpage === "Applications" ? "sidebar-item active" : "sidebar-item"} onClick={() => setSubpage("Applications")}>
                                     <span className="sidebar-icon">
                                         📋
                                     </span>
@@ -103,7 +103,7 @@ export const CheckSuperAdminAccess = () => {
                                         Applications
                                     </span>
                                 </div>
-                                <div className="sidebar-item" onClick={(e) => setSubpage("Manage_Courses")}>
+                                <div className="sidebar-item" onClick={() => setSubpage("Manage_Courses")}>
                                     <span className="sidebar-icon">
                                         🎓
                                     </span>
@@ -111,7 +111,7 @@ export const CheckSuperAdminAccess = () => {
                                         Manage Courses
                                     </span>
                                 </div>
-                                <div className="sidebar-item sidebar_logout_tab" onClick={(e) => logOutApi(setUserState, navigate)}>
+                                <div className="sidebar-item sidebar_logout_tab" onClick={() => logOutApi(setUserState, navigate)}>
                                     <span className="sidebar-icon">
                                         <FaSignOutAlt />
                                     </span>

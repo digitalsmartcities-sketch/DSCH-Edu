@@ -1,49 +1,100 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     FaBookOpen,
     FaPlus,
     FaTrash,
-    FaSave,
     FaArrowRight,
-    FaArrowLeft,
     FaImage,
-    FaCertificate
+    FaCertificate,
+    FaPen,
+    FaSyncAlt,
+    FaTimes
 } from "react-icons/fa";
 import "./course_form.css";
-import { createCourse } from "../../../../apicalls/superadmin_apicalls";
+import {
+    createCourse,
+    getAllCoursesForManagement,
+    updateCourse
+} from "../../../../apicalls/superadmin_apicalls";
 import { Enrollments } from "./enrollments/enrollments";
 import { EnrollmentPaymentView } from "./enrollment_payment_comp/enrollment_payment";
 import { CourseCertificate } from "./certificates/course_certificate";
 
+const createEmptyCourse = () => ({
+    title: "",
+    courseCode: "",
+    category: "",
+    shortDescription: "",
+    description: "",
+    level: "BEGINNER",
+    mode: "ONLINE",
+    duration: "",
+    offeredByInstitute: "",
+    offeredByInstituteLogoUrl: "",
+    thumbnail: "",
+    learningOutcomes: [""],
+    requirements: [""],
+    targetAudience: [""],
+    modules: [],
+    certificateAvailable: true,
+    enrollmentOpen: true,
+    enrollmentStart: "",
+    enrollmentEnd: "",
+    maxStudents: "",
+    price: "",
+    language: "",
+    whatsappGroupLink: "",
+    status: "PUBLISHED",
+});
+
+const toDateInputValue = (value) => {
+    if (!value) return "";
+
+    const date = new Date(value);
+    return Number.isNaN(date.getTime())
+        ? ""
+        : date.toISOString().slice(0, 10);
+};
+
+const toTextList = (value) => (
+    Array.isArray(value) && value.length > 0 ? value : [""]
+);
+
+const toCourseForm = (item) => ({
+    ...createEmptyCourse(),
+    ...item,
+    price: item.price ?? "",
+    maxStudents: item.maxStudents ?? "",
+    language: item.language || "",
+    whatsappGroupLink: item.whatsappGroupLink || "",
+    thumbnail: item.thumbnail || "",
+    offeredByInstituteLogoUrl: item.offeredByInstituteLogoUrl || "",
+    enrollmentStart: toDateInputValue(item.enrollmentStart),
+    enrollmentEnd: toDateInputValue(item.enrollmentEnd),
+    status: item.status || "DRAFT",
+    learningOutcomes: toTextList(item.learningOutcomes),
+    requirements: toTextList(item.requirements),
+    targetAudience: toTextList(item.targetAudience),
+    modules: Array.isArray(item.modules)
+        ? item.modules.map((module) => ({
+            ...module,
+            description: module.description || "",
+            lessons: Array.isArray(module.lessons) ? module.lessons : [],
+        }))
+        : [],
+});
+
 export const ManageCourses = () => {
     const [currentComponent, setCurrentComponent] = useState("courses");
     const [loading, setLoading] = useState(false);
+    const [listLoading, setListLoading] = useState(false);
+    const [courses, setCourses] = useState([]);
+    const [editingId, setEditingId] = useState(null);
+    const [course, setCourse] = useState(createEmptyCourse);
 
-    const [course, setCourse] = useState({
-        title: "",
-        courseCode: "",
-        category: "",
-        shortDescription: "",
-        description: "",
-        level: "BEGINNER",
-        mode: "ONLINE",
-        duration: "",
-        offeredByInstitute: "",
-        offeredByInstituteLogoUrl: "",
-        thumbnail: "",
-        learningOutcomes: [""],
-        requirements: [""],
-        targetAudience: [""],
-        modules: [],
-        certificateAvailable: true,
-        enrollmentOpen: true,
-        enrollmentStart: "",
-        enrollmentEnd: "",
-        maxStudents: "",
-        price: "",
-        language: "",
-        whatsappGroupLink: "",
-    });
+    useEffect(() => {
+        getAllCoursesForManagement(setCourses, setListLoading);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -167,9 +218,36 @@ export const ManageCourses = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const resetForm = () => {
+        setEditingId(null);
+        setCourse(createEmptyCourse());
+    };
+
+    const startEditing = (item) => {
+        setEditingId(item._id);
+        setCourse(toCourseForm(item));
+        document.querySelector(".courseCreateForm")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
+
+    const refreshCourses = () => {
+        getAllCoursesForManagement(setCourses, setListLoading);
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        createCourse(course, setLoading)
+
+        const wasEditing = Boolean(editingId);
+        const result = wasEditing
+            ? await updateCourse(editingId, course, setLoading)
+            : await createCourse(course, setLoading);
+
+        if (result?.success) {
+            resetForm();
+            refreshCourses();
+        }
     };
 
     if (currentComponent === "enrollment") {
@@ -236,12 +314,136 @@ export const ManageCourses = () => {
                 </button>
             </div>
             {/* =========================================
+                EXISTING COURSES
+            ========================================== */}
+            <section className="courseLibrary">
+                <div className="courseLibraryHeader">
+                    <div>
+                        <h2>Existing Courses</h2>
+                        <p>
+                            Select a course to update its content,
+                            pricing, enrollment settings, or status.
+                        </p>
+                    </div>
+                    <button
+                        type="button"
+                        className="courseRefreshBtn"
+                        onClick={refreshCourses}
+                        disabled={listLoading}
+                    >
+                        <FaSyncAlt
+                            className={listLoading ? "isSpinning" : ""}
+                        />
+                        {listLoading ? "Refreshing..." : "Refresh"}
+                    </button>
+                </div>
+                {listLoading && courses.length === 0 ? (
+                    <div className="courseLibraryState">
+                        Loading courses...
+                    </div>
+                ) : courses.length === 0 ? (
+                    <div className="courseLibraryState">
+                        No courses have been created yet.
+                    </div>
+                ) : (
+                    <div className="courseLibraryGrid">
+                        {courses.map((item) => (
+                            <article
+                                className={`courseLibraryCard ${
+                                    editingId === item._id
+                                        ? "isEditing"
+                                        : ""
+                                }`}
+                                key={item._id}
+                            >
+                                <div className="courseLibraryCardTop">
+                                    <span
+                                        className={`courseStatusBadge status-${String(
+                                            item.status || "DRAFT"
+                                        ).toLowerCase()}`}
+                                    >
+                                        {item.status || "DRAFT"}
+                                    </span>
+                                    <span className="courseCodeBadge">
+                                        {item.courseCode}
+                                    </span>
+                                </div>
+                                <h3>{item.title}</h3>
+                                <p>
+                                    {item.shortDescription ||
+                                        "No short description provided."}
+                                </p>
+                                <div className="courseLibraryMeta">
+                                    <span>{item.category}</span>
+                                    <span>{item.level}</span>
+                                    <span>{item.mode}</span>
+                                </div>
+                                <div className="courseLibraryFooter">
+                                    <div>
+                                        <strong>
+                                            {item.studentEnrolled || 0}
+                                            {item.maxStudents
+                                                ? ` / ${item.maxStudents}`
+                                                : ""}
+                                        </strong>
+                                        <small> students enrolled</small>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="courseEditBtn"
+                                        onClick={() =>
+                                            startEditing(item)
+                                        }
+                                    >
+                                        <FaPen />
+                                        {editingId === item._id
+                                            ? "Editing"
+                                            : "Edit Course"}
+                                    </button>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                )}
+            </section>
+            {/* =========================================
                 FORM
             ========================================== */}
             <form
-                className="courseCreateForm"
+                className={`courseCreateForm ${
+                    editingId ? "isEditingCourse" : ""
+                }`}
                 onSubmit={handleSubmit}
             >
+                <div className="courseFormIntro">
+                    <div>
+                        <span>
+                            {editingId
+                                ? "EDITING COURSE"
+                                : "NEW COURSE"}
+                        </span>
+                        <h2>
+                            {editingId
+                                ? course.title || "Edit course"
+                                : "Create a new course"}
+                        </h2>
+                        <p>
+                            {editingId
+                                ? "Update the course details below. Changes are applied immediately after saving."
+                                : "Fill in the course information below. New courses are published immediately unless you choose another status."}
+                        </p>
+                    </div>
+                    {editingId && (
+                        <button
+                            type="button"
+                            className="courseCancelEditBtn"
+                            onClick={resetForm}
+                        >
+                            <FaTimes />
+                            Cancel Editing
+                        </button>
+                    )}
+                </div>
                 {/* =====================================
                     BASIC INFORMATION
                 ====================================== */}
@@ -307,7 +509,6 @@ export const ManageCourses = () => {
                             onChange={handleChange}
                             type="url"
                             placeholder="https://chat.whatsapp.com/example"
-                            required
                         />
                         <div className="courseFormGroup">
                             <label>
@@ -702,6 +903,26 @@ export const ManageCourses = () => {
                         </label>
                     </div>
                     <div className="courseFormGrid">
+                        <div className="courseFormGroup">
+                            <label>
+                                Course Status
+                            </label>
+                            <select
+                                name="status"
+                                value={course.status}
+                                onChange={handleChange}
+                            >
+                                <option value="DRAFT">
+                                    Draft
+                                </option>
+                                <option value="PUBLISHED">
+                                    Published
+                                </option>
+                                <option value="ARCHIVED">
+                                    Archived
+                                </option>
+                            </select>
+                        </div>
                         <FormField
                             label="Enrollment Start Date"
                             name="enrollmentStart"
@@ -709,7 +930,6 @@ export const ManageCourses = () => {
                             value={course.enrollmentStart}
                             onChange={handleChange}
                             placeholder="Enrollment Start Date"
-                            required
                         />
                         <FormField
                             label="Enrollment End Date"
@@ -718,7 +938,6 @@ export const ManageCourses = () => {
                             value={course.enrollmentEnd}
                             onChange={handleChange}
                             placeholder="Enrollment End Date"
-                            required
                         />
                         <FormField
                             label="Maximum Students"
@@ -739,10 +958,12 @@ export const ManageCourses = () => {
                         className="publishCourseBtn"
                         disabled={loading}
                     >
-                        <FaBookOpen />
+                        {editingId ? <FaPen /> : <FaBookOpen />}
                         {loading
                             ? "Saving..."
-                            : "Create Course"}
+                            : editingId
+                                ? "Save Changes"
+                                : "Create Course"}
                         {!loading && (
                             <FaArrowRight />
                         )}

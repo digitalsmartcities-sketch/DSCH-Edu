@@ -3,6 +3,7 @@ import {
     FaArrowLeft,
     FaCreditCard,
     FaCloudUploadAlt,
+    FaFilePdf,
     FaUniversity,
     FaUser,
     FaCheckCircle,
@@ -11,30 +12,50 @@ import {
 import "./payment_form.css";
 import { useEffect } from "react";
 import { getBillById, submitBill } from "../../../../apicalls/student_apicalls";
+import notify from "../../../../components/toast/toastBus";
+
+const isPdfUrl = (url) => Boolean(url && url.split("?")[0].toLowerCase().endsWith(".pdf"));
 
 export const PaymentForm = ({ billId, setSubPage }) => {
-    let [billData, setBillData] = useState();
-
-    const [paymentMethod, setPaymentMethod] = useState("");
-    const [transactionId, setTransactionId] = useState("");
+    const [billData, setBillData] = useState();
     const [loading, setLoading] = useState(false);
-    const [paymentProof, setPaymentProof] = useState("");
-    const [preview, setPreview] = useState(null);
-    const [submitting, setSubmitting] = useState(false);
-
-    let [changes, setChanges] = useState([]);
 
     useEffect(() => {
         getBillById(billId, setBillData, setLoading);
-    }, []);
+    }, [billId]);
 
-    useEffect(() => {
-        if (billData) {
-            setPaymentMethod(billData?.paymentMethod || "");
-            setTransactionId(billData?.transactionId || "");
-            setPreview(billData?.paymentProof?.imageUrl || null);
-        }
-    }, [billData]);
+    if (!billData || loading) {
+        return (
+            <div className="appPageLoader">
+                <div className="appPageLoader__spinner"></div>
+                <p>Loading, Please wait...</p>
+            </div>
+        );
+    }
+
+    // Remounting the form whenever the bill changes keeps the inputs in sync
+    // with the server data without a "set state in effect" cascade.
+    return (
+        <PaymentFormFields
+            key={`${billId}-${billData.status || "new"}`}
+            billData={billData}
+            billId={billId}
+            setSubPage={setSubPage}
+        />
+    );
+};
+
+const PaymentFormFields = ({ billData, billId, setSubPage }) => {
+    const [paymentMethod, setPaymentMethod] = useState(billData?.paymentMethod || "");
+    const [transactionId, setTransactionId] = useState(billData?.transactionId || "");
+    const [paymentProof, setPaymentProof] = useState("");
+    const [preview, setPreview] = useState(() => {
+        const existingProof = billData?.paymentProof?.imageUrl;
+        return existingProof && !isPdfUrl(existingProof) ? existingProof : null;
+    });
+    const [submitting, setSubmitting] = useState(false);
+
+    let [changes, setChanges] = useState([]);
 
     const handleProofChange = (e) => {
         const file = e.target.files?.[0];
@@ -52,20 +73,20 @@ export const PaymentForm = ({ billId, setSubPage }) => {
         e.preventDefault();
 
         if (billData.status === "REJECTED" && changes.length === 0) {
-            alert("Please update the rejected changes");
+            notify.error("Please update the rejected changes.");
             return;
         }
 
         if (!paymentMethod) {
-            alert("Please select a payment method.");
+            notify.error("Please select a payment method.");
             return;
         }
         if (!transactionId.trim()) {
-            alert("Please enter the transaction ID.");
+            notify.error("Please enter the transaction ID.");
             return;
         }
-        if (!paymentProof && billData?.status === "PENDING") {
-            alert("Please upload your payment proof.");
+        if (!paymentProof && billData?.status !== "REJECTED") {
+            notify.error("Please upload your payment proof.");
             return;
         }
         let formData = new FormData;
@@ -293,6 +314,25 @@ export const PaymentForm = ({ billId, setSubPage }) => {
                             </p>
                         </div>
                     </div>
+                    {billData?.paymentProof?.imageUrl &&
+                        isPdfUrl(billData.paymentProof.imageUrl) &&
+                        !paymentProof && (
+                            <div className="selectedProof">
+                                <FaFilePdf />
+                                <div>
+                                    <strong>
+                                        Current payment proof (PDF)
+                                    </strong>
+                                    <a
+                                        href={billData.paymentProof.imageUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Open PDF
+                                    </a>
+                                </div>
+                            </div>
+                        )}
                     <div className="paymentUploadArea">
                         <label
                             htmlFor="paymentProof"
@@ -403,9 +443,9 @@ export const PaymentForm = ({ billId, setSubPage }) => {
                     <button
                         type="submit"
                         className="paymentSubmitBtn"
-                        disabled={loading || submitting}
+                        disabled={submitting}
                     >
-                        {submitting || loading
+                        {submitting
                             ? "Loading ..."
                             : (
                                 <>

@@ -1,3 +1,4 @@
+import "./plugins.js";
 import mongoose from "mongoose"
 
 const AdminSchema = new mongoose.Schema({
@@ -21,7 +22,9 @@ const AdminSchema = new mongoose.Schema({
     institutePhone: { type: String, required: true, default: "" },
     instituteEmail: { type: String, required: true, default: "" },
     website: { type: String, default: "" },
-    password: { type: String, required: true },
+    // The hash is never returned by default so it can not leak through an
+    // API response. It has to be requested explicitly with `+password`.
+    password: { type: String, required: true, select: false },
     instituteId: { type: String, default: "" },
     paymentMethod: { type: String, required: true },
     transactionId: { type: String, required: true },

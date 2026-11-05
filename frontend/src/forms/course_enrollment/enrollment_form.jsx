@@ -96,7 +96,15 @@ export const CourseEnrollment = () => {
         }
         formData.append("paymentProof", paymentProof);
         formData.append("id", id);
-        submitCourseEnrollment(formData, setLoading, navigate);
+
+        const result = await submitCourseEnrollment(formData, setLoading, navigate);
+
+        if (!result.success) {
+            setMessage({
+                text: result.message || "Something went wrong, Please try again.",
+                type: "error"
+            });
+        }
     };
 
     return (

@@ -267,6 +267,11 @@
         dschHeroArtworkFloat 6s ease-in-out infinite;
 }
 
+.dschHeroArtwork picture {
+    display: block;
+    width: 100%;
+}
+
 .dschHeroArtwork img {
     width: 100%;
     height: auto;

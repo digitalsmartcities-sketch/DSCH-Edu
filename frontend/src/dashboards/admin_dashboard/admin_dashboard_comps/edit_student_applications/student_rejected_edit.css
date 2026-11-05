@@ -199,6 +199,24 @@
     object-fit: contain;
 }
 
+.studentDocumentPdfLink {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #4f46e5;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.studentDocumentPdfLink:hover {
+    text-decoration: underline;
+}
+
+.studentDocumentPdfLink svg {
+    font-size: 22px;
+}
+
 .studentNoDocument {
     color: #9ca3af;
     font-size: 9px;

@@ -1,4 +1,23 @@
-import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
+import {
+    FaBuilding,
+    FaCheckCircle,
+    FaEdit,
+    FaEnvelope,
+    FaGlobe,
+    FaGraduationCap,
+    FaImage,
+    FaImages,
+    FaInfoCircle,
+    FaLayerGroup,
+    FaMapMarkerAlt,
+    FaPhone,
+    FaPlus,
+    FaQuestionCircle,
+    FaSchool,
+    FaTrash,
+    FaUniversity,
+    FaUpload
+} from "react-icons/fa";
 import "./institute_profile.css";
 import { useEffect, useState } from "react";
 import {
@@ -13,6 +32,7 @@ import {
     SaveFaqsApi,
     publishInstituteApi
 } from "../../../../apicalls/admin_apicalls";
+import { useToast } from "../../../../components/toast/ToastContext";
 
 const createHeroImages = (savedImages = []) => {
     return [1, 2, 3, 4, 5].map((number) => {
@@ -21,7 +41,35 @@ const createHeroImages = (savedImages = []) => {
     });
 };
 
+const SectionHeader = ({ icon, title, description, children }) => (
+    <div className="profileCardHeader">
+        <div className="sectionHeading">
+            <span className="sectionIcon">
+                {icon}
+            </span>
+            <div>
+                <h2>{title}</h2>
+                {description && (
+                    <p className="profileCardDesc">{description}</p>
+                )}
+            </div>
+        </div>
+        {children}
+    </div>
+);
+
+const EmptyState = ({ icon, title, description }) => (
+    <div className="profileEmptyState">
+        <span className="profileEmptyIcon">
+            {icon}
+        </span>
+        <h3>{title}</h3>
+        <p>{description}</p>
+    </div>
+);
+
 export const InstituteProfile = () => {
+    const toast = useToast();
     let [basicInfo, setBasicInfo] = useState({});
     let [heroImages, setHeroImages] = useState(createHeroImages());
     let [quickInfo, setQuickInfo] = useState({ admissionStatus: "", board: "", classes: "", medium: "", gender: "" });
@@ -104,7 +152,7 @@ export const InstituteProfile = () => {
             formData.append("timeTableImage", brandingImages.timeTableImage.file);
         }
         if (!brandingImages.instituteLogo.file && !brandingImages.timeTableImage.file) {
-            alert("Please select at least one image to upload.");
+            toast.error("Please select at least one image to upload.");
             return;
         }
         saveSection("branding", () => SaveBrandingImagesApi(formData));
@@ -154,7 +202,7 @@ export const InstituteProfile = () => {
         if (name === "name" && facilities.some(
             (facility) => facility.id !== id && facility.name.toLowerCase() === value.toLowerCase()
         )) {
-            alert("Facility already exists");
+            toast.error("A facility with this name already exists.");
             return;
         }
         setFacilities((prev) => prev.map(
@@ -185,7 +233,7 @@ export const InstituteProfile = () => {
 
     const AddGallery = () => {
         if (gallery.length >= 10) {
-            alert("Maximum 10 gallery images are allowed.");
+            toast.error("Maximum 10 gallery images are allowed.");
             return;
         }
         setGallery((prev) => [...prev, { id: crypto.randomUUID(), imageUrl: "", file: null }]);
@@ -231,53 +279,100 @@ export const InstituteProfile = () => {
     return (
         <section className="instituteProfile">
             <div className="profileHeader">
-                <div>
-                    <span>Institute Settings</span>
-                    <h1>Institute Profile</h1>
-                    <p>Manage your institute information displayed to students.</p>
+                <div className="profileHeaderMain">
+                    <span className="profileHeaderEyebrow">
+                        <FaSchool />
+                        Institute Settings
+                    </span>
+                    <h1>{basicInfo?.instituteName || "Institute Profile"}</h1>
+                    <p>
+                        Manage the information students see on your public institute
+                        page, from branding and facilities to fees and FAQs.
+                    </p>
+                    <div className="profileHeaderMeta">
+                        <span className={basicInfo?.isPublished ? "publishBadge published" : "publishBadge draft"}>
+                            {basicInfo?.isPublished ? <FaCheckCircle /> : <FaInfoCircle />}
+                            {basicInfo?.isPublished ? "Published and visible to students" : "Draft — not visible to students"}
+                        </span>
+                        {basicInfo?.instituteType && (
+                            <span className="headerMetaItem">
+                                <FaUniversity />
+                                {basicInfo.instituteType}
+                            </span>
+                        )}
+                        {basicInfo?.instituteAddress && (
+                            <span className="headerMetaItem">
+                                <FaMapMarkerAlt />
+                                {basicInfo.instituteAddress}
+                            </span>
+                        )}
+                    </div>
                 </div>
-                <button className="saveSectionBtn"
-                    disabled={savingSection === "publish"}
+                <button className="saveSectionBtn publishInstituteBtn"
+                    disabled={savingSection === "publish" || basicInfo?.isPublished}
                     onClick={() => saveSection("publish", publishInstituteApi)}>
-                    {savingSection === "publish" ? "Publishing..." : basicInfo?.isPublished ? "Published" : "Publish Institute"}
+                    {savingSection === "publish"
+                        ? "Publishing..."
+                        : basicInfo?.isPublished
+                            ? <><FaCheckCircle /> Published</>
+                            : <><FaGlobe /> Publish Institute</>
+                    }
                 </button>
             </div>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>Website Hero Section</h2>
+                <SectionHeader
+                    icon={<FaImages />}
+                    title="Website Hero Section"
+                    description="Upload up to five images for the top of your public institute page."
+                >
                     <button className="saveSectionBtn saveHeroBtn"
                         disabled={savingSection === "hero"}
                         onClick={SaveHeroImages}>
                         {savingSection === "hero" ? "Saving..." : "Save Images"}
                     </button>
-                </div>
-                <div className="webHeroSectionHandling">
-                    {heroImages.map((image) =>
-                        <div key={image.name}>
-                            <label>{image.name}</label>
-                            {image.imageUrl && <img src={image.imageUrl} alt={image.name} />}
-                            <input type="file" accept="image/*" name={image.name} onChange={handleHeroImgChange} />
+                </SectionHeader>
+                <div className="heroImagesGrid">
+                    {heroImages.map((image, index) => (
+                        <div className="heroImageCard" key={image.name}>
+                            <div className="heroImagePreview">
+                                {image.imageUrl
+                                    ? <img src={image.imageUrl} alt={`Hero ${index + 1}`} />
+                                    : <div className="imagePlaceholder">
+                                        <FaImage />
+                                        <span>No image yet</span>
+                                    </div>
+                                }
+                                <span className="imageIndexBadge">Image {index + 1}</span>
+                            </div>
+                            <label className="fileUploadLabel">
+                                <FaUpload />
+                                <span>{image.file ? image.file.name : "Choose image"}</span>
+                                <input type="file" accept="image/*" name={image.name} onChange={handleHeroImgChange} />
+                            </label>
                         </div>
-                    )}
+                    ))}
                 </div>
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <div>
-                        <h2>Branding &amp; Timetable Images</h2>
-                        <p className="profileCardDesc">Upload the institute logo and class timetable image.</p>
-                    </div>
+                <SectionHeader
+                    icon={<FaImage />}
+                    title="Branding & Timetable Images"
+                    description="Upload the institute logo and class timetable image."
+                >
                     <button className="saveSectionBtn saveBrandingBtn"
                         disabled={savingSection === "branding"}
                         onClick={SaveBrandingImages}>
                         {savingSection === "branding" ? "Saving..." : "Save Branding"}
                     </button>
-                </div>
+                </SectionHeader>
                 <div className="brandingImagesGrid">
                     <div className="brandingImageItem">
-                        <label className="brandingLabel">Institute Logo</label>
+                        <div className="brandingItemHeader">
+                            <label className="brandingLabel">Institute Logo</label>
+                            <span className="brandingTag">Square</span>
+                        </div>
                         <p className="brandingHint">Displayed in circular form across the platform (landing page, receipts, sidebar).</p>
                         {brandingImages.instituteLogo.imageUrl
                             ? <div className="brandingPreviewCircle">
@@ -285,55 +380,88 @@ export const InstituteProfile = () => {
                               </div>
                             : <div className="brandingPreviewCirclePlaceholder"><span>No Logo</span></div>
                         }
-                        <input type="file" accept="image/*" name="instituteLogo" onChange={handleBrandingImgChange} />
+                        <label className="fileUploadLabel">
+                            <FaUpload />
+                            <span>{brandingImages.instituteLogo.file ? brandingImages.instituteLogo.file.name : "Choose logo"}</span>
+                            <input type="file" accept="image/*" name="instituteLogo" onChange={handleBrandingImgChange} />
+                        </label>
                     </div>
                     <div className="brandingImageItem">
-                        <label className="brandingLabel">Class Timetable</label>
+                        <div className="brandingItemHeader">
+                            <label className="brandingLabel">Class Timetable</label>
+                            <span className="brandingTag">Wide image</span>
+                        </div>
                         <p className="brandingHint">Displayed on the institute landing page for students and parents.</p>
                         {brandingImages.timeTableImage.imageUrl
                             ? <img src={brandingImages.timeTableImage.imageUrl} alt="Timetable" className="brandingTimetablePreview" />
                             : <div className="brandingTimetablePlaceholder"><span>No Timetable Image</span></div>
                         }
-                        <input type="file" accept="image/*" name="timeTableImage" onChange={handleBrandingImgChange} />
+                        <label className="fileUploadLabel">
+                            <FaUpload />
+                            <span>{brandingImages.timeTableImage.file ? brandingImages.timeTableImage.file.name : "Choose timetable image"}</span>
+                            <input type="file" accept="image/*" name="timeTableImage" onChange={handleBrandingImgChange} />
+                        </label>
                     </div>
                 </div>
             </section>
 
             <section className="profileCard">
-                <h2>Basic Information</h2>
-                <div className="profileGrid">
-                    <div>
-                        <label>Institute Name</label>
-                        <input type="text" value={basicInfo?.instituteName || ""} placeholder="Institute Name" disabled />
+                <SectionHeader
+                    icon={<FaInfoCircle />}
+                    title="Basic Information"
+                    description="Official details from your verified institute registration."
+                />
+                <div className="basicInfoGrid">
+                    <div className="basicInfoItem">
+                        <span className="basicInfoIcon"><FaSchool /></span>
+                        <div>
+                            <small>Institute Name</small>
+                            <strong>{basicInfo?.instituteName || "Not provided"}</strong>
+                        </div>
                     </div>
-                    <div>
-                        <label>Address</label>
-                        <input type="text" value={basicInfo?.instituteAddress || ""} placeholder="Address" disabled />
+                    <div className="basicInfoItem">
+                        <span className="basicInfoIcon"><FaMapMarkerAlt /></span>
+                        <div>
+                            <small>Address</small>
+                            <strong>{basicInfo?.instituteAddress || "Not provided"}</strong>
+                        </div>
                     </div>
-                    <div>
-                        <label>Phone Number</label>
-                        <input type="text" value={basicInfo?.institutePhone || ""} placeholder="Phone Number" disabled />
+                    <div className="basicInfoItem">
+                        <span className="basicInfoIcon"><FaPhone /></span>
+                        <div>
+                            <small>Phone Number</small>
+                            <strong>{basicInfo?.institutePhone || "Not provided"}</strong>
+                        </div>
                     </div>
-                    <div>
-                        <label>Email</label>
-                        <input type="text" value={basicInfo?.instituteEmail || ""} placeholder="Email" disabled />
+                    <div className="basicInfoItem">
+                        <span className="basicInfoIcon"><FaEnvelope /></span>
+                        <div>
+                            <small>Email</small>
+                            <strong>{basicInfo?.instituteEmail || "Not provided"}</strong>
+                        </div>
                     </div>
-                    <div>
-                        <label>Type</label>
-                        <input type="text" value={basicInfo?.instituteType || ""} placeholder="Type" disabled />
+                    <div className="basicInfoItem">
+                        <span className="basicInfoIcon"><FaUniversity /></span>
+                        <div>
+                            <small>Institute Type</small>
+                            <strong>{basicInfo?.instituteType || "Not provided"}</strong>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>Quick Information</h2>
+                <SectionHeader
+                    icon={<FaLayerGroup />}
+                    title="Quick Information"
+                    description="At-a-glance details shown near the top of your public profile."
+                >
                     <button className="saveSectionBtn saveQuickInfoBtn"
                         disabled={savingSection === "quickInfo"}
                         onClick={SaveQuickInfo}>
                         {savingSection === "quickInfo" ? "Saving..." : "Save Quick Info"}
                     </button>
-                </div>
+                </SectionHeader>
                 <div className="profileGrid">
                     <div>
                         <label>Admission Status</label>
@@ -363,10 +491,13 @@ export const InstituteProfile = () => {
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>About & Overview Section</h2>
+                <SectionHeader
+                    icon={<FaUniversity />}
+                    title="About & Overview Section"
+                    description="Tell students and parents what makes your institute unique."
+                >
                     <button className="saveSectionBtn saveAboutInfoBtn" disabled={savingSection === "aboutInfo"} onClick={SaveAboutInfo}>{savingSection === "aboutInfo" ? "Saving..." : "Save About Info"}</button>
-                </div>
+                </SectionHeader>
                 <div className="profileGrid">
                     <div className="fullWidth">
                         <label>About</label>
@@ -389,43 +520,64 @@ export const InstituteProfile = () => {
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>Academic Programs (Classes & Fee Structure)</h2>
-                    <button className="saveSectionBtn saveAcademicProgramsBtn"
-                        disabled={savingSection === "programs"}
-                        onClick={SaveAcademicPrograms}>
-                        {savingSection === "programs" ? "Saving..." : "Save Academic Programs"}
-                    </button>
-                </div>
-                <div className="tableResponsiveWrapper">
-                    <table className="adm_academic_program_table">
-                        <thead>
-                            <tr>
-                                <th>Class</th>
-                                <th>Duration</th>
-                                <th>Admission Fee</th>
-                                <th>Monthly Fee</th>
-                                <th>Admission Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {academicPrograms.map((program) => <tr key={program.id}>
-                                <td>{program.class}</td>
-                                <td>{program.duration}</td>
-                                <td>Rs. {program.admissionFee}</td>
-                                <td>Rs. {program.monthlyFee}</td>
-                                <td>{program.admissionStatus}</td>
-                                <td>
-                                    <div className="actions">
-                                        <button className="editBtn" onClick={() => setEditField({ ...program })}><FaEdit /></button>
-                                        <button className="deleteBtn" onClick={() => removeAcademicProgram(program.id)}><FaTrash /></button>
-                                    </div>
-                                </td>
-                            </tr>)}
-                        </tbody>
-                    </table>
-                </div>
+                <SectionHeader
+                    icon={<FaGraduationCap />}
+                    title="Academic Programs"
+                    description="Classes, duration and fee structure shown on your public profile."
+                >
+                    <div className="profileCardActions">
+                        <button type="button" className="ghostActionBtn" onClick={AddAcademicProgram}>
+                            <FaPlus />
+                            Add Program
+                        </button>
+                        <button className="saveSectionBtn saveAcademicProgramsBtn"
+                            disabled={savingSection === "programs"}
+                            onClick={SaveAcademicPrograms}>
+                            {savingSection === "programs" ? "Saving..." : "Save Programs"}
+                        </button>
+                    </div>
+                </SectionHeader>
+                {academicPrograms.length === 0 ? (
+                    <EmptyState
+                        icon={<FaGraduationCap />}
+                        title="No academic programs yet"
+                        description="Add your first class to show its duration, admission fee, monthly fee and admission status."
+                    />
+                ) : (
+                    <div className="tableResponsiveWrapper">
+                        <table className="adm_academic_program_table">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Duration</th>
+                                    <th>Admission Fee</th>
+                                    <th>Monthly Fee</th>
+                                    <th>Admission Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {academicPrograms.map((program) => <tr key={program.id}>
+                                    <td>{program.class || "—"}</td>
+                                    <td>{program.duration || "—"}</td>
+                                    <td>Rs. {program.admissionFee}</td>
+                                    <td>Rs. {program.monthlyFee}</td>
+                                    <td>
+                                        <span className={program.admissionStatus === "OPEN" ? "statusPill open" : "statusPill closed"}>
+                                            {program.admissionStatus === "OPEN" ? "Open" : "Closed"}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div className="actions">
+                                            <button className="editBtn" title="Edit program" aria-label={`Edit ${program.class || "program"}`} onClick={() => setEditField({ ...program })}><FaEdit /></button>
+                                            <button className="deleteBtn" title="Delete program" aria-label={`Delete ${program.class || "program"}`} onClick={() => removeAcademicProgram(program.id)}><FaTrash /></button>
+                                        </div>
+                                    </td>
+                                </tr>)}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
                 {editField && <div className="editAcademicProgramOverlay">
                     <div className="editAcademicProgram">
                         <div className="editAcademicProgramHeader">
@@ -483,71 +635,160 @@ export const InstituteProfile = () => {
                         </div>
                     </div>
                 </div>}
-                <button className="addMoreBtn" onClick={AddAcademicProgram}><FaPlus /></button>
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>Campus Facilities</h2>
-                    <button className="saveSectionBtn saveFacilitiesBtn" disabled={savingSection === "facilities"} onClick={SaveFacilities}>
-                        {savingSection === "facilities" ? "Saving..." : "Save Facilities"}
-                    </button>
-                </div>
-                <div className="profileGrid">
-                    {facilities.map((facility, index) => (
-                        <div className="fullWidth" key={facility.id}>
-                            <span className="facilityCount">{index + 1}</span>
-                            <label>Name</label>
-                            <input type="text" name="name" value={facility.name} onChange={(e) => handleFacilitiesSecChange(e, facility.id)} />
-                            <label>Description</label>
-                            <textarea rows="4" name="description" value={facility.description} onChange={(e) => handleFacilitiesSecChange(e, facility.id)}></textarea>
-                            <button className="removeBtn" onClick={() => RemoveFacility(facility.id)}><FaTrash /></button>
-                        </div>
-                    ))}
-                </div>
-                <button className="addMoreBtn" onClick={AddFacility}><FaPlus /></button>
+                <SectionHeader
+                    icon={<FaBuilding />}
+                    title="Campus Facilities"
+                    description="Highlight the facilities that make your campus a great place to learn."
+                >
+                    <div className="profileCardActions">
+                        <button type="button" className="ghostActionBtn" onClick={AddFacility}>
+                            <FaPlus />
+                            Add Facility
+                        </button>
+                        <button className="saveSectionBtn saveFacilitiesBtn" disabled={savingSection === "facilities"} onClick={SaveFacilities}>
+                            {savingSection === "facilities" ? "Saving..." : "Save Facilities"}
+                        </button>
+                    </div>
+                </SectionHeader>
+                {facilities.length === 0 ? (
+                    <EmptyState
+                        icon={<FaBuilding />}
+                        title="No facilities added yet"
+                        description="Add facilities such as a library, science lab, sports ground or transport service."
+                    />
+                ) : (
+                    <div className="dynamicList">
+                        {facilities.map((facility, index) => (
+                            <div className="dynamicItem" key={facility.id}>
+                                <div className="dynamicItemHeader">
+                                    <span className="itemIndex">{index + 1}</span>
+                                    <div>
+                                        <strong>Facility {index + 1}</strong>
+                                        <small>Shown in the campus facilities section</small>
+                                    </div>
+                                    <button type="button" className="iconDangerBtn" title="Remove facility" aria-label={`Remove facility ${index + 1}`} onClick={() => RemoveFacility(facility.id)}>
+                                        <FaTrash />
+                                    </button>
+                                </div>
+                                <div className="dynamicItemGrid">
+                                    <div>
+                                        <label>Name</label>
+                                        <input type="text" name="name" value={facility.name} onChange={(e) => handleFacilitiesSecChange(e, facility.id)} placeholder="e.g. Science Laboratory" />
+                                    </div>
+                                    <div className="fullWidth">
+                                        <label>Description</label>
+                                        <textarea rows="3" name="description" value={facility.description} onChange={(e) => handleFacilitiesSecChange(e, facility.id)} placeholder="Describe this facility..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>Campus Gallery Section</h2>
-                    <button className="saveSectionBtn saveGalleryBtn" disabled={savingSection === "gallery"} onClick={SaveGallery}>
-                        {savingSection === "gallery" ? "Saving..." : "Save Gallery"}
-                    </button>
-                </div>
-                <div className="webHeroSectionHandling">
-                    {gallery.map((image, index) => (
-                        <div key={image.id}>
-                            <label>Image {index + 1}</label>
-                            {image.imageUrl && <img src={image.imageUrl} alt={`Gallery image ${index + 1}`} />}
-                            <input type="file" accept="image/*" onChange={(e) => handleGalleryImgChange(e, image.id)} />
-                            <button className="removeBtn" onClick={() => RemoveGallery(image.id)}><FaTrash /></button>
-                        </div>
-                    ))}
-                </div>
-                <button className="addMoreBtn" onClick={AddGallery}><FaPlus /></button>
+                <SectionHeader
+                    icon={<FaImages />}
+                    title="Campus Gallery"
+                    description="Showcase campus life with up to ten photos."
+                >
+                    <div className="profileCardActions">
+                        <button type="button" className="ghostActionBtn" onClick={AddGallery}>
+                            <FaPlus />
+                            Add Image
+                        </button>
+                        <button className="saveSectionBtn saveGalleryBtn" disabled={savingSection === "gallery"} onClick={SaveGallery}>
+                            {savingSection === "gallery" ? "Saving..." : "Save Gallery"}
+                        </button>
+                    </div>
+                </SectionHeader>
+                {gallery.length === 0 ? (
+                    <EmptyState
+                        icon={<FaImages />}
+                        title="No gallery images yet"
+                        description="Add photos of your campus, classrooms, events and facilities."
+                    />
+                ) : (
+                    <div className="galleryGrid">
+                        {gallery.map((image, index) => (
+                            <div className="galleryCard" key={image.id}>
+                                <div className="galleryPreview">
+                                    {image.imageUrl
+                                        ? <img src={image.imageUrl} alt={`Gallery image ${index + 1}`} />
+                                        : <div className="imagePlaceholder">
+                                            <FaImage />
+                                            <span>No image yet</span>
+                                        </div>
+                                    }
+                                    <span className="imageIndexBadge">{index + 1}</span>
+                                    <button type="button" className="galleryRemoveBtn" title="Remove image" aria-label={`Remove gallery image ${index + 1}`} onClick={() => RemoveGallery(image.id)}>
+                                        <FaTrash />
+                                    </button>
+                                </div>
+                                <label className="fileUploadLabel">
+                                    <FaUpload />
+                                    <span>{image.file ? image.file.name : "Choose image"}</span>
+                                    <input type="file" accept="image/*" onChange={(e) => handleGalleryImgChange(e, image.id)} />
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </section>
 
             <section className="profileCard">
-                <div className="profileCardHeader">
-                    <h2>FAQs Section</h2>
-                    <button className="saveSectionBtn saveFaqsBtn" disabled={savingSection === "faqs"} onClick={SaveFaqs}>
-                        {savingSection === "faqs" ? "Saving..." : "Save FAQs"}
-                    </button>
-                </div>
-                <div className="profileGrid">
-                    {faqs.map((faq, index) => (
-                        <div className="fullWidth" key={faq.id}>
-                            <span className="facilityCount">{index + 1}</span>
-                            <label>Question</label>
-                            <input type="text" name="question" value={faq.question} onChange={(e) => handleFaqSecChange(e, faq.id)} />
-                            <label>Answer</label>
-                            <textarea rows="4" name="answer" value={faq.answer} onChange={(e) => handleFaqSecChange(e, faq.id)}></textarea>
-                            <button className="removeBtn" onClick={() => RemoveFaq(faq.id)}><FaTrash /></button>
-                        </div>
-                    ))}
-                </div>
-                <button className="addMoreBtn" onClick={AddFaq}><FaPlus /></button>
+                <SectionHeader
+                    icon={<FaQuestionCircle />}
+                    title="Frequently Asked Questions"
+                    description="Answer common questions from prospective students and parents."
+                >
+                    <div className="profileCardActions">
+                        <button type="button" className="ghostActionBtn" onClick={AddFaq}>
+                            <FaPlus />
+                            Add FAQ
+                        </button>
+                        <button className="saveSectionBtn saveFaqsBtn" disabled={savingSection === "faqs"} onClick={SaveFaqs}>
+                            {savingSection === "faqs" ? "Saving..." : "Save FAQs"}
+                        </button>
+                    </div>
+                </SectionHeader>
+                {faqs.length === 0 ? (
+                    <EmptyState
+                        icon={<FaQuestionCircle />}
+                        title="No FAQs added yet"
+                        description="Add questions about admissions, fees, timings or transport."
+                    />
+                ) : (
+                    <div className="dynamicList">
+                        {faqs.map((faq, index) => (
+                            <div className="dynamicItem" key={faq.id}>
+                                <div className="dynamicItemHeader">
+                                    <span className="itemIndex">{index + 1}</span>
+                                    <div>
+                                        <strong>Question {index + 1}</strong>
+                                        <small>Displayed in the public FAQs section</small>
+                                    </div>
+                                    <button type="button" className="iconDangerBtn" title="Remove FAQ" aria-label={`Remove FAQ ${index + 1}`} onClick={() => RemoveFaq(faq.id)}>
+                                        <FaTrash />
+                                    </button>
+                                </div>
+                                <div className="dynamicItemGrid singleColumn">
+                                    <div>
+                                        <label>Question</label>
+                                        <input type="text" name="question" value={faq.question} onChange={(e) => handleFaqSecChange(e, faq.id)} placeholder="e.g. What are the admission requirements?" />
+                                    </div>
+                                    <div>
+                                        <label>Answer</label>
+                                        <textarea rows="3" name="answer" value={faq.answer} onChange={(e) => handleFaqSecChange(e, faq.id)} placeholder="Write a clear answer..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </section>
         </section>
     );

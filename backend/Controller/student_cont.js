@@ -3,6 +3,7 @@ import Admission from "../Models/Admission.js";
 import { Fee } from "../Models/Fee.js";
 import { validateStudent } from "../Utils/validation_check.js";
 import { Institute } from "../Models/Institute.js";
+import { isValidEmail, isValidPhone } from "../Utils/inputValidation.js";
 // ===============================
 // Student Controller
 // ===============================
@@ -13,24 +14,24 @@ export const CheckStudentAccessCont = async (req, res) => {
         if (!isValid) return;
 
         if (student.admissionApplication !== "APPROVED") {
-            return res.json({ success: false, message: "Student not approved" });
+            return res.status(403).json({ success: false, message: "Student not approved" });
         }
 
         if (student.admissionApplicationId == null || student.admissionApplicationId == "") {
-            return res.json({ success: false, message: "Please complete admission process first" });
+            return res.status(403).json({ success: false, message: "Please complete admission process first" });
         }
 
         let admission = await Admission.findById(student.admissionApplicationId);
         if (!admission) {
-            return res.json({ success: false, message: "Admission application not found" });
+            return res.status(404).json({ success: false, message: "Admission application not found" });
         }
 
         if (admission.status === "REJECTED") {
-            return res.json({ success: false, message: "Admission application rejected" });
+            return res.status(403).json({ success: false, message: "Admission application rejected" });
         }
 
         if (admission.admissionReceipt !== "GENERATED") {
-            return res.json({ success: false, message: "Your Application is Under-Process." });
+            return res.status(403).json({ success: false, message: "Your Application is Under-Process." });
         }
 
         let canAccess = ["Admission", "PaymentForm", "Home"]
@@ -58,7 +59,7 @@ export const GetMyApplication = async (req, res) => {
             }
         }
 
-        return res.json({ success: false, message: "No application found", application: null });
+        return res.status(404).json({ success: false, message: "No application found", application: null });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: "Internal server error" });
@@ -71,12 +72,12 @@ export const GetBillByIdCont = async (req, res) => {
         if (!isValid) return;
 
         if (student.admissionApplication !== "APPROVED") {
-            return res.json({ success: false, message: "Student not approved" });
+            return res.status(403).json({ success: false, message: "Student not approved" });
         }
 
         let { id } = req.body;
         if (!id) {
-            return res.json({ success: false, message: "Please provide bill id" });
+            return res.status(400).json({ success: false, message: "Please provide bill id" });
         }
 
         let responseData = {};
@@ -91,7 +92,7 @@ export const GetBillByIdCont = async (req, res) => {
         }
 
         if (!bill) {
-            return res.json({ success: false, message: "Bill not found" });
+            return res.status(404).json({ success: false, message: "Bill not found" });
         }
 
         if (responseData.paymentType !== "Fee") { // Admission case is handled.
@@ -138,10 +139,7 @@ export const SubmitBill = async (req, res) => {
         if (!isValid) return;
 
         if (student.admissionApplication !== "APPROVED") {
-            return res.json({
-                success: false,
-                message: "Student not approved"
-            });
+            return res.status(403).json({ success: false, message: "Student not approved" });
         }
 
         // =========================================================
@@ -160,10 +158,7 @@ export const SubmitBill = async (req, res) => {
             !paymentMethod ||
             !transactionId
         ) {
-            return res.json({
-                success: false,
-                message: "Please provide complete bill information"
-            });
+            return res.status(400).json({ success: false, message: "Please provide complete bill information" });
         }
 
 
@@ -177,10 +172,7 @@ export const SubmitBill = async (req, res) => {
         const isFeeBill = collection === "Fee";
 
         if (!isAdmissionBill && !isFeeBill) {
-            return res.json({
-                success: false,
-                message: "Invalid bill collection"
-            });
+            return res.status(400).json({ success: false, message: "Invalid bill collection" });
         }
 
         // =========================================================
@@ -189,16 +181,13 @@ export const SubmitBill = async (req, res) => {
         let bill;
 
         if (isAdmissionBill) {
-            bill = await Admission.findById(billId);
+            bill = await Admission.findOne({ _id: billId, studentId: student._id });
         } else {
-            bill = await Fee.findById(billId);
+            bill = await Fee.findOne({ _id: billId, studentId: student._id });
         }
 
         if (!bill) {
-            return res.json({
-                success: false,
-                message: "Bill not found"
-            });
+            return res.status(404).json({ success: false, message: "Bill not found" });
         }
 
 
@@ -220,10 +209,7 @@ export const SubmitBill = async (req, res) => {
                 try {
                     changedData = JSON.parse(req.body.changes);
                 } catch (error) {
-                    return res.json({
-                        success: false,
-                        message: "Invalid changes data"
-                    });
+                    return res.status(400).json({ success: false, message: "Invalid changes data" });
                 }
             }
 
@@ -245,10 +231,7 @@ export const SubmitBill = async (req, res) => {
                 !transactionIdChanged &&
                 !paymentMethodChanged
             ) {
-                return res.json({
-                    success: false,
-                    message: "Please make at least one change before resubmitting"
-                });
+                return res.status(400).json({ success: false, message: "Please make at least one change before resubmitting" });
             }
 
             // -----------------------------------------------------
@@ -270,10 +253,7 @@ export const SubmitBill = async (req, res) => {
             // -----------------------------------------------------
             if (paymentProofChanged) {
                 if (!req.file) {
-                    return res.json({
-                        success: false,
-                        message: "Please provide new payment proof"
-                    });
+                    return res.status(400).json({ success: false, message: "Please provide new payment proof" });
                 }
 
                 const uploadResult = await uploadFiles(
@@ -286,10 +266,7 @@ export const SubmitBill = async (req, res) => {
                     !uploadResult.secure_url ||
                     !uploadResult.public_id
                 ) {
-                    return res.json({
-                        success: false,
-                        message: "Payment proof upload failed"
-                    });
+                    return res.status(400).json({ success: false, message: "Payment proof upload failed" });
                 }
 
                 const paymentProof = {
@@ -319,7 +296,6 @@ export const SubmitBill = async (req, res) => {
             } else {
                 bill.status = "PENDING";
                 bill.submittedAt = new Date();
-                bill.paidAt = new Date();
             }
 
             await bill.save();
@@ -334,10 +310,7 @@ export const SubmitBill = async (req, res) => {
         // =========================================================
         // Payment proof is required for a new submission
         if (!req.file) {
-            return res.json({
-                success: false,
-                message: "Please provide payment proof"
-            });
+            return res.status(400).json({ success: false, message: "Please provide payment proof" });
         }
 
         // =========================================================
@@ -353,10 +326,7 @@ export const SubmitBill = async (req, res) => {
             !uploadResult.secure_url ||
             !uploadResult.public_id
         ) {
-            return res.json({
-                success: false,
-                message: "Payment proof upload failed"
-            });
+            return res.status(400).json({ success: false, message: "Payment proof upload failed" });
         }
 
         const paymentProof = {
@@ -383,7 +353,6 @@ export const SubmitBill = async (req, res) => {
             bill.transactionId = transactionId;
             bill.paymentProof = paymentProof;
             bill.submittedAt = new Date();
-            bill.paidAt = new Date();
         }
 
         // =========================================================
@@ -400,10 +369,7 @@ export const SubmitBill = async (req, res) => {
         });
     } catch (error) {
         console.error("SubmitBill Error:", error);
-        return res.json({
-            success: false,
-            message: "Internal server error"
-        });
+        return res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
 
@@ -415,7 +381,7 @@ export const GetStudentProfileCont = async (req, res) => {
         return res.json({ success: true, student });
     } catch (error) {
         console.log(error);
-        return res.json({ success: false, message: "Internal server error" });
+        return res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
 
@@ -429,7 +395,7 @@ export const GetStudentFeesCont = async (req, res) => {
         return res.json({ success: true, fees, institute });
     } catch (error) {
         console.log(error);
-        return res.json({ success: false, message: "Internal server error" });
+        return res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
 
@@ -438,16 +404,76 @@ export const UpdateStudentProfileCont = async (req, res) => {
         const { isValid, student } = await validateStudent(req, res);
         if (!isValid) return;
 
-        let changes = req.body;
-        for (const key in changes) {
-            if (changes[key] !== "") {
-                student[key] = changes[key];
-            }
+        const allowedFields = [
+            "firstName",
+            "lastName",
+            "email",
+            "phone",
+            "gender",
+            "dateOfBirth",
+            "previousSchool",
+            "lastQualification",
+            "obtainedMarks",
+            "totalMarks",
+            "passingYear",
+            "guardianName",
+            "guardianPhone",
+            "guardianCnic",
+            "guardianRelation"
+        ];
+
+        const changes = req.body || {};
+
+        // The student may only change the fields listed above. Everything
+        // else (role, class, fees, approval flags, ...) stays untouched.
+        const appliedFields = allowedFields.filter(
+            (key) => changes[key] !== undefined && changes[key] !== ""
+        );
+
+        if (appliedFields.length === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "No valid changes were provided."
+            });
         }
+
+        if (appliedFields.includes("email")) {
+            const normalizedEmail = String(changes.email).trim().toLowerCase();
+            if (!isValidEmail(normalizedEmail)) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Please provide a valid email address."
+                });
+            }
+            const emailTaken = await Student.findOne({
+                email: normalizedEmail,
+                _id: { $ne: student._id }
+            });
+            if (emailTaken) {
+                return res.status(409).json({
+                    success: false,
+                    message: "That email address is already in use."
+                });
+            }
+            student.email = normalizedEmail;
+        }
+
+        if (appliedFields.includes("phone") && !isValidPhone(String(changes.phone))) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide a valid phone number."
+            });
+        }
+
+        for (const key of appliedFields) {
+            if (key === "email") continue;
+            student[key] = changes[key];
+        }
+
         await student.save();
         return res.json({ success: true, message: "Student profile updated successfully", student });
     } catch (error) {
         console.log(error);
-        return res.json({ success: false, message: "Internal server error" });
+        return res.status(500).json({ success: false, message: "Internal server error" });
     }
 }

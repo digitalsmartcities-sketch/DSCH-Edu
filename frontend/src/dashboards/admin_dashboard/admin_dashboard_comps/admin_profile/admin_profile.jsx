@@ -413,41 +413,52 @@ const InfoItem = ({
 const DocumentCard = ({
     title,
     image
-}) => (
-    <div className="adminDocumentCard">
-        <div className="adminDocumentHeader">
-            <h3>
-                {title}
-            </h3>
-            {image && (
-                <button
-                    type="button"
-                    onClick={() =>
-                        window.open(
-                            image,
-                            "_blank",
-                            "noopener,noreferrer"
-                        )
-                    }
-                >
-                    View
-                </button>
-            )}
+}) => {
+    const isPdf = typeof image === "string" && image.split("?")[0].toLowerCase().endsWith(".pdf");
+
+    return (
+        <div className="adminDocumentCard">
+            <div className="adminDocumentHeader">
+                <h3>
+                    {title}
+                </h3>
+                {image && (
+                    <button
+                        type="button"
+                        onClick={() =>
+                            window.open(
+                                image,
+                                "_blank",
+                                "noopener,noreferrer"
+                            )
+                        }
+                    >
+                        View
+                    </button>
+                )}
+            </div>
+            <div className="adminDocumentPreview">
+                {!image ? (
+                    <div className="adminDocumentMissing">
+                        <FaFileAlt />
+                        <span>
+                            Document unavailable
+                        </span>
+                    </div>
+                ) : isPdf ? (
+                    <div className="adminDocumentMissing">
+                        <FaFileAlt />
+                        <a href={image} target="_blank" rel="noreferrer">
+                            Open PDF
+                        </a>
+                    </div>
+                ) : (
+                    <img
+                        src={image}
+                        alt={title}
+                    />
+                )}
+            </div>
         </div>
-        <div className="adminDocumentPreview">
-            {image ? (
-                <img
-                    src={image}
-                    alt={title}
-                />
-            ) : (
-                <div className="adminDocumentMissing">
-                    <FaFileAlt />
-                    <span>
-                        Document unavailable
-                    </span>
-                </div>
-            )}
-        </div>
-    </div>
-);
+    );
+};

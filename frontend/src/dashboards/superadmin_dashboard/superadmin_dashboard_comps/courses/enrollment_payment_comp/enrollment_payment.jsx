@@ -5,6 +5,7 @@ import {
     FaCheckCircle,
     FaCreditCard,
     FaEye,
+    FaFilePdf,
     FaFileUpload,
     FaLock,
     FaTimes,
@@ -13,6 +14,9 @@ import {
 } from "react-icons/fa";
 import "./enrollment_payment.css";
 import { approveCourseEnrollment, getEnrollmentById, rejectCourseEnrollment, resubmitCourseEnrollmentPayment } from "../../../../../apicalls/superadmin_apicalls";
+import notify from "../../../../../components/toast/toastBus";
+
+const isPdfUrl = (url) => Boolean(url && url.split("?")[0].toLowerCase().endsWith(".pdf"));
 
 export const EnrollmentPaymentView = ({ id, onBack }) => {
     let [enrollment, setEnrollment] = useState(null);
@@ -25,10 +29,12 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
         text: "",
         type: ""
     });
+    const [showRejectForm, setShowRejectForm] = useState(false);
+    const [rejectReason, setRejectReason] = useState("");
 
     useEffect(() => {
         getEnrollmentById(id, setEnrollment, setLoading, setMessage);
-    }, []);
+    }, [id]);
 
     const isEditable =
         enrollment?.status === "REJECTED" ||
@@ -99,7 +105,16 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
     };
 
     const handleReject = () => {
-        rejectCourseEnrollment(enrollment._id, setLoading, onBack)
+        if (!rejectReason.trim()) {
+            notify.error("A rejection reason is required.");
+            return;
+        }
+        rejectCourseEnrollment(enrollment._id, rejectReason.trim(), setLoading, onBack)
+    };
+
+    const cancelReject = () => {
+        setRejectReason("");
+        setShowRejectForm(false);
     };
 
     if (!enrollment) {
@@ -508,7 +523,7 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
                             label="Payment Date"
                             name="paymentDate"
                             type="date"
-                            value={enrollment.payment?.paymentDate.slice(0, 10)}
+                            value={enrollment.payment?.paymentDate?.slice(0, 10) || ""}
                             onChange={(e) => handleChange(e, "payment")}
                             disabled={!isEditable}
                         />
@@ -629,7 +644,8 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
                                         <button
                                             type="button"
                                             className="enrollmentRejectBtn"
-                                            onClick={handleReject}
+                                            onClick={() => setShowRejectForm((prev) => !prev)}
+                                            disabled={loading}
                                         >
                                             <FaTimes />
                                             Reject
@@ -642,6 +658,7 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
                                             type="button"
                                             className="enrollmentApproveBtn"
                                             onClick={handleApprove}
+                                            disabled={loading}
                                         >
                                             <FaCheckCircle />
                                             Approve Enrollment
@@ -652,6 +669,57 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
                         )
                     }
                 </div>
+                {/* =====================================
+                    REJECTION REASON
+                ====================================== */}
+                {
+                    showRejectForm && (
+                        <div className="enrollmentRejectPanel">
+
+                            <label htmlFor="enrollment-reject-reason">
+                                Reason for rejection
+                                <span>*</span>
+                            </label>
+
+                            <textarea
+                                id="enrollment-reject-reason"
+                                name="rejectReason"
+                                value={rejectReason}
+                                onChange={(e) => setRejectReason(e.target.value)}
+                                placeholder="Explain why this enrollment is being rejected..."
+                                rows={3}
+                                maxLength={500}
+                                disabled={loading}
+                            />
+
+                            <div className="enrollmentRejectActions">
+                                <button
+                                    type="button"
+                                    className="enrollmentCancelBtn"
+                                    onClick={cancelReject}
+                                    disabled={loading}
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className="enrollmentRejectConfirmBtn"
+                                    onClick={handleReject}
+                                    disabled={loading || !rejectReason.trim()}
+                                >
+                                    <FaTimes />
+                                    {
+                                        loading
+                                            ? "Rejecting..."
+                                            : "Confirm Rejection"
+                                    }
+                                </button>
+                            </div>
+
+                        </div>
+                    )
+                }
             </form>
             {/* =========================================
                 PAYMENT PROOF MODAL
@@ -682,15 +750,9 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
                             </div>
                             <div className="enrollmentProofContent">
                                 {
-                                    enrollment.payment.paymentProof.imageUrl
-                                        .toLowerCase() ? (
-                                        <img
-                                            src={
-                                                enrollment.payment.paymentProof.imageUrl
-                                            }
-                                            alt="Payment proof"
-                                        />
-                                    ) : (
+                                    isPdfUrl(
+                                        enrollment.payment.paymentProof.imageUrl
+                                    ) ? (
                                         <a
                                             href={
                                                 enrollment.payment.paymentProof.imageUrl
@@ -698,8 +760,16 @@ export const EnrollmentPaymentView = ({ id, onBack }) => {
                                             target="_blank"
                                             rel="noreferrer"
                                         >
-                                            Open payment document
+                                            <FaFilePdf />
+                                            Open payment proof (PDF)
                                         </a>
+                                    ) : (
+                                        <img
+                                            src={
+                                                enrollment.payment.paymentProof.imageUrl
+                                            }
+                                            alt="Payment proof"
+                                        />
                                     )
                                 }
                             </div>

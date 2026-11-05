@@ -6,11 +6,14 @@ import {
     FaUserGraduate,
     FaCreditCard,
     FaFileImage,
+    FaFilePdf,
     FaClock,
     FaReceipt
 } from "react-icons/fa";
 import "./payment_view.css";
 import { approveStudentAdmissionPayment, getStudentPaymentById, rejectStudentPayment } from "../../../../apicalls/admin_apicalls";
+
+const isPdfUrl = (url) => Boolean(url && url.split("?")[0].toLowerCase().endsWith(".pdf"));
 
 export const PaymentView = ({ setSubpage, id }) => {
 
@@ -238,7 +241,18 @@ export const PaymentView = ({ setSubpage, id }) => {
                 <div className="paymentProofReview">
                     <div className="paymentProofImageBox">
                         { 
-                            paymentProof.imageUrl ? (
+                            paymentProof.imageUrl && isPdfUrl(paymentProof.imageUrl) ? (
+                                <div className="paymentProofMissing">
+                                    <FaFilePdf />
+                                    <a
+                                        href={paymentProof.imageUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Open payment proof (PDF)
+                                    </a>
+                                </div>
+                            ) : paymentProof.imageUrl ? (
                                 <img
                                     src={paymentProof.imageUrl}
                                     alt={paymentProof.title || "Payment proof"}

@@ -15,9 +15,9 @@ import { FaSignOutAlt } from "react-icons/fa";
 
 export const CheckStudentAccess = () => {
     const navigate = useNavigate();
-    const { userState, setUserState } = useContext(AppContext);
+    const { setUserState } = useContext(AppContext);
     const [subpage, setSubpage] = useState("check_page");
-    const [student, setStudent] = useState(null);
+    const [, setStudent] = useState(null);
     const [message, setMessage] = useState({
         text: null,
         type: null

@@ -450,6 +450,24 @@
     cursor: not-allowed;
 }
 
+.delete-btn {
+    padding: 5px;
+    background-color: #7f1d1d;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    opacity: 0.8;
+}
+
+.delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 
 /* =========================================
    EMPTY STATE

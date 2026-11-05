@@ -2,12 +2,18 @@ import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
     FaArrowRight,
+    FaCheck,
     FaEnvelope,
+    FaEye,
+    FaEyeSlash,
     FaLock,
+    FaSpinner,
     FaUniversity,
     FaUserGraduate
 } from "react-icons/fa";
 import {
+    FaCircleCheck,
+    FaCircleExclamation,
     FaGraduationCap,
     FaShieldHalved
 } from "react-icons/fa6";
@@ -16,11 +22,33 @@ import { loginApi } from "../../apicalls/public_apicalls";
 import { useContext, useState } from "react";
 import AppContext from "../../app_context/context";
 
+const ROLE_OPTIONS = [
+    {
+        value: "student",
+        label: "Student",
+        description: "Fees, payments and certificates",
+        icon: FaUserGraduate
+    },
+    {
+        value: "admin",
+        label: "Institute Admin",
+        description: "Institute profile, admissions and students",
+        icon: FaUniversity
+    },
+    {
+        value: "superadmin",
+        label: "Super Administrator",
+        description: "Platform verification and records",
+        icon: FaShieldHalved
+    }
+];
+
 export const Login = () => {
     const navigate = useNavigate();
     const { setUserState } = useContext(AppContext);
 
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [message, setMessage] = useState({
         text: "",
         type: ""
@@ -54,11 +82,34 @@ export const Login = () => {
     };
 
 
+    const handleRoleChange = (role) => {
+        setFormData((prev) => ({
+            ...prev,
+            role
+        }));
+
+        if (message.text) {
+            setMessage({
+                text: "",
+                type: ""
+            });
+        }
+    };
+
+
     const handleOnSubmit = (e) => {
         e.preventDefault();
         if (!formData.email.trim()) {
             setMessage({
                 text: "Please enter your email address.",
+                type: "error"
+            });
+            return;
+        }
+
+        if (!formData.role) {
+            setMessage({
+                text: "Please select your account role.",
                 type: "error"
             });
             return;
@@ -151,6 +202,12 @@ export const Login = () => {
                         LOGIN PANEL
                     ========================================== */}
                 <section className="loginRight">
+                    <div className="loginCardIcon">
+                        <FaGraduationCap />
+                    </div>
+                    <span className="loginEyebrow">
+                        Secure Account Access
+                    </span>
                     <h2>
                         Sign In
                     </h2>
@@ -176,6 +233,7 @@ export const Login = () => {
                                     onChange={handleOnChange}
                                     placeholder="Enter your registered email"
                                     autoComplete="email"
+                                    autoFocus
                                     required
                                 />
                             </div>
@@ -183,22 +241,39 @@ export const Login = () => {
 
                         {/* ROLE */}
                         <div className="inputGroup">
-                            <label htmlFor="login-role">
-                                Role
+                            <label>
+                                Account Role
                             </label>
-                            <div className="inputField">
-                                <FaUserGraduate />
-                                <select
-                                    id="login-role"
-                                    name="role"
-                                    value={formData.role}
-                                    onChange={handleOnChange}
-                                    style={{ border: "none", outline: "none", width: "100%", background: "transparent" }}
-                                >
-                                    <option value="" disabled>Select your account role</option>
-                                    <option value="student">Student</option>
-                                    <option value="admin">Institute Admin</option>
-                                </select>
+                            <div
+                                className="roleSelector"
+                                role="radiogroup"
+                                aria-label="Account role"
+                            >
+                                {ROLE_OPTIONS.map(({ value, label, description, icon: Icon }) => {
+                                    const isActive = formData.role === value;
+
+                                    return (
+                                        <button
+                                            key={value}
+                                            type="button"
+                                            role="radio"
+                                            aria-checked={isActive}
+                                            className={isActive ? "roleOption active" : "roleOption"}
+                                            onClick={() => handleRoleChange(value)}
+                                        >
+                                            <span className="roleOptionIcon">
+                                                <Icon />
+                                            </span>
+                                            <span className="roleOptionText">
+                                                <strong>{label}</strong>
+                                                <small>{description}</small>
+                                            </span>
+                                            <span className="roleOptionCheck" aria-hidden="true">
+                                                {isActive && <FaCheck />}
+                                            </span>
+                                        </button>
+                                    );
+                                })}
                             </div>
                         </div>
 
@@ -207,11 +282,11 @@ export const Login = () => {
                             <label htmlFor="login-password">
                                 Password
                             </label>
-                            <div className="inputField">
+                            <div className="inputField passwordField">
                                 <FaLock />
                                 <input
                                     id="login-password"
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     name="password"
                                     value={formData.password}
                                     onChange={handleOnChange}
@@ -219,6 +294,14 @@ export const Login = () => {
                                     autoComplete="current-password"
                                     required
                                 />
+                                <button
+                                    type="button"
+                                    className="passwordVisibilityBtn"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
                             </div>
                         </div>
                         {/* FORGOT PASSWORD */}
@@ -231,8 +314,16 @@ export const Login = () => {
                         {message.text && (
                             <div
                                 className={`loginMessage ${message.type}`}
+                                role={message.type === "error" ? "alert" : "status"}
+                                aria-live="polite"
                             >
-                                {message.text}
+                                {message.type === "error"
+                                    ? <FaCircleExclamation />
+                                    : <FaCircleCheck />
+                                }
+                                <span>
+                                    {message.text}
+                                </span>
                             </div>
                         )}
                         {/* SUBMIT */}
@@ -242,7 +333,12 @@ export const Login = () => {
                             disabled={loading}
                         >
                             {loading
-                                ? "Signing in..."
+                                ? (
+                                    <>
+                                        <FaSpinner className="loginSpinner" />
+                                        Signing in...
+                                    </>
+                                )
                                 : (
                                     <>
                                         Sign In

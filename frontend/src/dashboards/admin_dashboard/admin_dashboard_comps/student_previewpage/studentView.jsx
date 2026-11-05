@@ -6,16 +6,21 @@ import {
     FaUserGraduate,
     FaPhone,
     FaCalendarAlt,
-    FaFileAlt
+    FaFileAlt,
+    FaFilePdf
 } from "react-icons/fa";
 
 import "./studentView.css";
 import { approveAdmission, GetApplicationByIdApi, rejectAdmission } from "../../../../apicalls/admin_apicalls";
 import { StudentRejectedEdit } from "../edit_student_applications/student_rejected_edit";
+import notify from "../../../../components/toast/toastBus";
+
+const isPdfUrl = (url) => Boolean(url && url.split("?")[0].toLowerCase().endsWith(".pdf"));
 
 export const StudentView = ({ id, setSubpage }) => {
     const [showRejectBox, setShowRejectBox] = useState(false);
     const [rejectionReason, setRejectionReason] = useState("");
+    const [applyMonthlyFee, setApplyMonthlyFee] = useState(true);
     let [loading, setLoading] = useState(true);
     let [student, setStudent] = useState();
 
@@ -33,12 +38,12 @@ export const StudentView = ({ id, setSubpage }) => {
     }
     
     const handleApprove = () => {
-        approveAdmission(student._id, setSubpage, setLoading);
+        approveAdmission(student._id, setSubpage, setLoading, applyMonthlyFee);
     };
 
     const handleRejectSubmit = () => {
         if (!rejectionReason.trim()) {
-            alert("Please provide a rejection reason.");
+            notify.error("Please provide a rejection reason.");
             return;
         }
         rejectAdmission(student._id, rejectionReason, setSubpage, setLoading);
@@ -285,10 +290,24 @@ export const StudentView = ({ id, setSubpage }) => {
                                     </span>
                                 </div>
                                 <div className="studentDocumentImage">
-                                    <img
-                                        src={document.imageUrl}
-                                        alt={document.title}
-                                    />
+                                    {isPdfUrl(document.imageUrl) ? (
+                                        <a
+                                            className="studentDocumentPdfLink"
+                                            href={document.imageUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <FaFilePdf />
+                                            <span>
+                                                Open PDF
+                                            </span>
+                                        </a>
+                                    ) : (
+                                        <img
+                                            src={document.imageUrl}
+                                            alt={document.title}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         ))
@@ -345,8 +364,9 @@ export const StudentView = ({ id, setSubpage }) => {
                             Reject Application
                         </h2>
                         <p>
-                            Provide a clear reason so the student knows
-                            what information or documents need to be corrected.
+                            Provide a clear reason. The application and all
+                            uploaded documents will be permanently deleted,
+                            and the student must resubmit with corrected data.
                         </p>
                         <textarea
                             value={rejectionReason}
@@ -374,7 +394,7 @@ export const StudentView = ({ id, setSubpage }) => {
                                 onClick={handleRejectSubmit}
                             >
                                 <FaTimes />
-                                Reject Application
+                                Reject & Delete Application
                             </button>
                         </div>
                     </section>
@@ -396,6 +416,17 @@ export const StudentView = ({ id, setSubpage }) => {
                             </p>
                         </div>
                         <div className="studentDecisionButtons">
+                            <label className="studentFeeToggle">
+                                <input
+                                    type="checkbox"
+                                    checked={applyMonthlyFee}
+                                    onChange={(e) => setApplyMonthlyFee(e.target.checked)}
+                                    disabled={loading}
+                                />
+                                <span>
+                                    Apply monthly fee from institute program
+                                </span>
+                            </label>
                             <button
                                 className="studentRejectBtn"
                                 onClick={() => setShowRejectBox(true)}

@@ -12,8 +12,10 @@ import { getFeesRecord } from "../../../../apicalls/admin_apicalls";
 import { FeeReceiptModal } from "./fee_receipt_view/fee_receipt_modal";
 import { FeePaymentView } from "./fee_payment_view/fee_payment_view";
 import { GenerateFeeModal } from "./fee_model/generate_fee_modal";
+import { useToast } from "../../../../components/toast/ToastContext";
 
 export const AdminFeeManagmenet = () => {
+    const toast = useToast();
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
     const [classFilter, setClassFilter] = useState("");
@@ -234,7 +236,13 @@ export const AdminFeeManagmenet = () => {
                                 !classFilter ||
                                 loading
                             }
-                            onClick={() => filteredFees.length > 0 ? setOpenGenerateFeeModal(true) : alert("No Data To Generate")}
+                            onClick={() => {
+                                if (filteredFees.length > 0) {
+                                    setOpenGenerateFeeModal(true);
+                                } else {
+                                    toast.error("There is no fee data to generate for this class.");
+                                }
+                            }}
                         >
                             <FaPlus />
                             {loading ? "Loading..." : "Generate Fee"}

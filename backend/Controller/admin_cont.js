@@ -1,5 +1,5 @@
 import { Institute } from "../Models/Institute.js";
-import { deleteFiles, generatePassword, sendEmail, uploadFiles } from "../Utils/helperFun.js";
+import { deleteFiles, deleteFilesSafely, generatePassword, getFrontendUrl, sendEmail, uploadFiles } from "../Utils/helperFun.js";
 import { validateAdmin } from "../Utils/validation_check.js";
 import argon2 from "argon2";
 import { randomUUID } from "crypto";
@@ -24,7 +24,7 @@ export const checkAdminAccessCont = async (req, res) => {
         res.json({ success: true });
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: "Something went wrong" });
+        res.status(500).json({ success: false, message: "Something went wrong" });
     }
 }
 
@@ -46,7 +46,7 @@ export const getInstituteData = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: "Something went wrong." })
+        res.status(500).json({ success: false, message: "Something went wrong." })
     }
 }
 
@@ -66,7 +66,7 @@ export const SaveInstHeroImageCont = async (req, res) => {
 
             if (file) {
                 if (!file.mimetype.startsWith("image/")) {
-                    return res.json({ success: false, message: "Hero images must be image files." });
+                    return res.status(400).json({ success: false, message: "Hero images must be image files." });
                 }
                 imageTasks.push(
                     uploadFiles(file, "heroImages").then((result) => ({
@@ -81,7 +81,7 @@ export const SaveInstHeroImageCont = async (req, res) => {
         const heroImages = await Promise.all(imageTasks);
 
         if ((!admin.instituteId || admin.instituteId == "") && heroImages.length === 0) {
-            return res.json({ success: false, message: "Please upload at least one hero image." });
+            return res.status(400).json({ success: false, message: "Please upload at least one hero image." });
         }
 
         // -----------------------------------------
@@ -104,7 +104,7 @@ export const SaveInstHeroImageCont = async (req, res) => {
             });
 
             institute.website =
-                `${process.env.FRONTEND_URL}/${admin.instituteType}/${institute._id}`;
+                `${getFrontendUrl()}/${admin.instituteType}/${institute._id}`;
 
             await institute.save();
             admin.instituteId = institute._id;
@@ -117,10 +117,7 @@ export const SaveInstHeroImageCont = async (req, res) => {
             const inst = await Institute.findById(admin.instituteId);
 
             if (!inst) {
-                return res.json({
-                    success: false,
-                    message: "Institute not found."
-                });
+                return res.status(404).json({ success: false, message: "Institute not found." });
             }
 
             // Make sure existing images are an array
@@ -156,7 +153,7 @@ export const SaveInstHeroImageCont = async (req, res) => {
 
             // Save complete array
             inst.heroImages = existingImages;
-            inst.website = `${process.env.FRONTEND_URL}/${inst.instituteType}/${inst._id}`;
+            inst.website = `${getFrontendUrl()}/${inst.instituteType}/${inst._id}`;
 
             await inst.save();
         }
@@ -184,12 +181,12 @@ export const SaveBrandingImagesCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin?.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please save hero images first to initialize the institute profile." });
+            return res.status(400).json({ success: false, message: "Please save hero images first to initialize the institute profile." });
         }
 
         const institute = await Institute.findById(admin.instituteId);
         if (!institute) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         let brandingUpdated = false;
@@ -198,10 +195,10 @@ export const SaveBrandingImagesCont = async (req, res) => {
         const logoFile = req.files?.["instituteLogo"]?.[0];
         if (logoFile) {
             if (!logoFile.mimetype.startsWith("image/")) {
-                return res.json({ success: false, message: "Institute logo must be an image." });
+                return res.status(400).json({ success: false, message: "Institute logo must be an image." });
             }
             if (institute.instituteLogo?.public_id) {
-                await deleteFile(institute.instituteLogo.public_id);
+                await deleteFiles(institute.instituteLogo.public_id);
             }
             const logoUpload = await uploadFiles(logoFile, "branding");
             institute.instituteLogo = {
@@ -215,10 +212,10 @@ export const SaveBrandingImagesCont = async (req, res) => {
         const timeTableFile = req.files?.["timeTableImage"]?.[0];
         if (timeTableFile) {
             if (!timeTableFile.mimetype.startsWith("image/")) {
-                return res.json({ success: false, message: "Time table must be an image." });
+                return res.status(400).json({ success: false, message: "Time table must be an image." });
             }
             if (institute.timeTableImage?.public_id) {
-                await deleteFile(institute.timeTableImage.public_id);
+                await deleteFiles(institute.timeTableImage.public_id);
             }
             const timeTableUpload = await uploadFiles(timeTableFile, "branding");
             institute.timeTableImage = {
@@ -232,7 +229,7 @@ export const SaveBrandingImagesCont = async (req, res) => {
             await institute.save();
             return res.json({ success: true, message: "Branding images saved successfully." });
         } else {
-            return res.json({ success: false, message: "No images provided to upload." });
+            return res.status(400).json({ success: false, message: "No images provided to upload." });
         }
 
     } catch (error) {
@@ -247,7 +244,7 @@ export const SaveQuickInfoCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin?.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please save hero images first." });
+            return res.status(400).json({ success: false, message: "Please save hero images first." });
         }
 
         const {
@@ -259,13 +256,13 @@ export const SaveQuickInfoCont = async (req, res) => {
         } = req.body;
 
         if (!admissionStatus || !board || !classes || !medium || !gender) {
-            return res.json({ success: false, message: "Please provide all quick info fields." });
+            return res.status(400).json({ success: false, message: "Please provide all quick info fields." });
         }
 
         let inst = await Institute.findById(admin.instituteId);
 
         if (!inst) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         inst.quickInfo = req.body;
@@ -285,7 +282,7 @@ export const SaveAboutInfoCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin?.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please save hero images first." });
+            return res.status(400).json({ success: false, message: "Please save hero images first." });
         }
 
         const {
@@ -297,13 +294,13 @@ export const SaveAboutInfoCont = async (req, res) => {
         } = req.body;
 
         if (!about || !establishedYear || !totalStudents || !teachers || !campusArea) {
-            return res.json({ success: false, message: "Please provide all about info fields." });
+            return res.status(400).json({ success: false, message: "Please provide all about info fields." });
         }
 
         const aboutInfo = { about, establishedYear, totalStudents, teachers, campusArea };
         let inst = await Institute.findById(admin.instituteId);
         if (!inst) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         inst.aboutInfo = aboutInfo;
@@ -322,13 +319,13 @@ export const SaveAcademicProgramsCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin?.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please save hero images first." });
+            return res.status(400).json({ success: false, message: "Please save hero images first." });
         }
 
         const academicPrograms = req.body;
 
         if (!academicPrograms || !Array.isArray(academicPrograms) || academicPrograms.length === 0) {
-            return res.json({ success: false, message: "Please provide at least one academic program." });
+            return res.status(400).json({ success: false, message: "Please provide at least one academic program." });
         }
 
         const validPrograms = academicPrograms.every((program) => (
@@ -343,12 +340,12 @@ export const SaveAcademicProgramsCont = async (req, res) => {
         const uniqueProgramIds = new Set(academicPrograms.map((program) => String(program.id))).size === academicPrograms.length;
 
         if (!validPrograms || !uniqueProgramIds) {
-            return res.json({ success: false, message: "Please provide valid academic programs with unique IDs." });
+            return res.status(400).json({ success: false, message: "Please provide valid academic programs with unique IDs." });
         }
 
         let inst = await Institute.findById(admin.instituteId);
         if (!inst) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         inst.academicPrograms = academicPrograms;
@@ -367,25 +364,25 @@ export const SaveFacilitiesCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin?.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please save hero images first." });
+            return res.status(400).json({ success: false, message: "Please save hero images first." });
         }
 
         const facilities = req.body;
 
         if (!facilities || !Array.isArray(facilities) || facilities.length === 0) {
-            return res.json({ success: false, message: "Please provide at least one facility." });
+            return res.status(400).json({ success: false, message: "Please provide at least one facility." });
         }
 
         const validFacilities = facilities.every((facility) => facility.id && facility.name?.trim());
         const uniqueFacilityIds = new Set(facilities.map((facility) => String(facility.id))).size === facilities.length;
 
         if (!validFacilities || !uniqueFacilityIds) {
-            return res.json({ success: false, message: "Please provide valid facilities with unique IDs." });
+            return res.status(400).json({ success: false, message: "Please provide valid facilities with unique IDs." });
         }
 
         let inst = await Institute.findById(admin.instituteId);
         if (!inst) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         inst.facilities = facilities;
@@ -404,19 +401,13 @@ export const SaveGalleryCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please save hero images first."
-            });
+            return res.status(400).json({ success: false, message: "Please save hero images first." });
         }
 
         const inst = await Institute.findById(admin.instituteId);
 
         if (!inst) {
-            return res.json({
-                success: false,
-                message: "Institute not found."
-            });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         let keptGalleryIds = [];
@@ -424,11 +415,11 @@ export const SaveGalleryCont = async (req, res) => {
         try {
             keptGalleryIds = JSON.parse(req.body.keptGalleryIds || "[]");
         } catch (error) {
-            return res.json({ success: false, message: "Invalid gallery data." });
+            return res.status(400).json({ success: false, message: "Invalid gallery data." });
         }
 
         if (!Array.isArray(keptGalleryIds)) {
-            return res.json({ success: false, message: "Invalid gallery data." });
+            return res.status(400).json({ success: false, message: "Invalid gallery data." });
         }
 
         const existingGallery = Array.isArray(inst.gallery) ? inst.gallery : [];
@@ -440,15 +431,15 @@ export const SaveGalleryCont = async (req, res) => {
         const uploadedFiles = Array.isArray(req.files) ? req.files : [];
 
         if (keptGallery.length + uploadedFiles.length === 0) {
-            return res.json({ success: false, message: "Please keep or upload at least one gallery image." });
+            return res.status(400).json({ success: false, message: "Please keep or upload at least one gallery image." });
         }
 
         if (keptGallery.length + uploadedFiles.length > 10) {
-            return res.json({ success: false, message: "You can save a maximum of 10 gallery images." });
+            return res.status(400).json({ success: false, message: "You can save a maximum of 10 gallery images." });
         }
 
         if (uploadedFiles.some((file) => !file.mimetype.startsWith("image/"))) {
-            return res.json({ success: false, message: "Gallery images must be image files." });
+            return res.status(400).json({ success: false, message: "Gallery images must be image files." });
         }
 
         // Upload new gallery images
@@ -489,25 +480,25 @@ export const SaveFaqsCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin?.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please save hero images first." });
+            return res.status(400).json({ success: false, message: "Please save hero images first." });
         }
 
         const faqs = req.body;
 
         if (!faqs || !Array.isArray(faqs) || faqs.length === 0) {
-            return res.json({ success: false, message: "Please provide at least one FAQ." });
+            return res.status(400).json({ success: false, message: "Please provide at least one FAQ." });
         }
 
         const validFaqs = faqs.every((faq) => faq.id && faq.question?.trim() && faq.answer?.trim());
         const uniqueFaqIds = new Set(faqs.map((faq) => String(faq.id))).size === faqs.length;
 
         if (!validFaqs || !uniqueFaqIds) {
-            return res.json({ success: false, message: "Please provide valid FAQs with unique IDs." });
+            return res.status(400).json({ success: false, message: "Please provide valid FAQs with unique IDs." });
         }
 
         let inst = await Institute.findById(admin.instituteId);
         if (!inst) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         inst.faqs = faqs;
@@ -526,13 +517,13 @@ export const PublishInstituteCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please complete your institute profile first." });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         const institute = await Institute.findById(admin.instituteId);
 
         if (!institute) {
-            return res.json({ success: false, message: "Institute not found." });
+            return res.status(404).json({ success: false, message: "Institute not found." });
         }
 
         institute.isPublished = true;
@@ -551,7 +542,7 @@ export const GetAdmissionApplicationsCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please complete your institute profile first." });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         const applications = await Admission.find({ instituteId: admin.instituteId });
@@ -570,12 +561,12 @@ export const GetApplicationByIdCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please complete your institute profile first." });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
-        const admission = await Admission.findById(id);
+        const admission = await Admission.findOne({ _id: id, instituteId: admin.instituteId });
         if (!admission) {
-            return res.json({ success: false, message: "Admission Application not found" });
+            return res.status(404).json({ success: false, message: "Admission Application not found" });
         }
 
         return res.json({ success: true, application: admission });
@@ -591,22 +582,35 @@ export const ApproveAdmissionCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please complete your institute profile first." });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         const { id, addmonthlyFee } = req.body;
-        const admission = await Admission.findById(id);
+        if (!id) {
+            return res.status(400).json({ success: false, message: "Admission Application ID is required" });
+        }
+        const admission = await Admission.findOne({ _id: id, instituteId: admin.instituteId });
         if (!admission) {
-            return res.json({ success: false, message: "Admission Application not found" });
+            return res.status(404).json({ success: false, message: "Admission Application not found" });
         }
 
         if (admission.status === "APPROVED") {
-            return res.json({ success: false, message: "Admission Application already approved" });
+            return res.status(409).json({ success: false, message: "Admission Application already approved" });
+        }
+
+        // Student accounts are unique by email, so reject a duplicate before
+        // creating the account instead of failing with a database error.
+        const existingStudent = await Student.findOne({ email: admission.email });
+        if (existingStudent) {
+            return res.status(409).json({
+                success: false,
+                message: "A student account with this email already exists. This application cannot be approved.",
+            });
         }
 
         let institute = await Institute.findById(admin.instituteId);
         if (!institute) {
-            return res.json({ success: false, message: "Institute not found" });
+            return res.status(404).json({ success: false, message: "Institute not found" });
         }
 
         let monthlyFee = 0;
@@ -638,7 +642,7 @@ export const ApproveAdmissionCont = async (req, res) => {
             admissionFee: admission.admissionFee,
             monthlyFee: monthlyFee,
             guardianName: admission.guardianName,
-            guardianPhone: admission.phone,
+            guardianPhone: admission.guardianPhone,
             guardianCnic: admission.guardianCnic,
             guardianRelation: admission.guardianRelation,
             documents: admission.documents,
@@ -659,7 +663,7 @@ export const ApproveAdmissionCont = async (req, res) => {
             studentId: student._id,
             class: admission.applyingFor,
             guardianName: admission.guardianName,
-            guardianPhone: admission.phone,
+            guardianPhone: admission.guardianPhone,
             admissionFee: admission.admissionFee,
             monthlyFee: monthlyFee,
         }
@@ -671,22 +675,30 @@ export const ApproveAdmissionCont = async (req, res) => {
         admission.admissionReceipt = "GENERATED";
         admission.admissionReceiptData = admissionReceiptData;
 
+        // The account has to exist before the student is told about it,
+        // otherwise a failed save would leave them with credentials that do
+        // not work.
+        await student.save();
+        await admission.save();
 
-        // Send email
         await sendEmail(admission.email, "Admission Application Approved.", studentAdmissionApprovedEmail({
             studentName: admission.firstName,
             instituteName: institute.instituteName,
             applyingFor: admission.applyingFor,
             email: admission.email,
             password: stdPassword,
-            loginUrl: `${process.env.FRONTEND_URL}/auth/login`
+            loginUrl: `${getFrontendUrl()}/auth/login`
         }));
-
-        await student.save();
-        await admission.save();
 
         return res.json({ success: true, message: "Admission approved successfully" });
     } catch (error) {
+        if (error?.code === 11000) {
+            return res.status(409).json({
+                success: false,
+                message: "A student account with this email already exists. This application cannot be approved.",
+            });
+        }
+
         console.log(error);
         return res.status(500).json({ success: false, message: "Internal server error" });
     }
@@ -698,28 +710,49 @@ export const DeleteAdmissionApplicationCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({ success: false, message: "Please complete your institute profile first." });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         const { id } = req.body;
-        const admission = await Admission.findById(id);
-        if (!admission) {
-            return res.json({ success: false, message: "Admission Application not found" });
+        if (!id) {
+            return res.status(400).json({ success: false, message: "Application ID is required" });
         }
 
-        let images = admission.documents;
-        await Promise.all(images.map(async (img) => {
-            if (img.publicId) {
-                await deleteFiles(img.publicId);
-            }
-        }));
+        const admission = await Admission.findOne({ _id: id, instituteId: admin.instituteId });
+        if (!admission) {
+            return res.status(404).json({ success: false, message: "Admission Application not found" });
+        }
 
-        if (admission?.studentId) {
+        const student = admission.studentId
+            ? await Student.findById(admission.studentId)
+            : null;
+
+        if (
+            admission.isAdmissionCompleted ||
+            admission.paymentStatus === "PAID" ||
+            admission.admissionReceipt === "GENERATED" ||
+            student?.approved ||
+            student?.status === "ACTIVE"
+        ) {
+            return res.status(409).json({
+                success: false,
+                message: "Completed or active admissions cannot be deleted.",
+            });
+        }
+
+        // Remove the documents and payment proof that belong to this application.
+        const publicIds = (admission.documents || []).map(
+            (document) => document?.publicId || document?.public_id
+        );
+        publicIds.push(admission.paymentProof?.publicId || admission.paymentProof?.public_id);
+        await deleteFilesSafely(publicIds);
+
+        if (admission.studentId) {
             await Student.findByIdAndDelete(admission.studentId);
         }
 
-        await Admission.findByIdAndDelete(id);
-        return res.json({ success: true, message: "Admission application deleted successfully" });
+        await Admission.findByIdAndDelete(admission._id);
+        return res.json({ success: true, message: "Admission application and associated files deleted successfully" });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: "Internal server error" });
@@ -731,32 +764,57 @@ export const RejectAdmissionCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
 
+        if (!admin.instituteId || admin.instituteId == "") {
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
+        }
+
         const { applicationId, rejectionReason } = req.body;
-        const admission = await Admission.findById(applicationId);
+        if (!rejectionReason || !String(rejectionReason).trim()) {
+            return res.status(400).json({ success: false, message: "A rejection reason is required" });
+        }
+
+        const admission = await Admission.findOne({ _id: applicationId, instituteId: admin.instituteId });
         if (!admission) {
-            return res.json({ success: false, message: "Admission Application not found" });
+            return res.status(404).json({ success: false, message: "Admission Application not found" });
+        }
+
+        if (admission.status === "APPROVED" || admission.admissionReceipt === "GENERATED" || admission.isAdmissionCompleted) {
+            return res.status(409).json({ success: false, message: "Approved applications cannot be rejected." });
         }
 
         let student = await Student.findById(admission.studentId);
         if (student) {
-            return res.json({ success: false, message: "Student already approved" });
+            return res.status(409).json({ success: false, message: "Student already approved" });
         }
 
-        admission.status = "REJECTED";
-        if (admission.paymentStatus === "NOT_SUBMITTED") {
-            admission.paymentStatus = "REJECTED";
-        }
-        admission.rejectionReason = rejectionReason;
-        await admission.save();
+        const email = admission.email;
+        const studentName = `${admission.firstName} ${admission.lastName}`;
+        const instituteName = admission.instituteName;
+        const rejectedFor = admission.applyingFor;
 
-        await sendEmail(admission.email, "Admission Application Rejected.", studentAdmissionRejectedEmail({
-            studentName: admission.firstName + " " + admission.lastName,
-            instituteName: admission.instituteName,
-            rejectedFor: admission.applyingFor,
+        // Remove the documents and payment proof that belong to this application.
+        const publicIds = (admission.documents || []).map(
+            (document) => document?.publicId || document?.public_id
+        );
+        publicIds.push(admission.paymentProof?.publicId || admission.paymentProof?.public_id);
+        await deleteFilesSafely(publicIds);
+
+        await Admission.findByIdAndDelete(admission._id);
+
+        const emailSent = await sendEmail(email, "Admission Application Rejected.", studentAdmissionRejectedEmail({
+            studentName,
+            instituteName,
+            rejectedFor,
             reason: rejectionReason,
             supportContact: process.env.SUPPORT_EMAIL
         }));
-        return res.json({ success: true, message: "Admission application rejected successfully" });
+
+        return res.json({
+            success: true,
+            message: emailSent
+                ? "Admission application rejected and removed. The applicant has been notified."
+                : "Admission application rejected and removed, but the notification email could not be sent."
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: "Internal server error" });
@@ -769,12 +827,15 @@ export const GetStudentPaymentByIdCont = async (req, res) => {
         if (!isValid) return;
 
         const { id } = req.body;
-        const admission = await Admission.findById(id);
+        const admission = await Admission.findOne({ _id: id, instituteId: admin.instituteId });
+        if (!admission) {
+            return res.status(404).json({ success: false, message: "Admission Application not found" });
+        }
         return res.json({ success: true, student: admission });
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: "Internal Server Error." })
+        res.status(500).json({ success: false, message: "Internal Server Error." })
     }
 }
 
@@ -784,40 +845,25 @@ export const ApproveStudentPaymentCont = async (req, res) => {
         if (!isValid) return;
         const { admissionId } = req.body;
         if (!admissionId) {
-            return res.json({
-                success: false,
-                message: "Admission Application ID is required"
-            });
+            return res.status(400).json({ success: false, message: "Admission Application ID is required" });
         }
         const admission = await Admission.findById(admissionId);
         if (!admission) {
-            return res.json({
-                success: false,
-                message: "Admission application not found"
-            });
+            return res.status(404).json({ success: false, message: "Admission application not found" });
         }
         const studentId = admission.studentId;
         const student = await Student.findById(studentId);
         if (!student) {
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if (
             admission.adminId &&
             admission.adminId.toString() !== admin._id.toString()
         ) {
-            return res.json({
-                success: false,
-                message: "You are not authorized to approve this payment"
-            });
+            return res.status(400).json({ success: false, message: "You are not authorized to approve this payment" });
         }
         if (admission.isAdmissionCompleted) {
-            return res.json({
-                success: false,
-                message: "Admission application has already been completed."
-            });
+            return res.status(409).json({ success: false, message: "Admission application has already been completed." });
         }
         if (admission.paymentStatus !== "SUBMITTED") {
             return res.json({
@@ -826,10 +872,7 @@ export const ApproveStudentPaymentCont = async (req, res) => {
             });
         }
         if (student.approved && student.status === "ACTIVE") {
-            return res.json({
-                success: false,
-                message: "Student is already active"
-            });
+            return res.status(409).json({ success: false, message: "Student is already active" });
         }
 
         admission.paymentReviewedAt = new Date();
@@ -905,7 +948,7 @@ export const ApproveStudentPaymentCont = async (req, res) => {
                 className:
                     admission.applyingFor,
                 loginUrl:
-                    `${process.env.FRONTEND_URL}/auth/login`
+                    `${getFrontendUrl()}/auth/login`
             })
         );
         await admission.save();
@@ -932,10 +975,7 @@ export const GetInstituteStudentsCont = async (req, res) => {
         if (!isValid) return;
 
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         const students = await Student.find({
@@ -961,43 +1001,25 @@ export const GetStudentByIdCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
         const { id } = req.body;
         if (!id) {
-            return res.json({
-                success: false,
-                message: "Please provide student id"
-            });
+            return res.status(400).json({ success: false, message: "Please provide student id" });
         }
         const student = await Student.findById(id);
         if (!student) {
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if (student.instituteId != admin.instituteId) {
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if (student.admissionApplication != "APPROVED") {
-            return res.json({
-                success: false,
-                message: "Student not approved"
-            });
+            return res.status(400).json({ success: false, message: "Student not approved" });
         }
         const admission_application = await Admission.findById(student.admissionApplicationId);
         if (!admission_application) {
-            return res.json({
-                success: false,
-                message: "Admission application not found"
-            });
+            return res.status(404).json({ success: false, message: "Admission application not found" });
         }
         return res.json({
             success: true,
@@ -1018,43 +1040,25 @@ export const SuspendTheStudentCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
         const { id } = req.params;
         if (!id) {
-            return res.json({
-                success: false,
-                message: "Student id is not available"
-            });
+            return res.status(400).json({ success: false, message: "Student id is not available" });
         }
         const student = await Student.findById(id);
         if (!student) {
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if (student.instituteId != admin.instituteId) {
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if (student.admissionApplication != "APPROVED") {
-            return res.json({
-                success: false,
-                message: "Student not approved"
-            });
+            return res.status(400).json({ success: false, message: "Student not approved" });
         }
         const admission_application = await Admission.findById(student.admissionApplicationId);
         if (!admission_application) {
-            return res.json({
-                success: false,
-                message: "Admission application not found"
-            });
+            return res.status(404).json({ success: false, message: "Admission application not found" });
         }
 
         student.status = "SUSPENDED";
@@ -1078,43 +1082,25 @@ export const UnsuspendTheStudentCont = async (req,res)=>{
         const {isValid, admin} = await validateAdmin(req,res);
         if(!isValid) return;
         if(!admin.instituteId || admin.instituteId == ""){
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
         const {id} = req.params;
         if(!id){
-            return res.json({
-                success: false,
-                message: "Student id is not available"
-            });
+            return res.status(400).json({ success: false, message: "Student id is not available" });
         }
         const student = await Student.findById(id);
         if(!student){
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if(student.instituteId != admin.instituteId){
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         if(student.admissionApplication != "APPROVED"){
-            return res.json({
-                success: false,
-                message: "Student not approved"
-            });
+            return res.status(400).json({ success: false, message: "Student not approved" });
         }
         const admission_application = await Admission.findById(student.admissionApplicationId);
         if(!admission_application){
-            return res.json({
-                success: false,
-                message: "Admission application not found"
-            });
+            return res.status(404).json({ success: false, message: "Admission application not found" });
         }
 
         student.status = "ACTIVE";
@@ -1138,10 +1124,7 @@ export const GetInstFeesRecordCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         const fees = await Fee.find({
@@ -1167,16 +1150,22 @@ export const GenerateMonthlyFeeCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
+            return res.status(400).json({
                 success: false,
                 message: "Please complete your institute profile first."
             });
         }
         const { feeOfClass, month, year } = req.body;
         if (!feeOfClass) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
                 message: "Please provide class"
+            });
+        }
+        if (!month || !year) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide month and year"
             });
         }
         const students = await Student.find({
@@ -1185,8 +1174,8 @@ export const GenerateMonthlyFeeCont = async (req, res) => {
             class: feeOfClass
         });
 
-        if (!students) {
-            return res.json({
+        if (!students || students.length === 0) {
+            return res.status(404).json({
                 success: false,
                 message: "No students found"
             });
@@ -1195,9 +1184,17 @@ export const GenerateMonthlyFeeCont = async (req, res) => {
         let institutePrograms = await Institute.findById(admin.instituteId).select("academicPrograms");
 
         if (!institutePrograms) {
-            return res.json({
+            return res.status(404).json({
                 success: false,
                 message: "Institute not found"
+            });
+        }
+
+        const programFee = institutePrograms.academicPrograms.filter((program) => String(program.class).toLowerCase() === String(feeOfClass).toLowerCase())[0]?.monthlyFee;
+        if (!programFee) {
+            return res.status(404).json({
+                success: false,
+                message: "Program not found"
             });
         }
 
@@ -1205,40 +1202,60 @@ export const GenerateMonthlyFeeCont = async (req, res) => {
         for (const student of students) {
             let feeExsist = student?.feeRecord?.filter((fee) => String(fee.month).toLowerCase() === String(month).toLowerCase() && String(fee.year).toLowerCase() === String(year).toLowerCase())[0];
             if (feeExsist) {
-                return res.json({
+                return res.status(409).json({
                     success: false,
                     message: ` ${month} ${year} fee already generated for all students of ${student.class} class.`
                 });
             }
         }
 
+        // One failing student must not abort the whole run. Every fee is
+        // created independently and the failures are reported back.
+        const failures = [];
+        let created = 0;
+
         for (const student of students) {
-            let fee = institutePrograms.academicPrograms.filter((program) => String(program.class).toLowerCase() === String(feeOfClass).toLowerCase())[0].monthlyFee;
-            if (!fee) {
-                return res.json({
-                    success: false,
-                    message: "Program not found"
+            try {
+                let feeDoc = await Fee.create({
+                    studentId: student._id,
+                    instituteId: admin.instituteId,
+                    class: student.class,
+                    month,
+                    year,
+                    amount: programFee,
+                    status: "NOT_PAID",
+                    generatedAt: new Date()
+                });
+                student.feeRecord.push({
+                    month,
+                    year,
+                    feeDocId: feeDoc._id
+                });
+                await student.save();
+                created += 1;
+            } catch (feeError) {
+                console.error("GenerateMonthlyFeeCont per-student failure:", feeError);
+                failures.push({
+                    studentId: student._id,
+                    name: `${student.firstName || ""} ${student.lastName || ""}`.trim(),
+                    message: feeError?.message || "Unknown error",
                 });
             }
-            let feeDoc = await Fee.create({
-                studentId: student._id,
-                instituteId: admin.instituteId,
-                class: student.class,
-                month,
-                year,
-                amount: fee,
-                status: "NOT_PAID",
-                generatedAt: new Date()
-            });
-            student.feeRecord.push({
-                month,
-                year,
-                feeDocId: feeDoc._id
-            });
-            await student.save();
         }
+
+        if (created === 0) {
+            return res.status(500).json({
+                success: false,
+                message: "No fee could be generated.",
+                failures,
+            });
+        }
+
         return res.json({
-            success: true
+            success: true,
+            message: `${month} ${year} fee generated for ${created} student(s).`,
+            created,
+            failures: failures.length ? failures : undefined,
         });
     } catch (error) {
         console.log("GenerateMonthlyFeeCont:", error);
@@ -1254,33 +1271,39 @@ export const GenerateFeeForStudentCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
+            return res.status(400).json({
                 success: false,
                 message: "Please complete your institute profile first."
             });
         }
         const { id, month, year } = req.body;
         if (!id) {
-            return res.json({
+            return res.status(400).json({
                 success: false,
                 message: "Please provide student id"
             });
         }
+        if (!month || !year) {
+            return res.status(400).json({
+                success: false,
+                message: "Please provide month and year"
+            });
+        }
         const student = await Student.findById(id);
         if (!student) {
-            return res.json({
+            return res.status(404).json({
                 success: false,
                 message: "Student not found"
             });
         }
-        if (student.instituteId != admin.instituteId) {
-            return res.json({
+        if (String(student.instituteId) !== String(admin.instituteId)) {
+            return res.status(404).json({
                 success: false,
                 message: "Student not found"
             });
         }
         if (student.admissionApplication != "APPROVED") {
-            return res.json({
+            return res.status(403).json({
                 success: false,
                 message: "Student not approved"
             });
@@ -1289,15 +1312,15 @@ export const GenerateFeeForStudentCont = async (req, res) => {
         let institutePrograms = await Institute.findById(admin.instituteId).select("academicPrograms");
 
         if (!institutePrograms) {
-            return res.json({
+            return res.status(404).json({
                 success: false,
                 message: "Institute not found"
             });
         }
 
-        let fee = institutePrograms.academicPrograms.filter((program) => String(program.class).toLowerCase() === String(student.class).toLowerCase())[0].monthlyFee;
+        let fee = institutePrograms.academicPrograms.filter((program) => String(program.class).toLowerCase() === String(student.class).toLowerCase())[0]?.monthlyFee;
         if (!fee) {
-            return res.json({
+            return res.status(404).json({
                 success: false,
                 message: "Program not found"
             });
@@ -1306,7 +1329,7 @@ export const GenerateFeeForStudentCont = async (req, res) => {
         // Check Fee Exsist?
         let feeExsist = student?.feeRecord?.filter((fee) => String(fee.month).toLowerCase() === String(month).toLowerCase() && String(fee.year).toLowerCase() === String(year).toLowerCase())[0];
         if (feeExsist) {
-            return res.json({
+            return res.status(409).json({
                 success: false,
                 message: ` ${month} ${year} fee already generated for ${student.firstName + " " + student.lastName}.`
             });
@@ -1334,7 +1357,7 @@ export const GenerateFeeForStudentCont = async (req, res) => {
             message: `${month} ${year} fee generated successfully for ${student.firstName + " " + student.lastName}.`
         });
     } catch (error) {
-        console.error("GetStudentByIdCont:", error);
+        console.error("GenerateFeeForStudentCont:", error);
         return res.status(500).json({
             success: false,
             message: "Internal Server Error."
@@ -1347,10 +1370,7 @@ export const RejectFeePaymentCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         let { id } = req.params;
@@ -1360,24 +1380,19 @@ export const RejectFeePaymentCont = async (req, res) => {
         let feeDoc = await Fee.findById(id);
 
         if (!feeDoc) {
-            return res.json({
-                success: false,
-                message: "Fee Data not found"
-            });
+            return res.status(404).json({ success: false, message: "Fee Data not found" });
+        }
+
+        if (String(feeDoc.instituteId) !== String(admin.instituteId)) {
+            return res.status(404).json({ success: false, message: "Fee Data not found" });
         }
 
         if (feeDoc.status == "PAID") {
-            return res.json({
-                success: false,
-                message: "Payment already approved"
-            });
+            return res.status(409).json({ success: false, message: "Payment already approved" });
         }
 
         if (feeDoc.status == "REJECTED") {
-            return res.json({
-                success: false,
-                message: "Payment already rejected"
-            });
+            return res.status(409).json({ success: false, message: "Payment already rejected" });
         }
 
         feeDoc.rejectionReason = reason;
@@ -1402,10 +1417,7 @@ export const ApproveMonthlyFeePaymentCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
         let { id } = req.body;
@@ -1413,14 +1425,16 @@ export const ApproveMonthlyFeePaymentCont = async (req, res) => {
         let feeDoc = await Fee.findById(id);
 
         if (!feeDoc) {
-            return res.json({
-                success: false,
-                message: "Fee Data not found"
-            });
+            return res.status(404).json({ success: false, message: "Fee Data not found" });
+        }
+
+        if (String(feeDoc.instituteId) !== String(admin.instituteId)) {
+            return res.status(404).json({ success: false, message: "Fee Data not found" });
         }
 
         feeDoc.status = "PAID";
         feeDoc.reviewedAt = Date.now();
+        feeDoc.paidAt = new Date();
 
         feeDoc.save();
         return res.json({
@@ -1442,25 +1456,19 @@ export const GetStudentDataForCertificateCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId == "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
         let { id } = req.body;
         let student = await Student.findById(id).select("_id firstName lastName class email phone guardianName");
         if (!student) {
-            return res.json({
-                success: false,
-                message: "Student not found"
-            });
+            return res.status(404).json({ success: false, message: "Student not found" });
+        }
+        if (String(student.instituteId) !== String(admin.instituteId)) {
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
         let institute = await Institute.findById(admin.instituteId).select("_id instituteName instituteAddress institutePhone instituteType");
         if (!institute) {
-            return res.json({
-                success: false,
-                message: "Institute not found"
-            });
+            return res.status(404).json({ success: false, message: "Institute not found" });
         }
         return res.json({
             success: true,
@@ -1486,34 +1494,33 @@ export const UpdateRejectedStudentApplicationCont = async (req, res) => {
         const { isValid, admin } = await validateAdmin(req, res);
         if (!isValid) return;
         if (!admin.instituteId || admin.instituteId === "") {
-            return res.json({
-                success: false,
-                message: "Please complete your institute profile first."
-            });
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
         // ========================================
         // GET FORM DATA
         // =========================================
-        const editedFields = JSON.parse(
-            req.body.editedFields || "{}"
-        );
+        let editedFields = {};
+        try {
+            editedFields = JSON.parse(
+                req.body.editedFields || "{}"
+            );
+        } catch (parseError) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid edited fields payload."
+            });
+        }
         const editedDocTitles = req.body.editedDocTitles;
         const { id } = editedFields;
         if (!id) {
-            return res.json({
-                success: false,
-                message: "Application ID is required."
-            });
+            return res.status(400).json({ success: false, message: "Application ID is required." });
         }
         // =========================================
         // FIND APPLICATION
         // =========================================
-        const admission = await Admission.findById(id);
+        const admission = await Admission.findOne({ _id: id, instituteId: admin.instituteId });
         if (!admission) {
-            return res.json({
-                success: false,
-                message: "Application not found."
-            });
+            return res.status(404).json({ success: false, message: "Application not found." });
         }
         // =========================================
         // CHECK WHAT IS REJECTED
@@ -1523,10 +1530,7 @@ export const UpdateRejectedStudentApplicationCont = async (req, res) => {
         const paymentRejected =
             admission.paymentStatus === "REJECTED";
         if (!applicationRejected && !paymentRejected) {
-            return res.json({
-                success: false,
-                message: "This application cannot be edited."
-            });
+            return res.status(400).json({ success: false, message: "This application cannot be edited." });
         }
         // =====================================================
         // 1. APPLICATION CORRECTION
@@ -1724,29 +1728,31 @@ export const RejectStudentPaymentCont = async (req, res) => {
 
         let { id, reason } = req.body;
         if (!id) {
-            return res.json({ success: false, message: "Payment ID is required" });
+            return res.status(400).json({ success: false, message: "Payment ID is required" });
+        }
+        if (!admin.instituteId || admin.instituteId == "") {
+            return res.status(400).json({ success: false, message: "Please complete your institute profile first." });
         }
 
-        let feeTransaction = await Admission.findById(id);
+        let feeTransaction = await Admission.findOne({ _id: id, instituteId: admin.instituteId });
         let paymentType = "Admission";
-        let studentId = feeTransaction.studentId;
         if (!feeTransaction) {
-            feeTransaction = await Fee.findById(id);
+            feeTransaction = await Fee.findOne({ _id: id, instituteId: admin.instituteId });
             paymentType = "Fee";
-            studentId = feeTransaction.studentId;
         }
 
         if (!feeTransaction) {
-            return res.json({ success: false, message: "Transaction not found" });
+            return res.status(404).json({ success: false, message: "Transaction not found" });
         }
 
+        let studentId = feeTransaction.studentId;
         let student = await Student.findById(studentId).populate("instituteId", "instituteName");
         if (!student) {
-            return res.json({ success: false, message: "Student not found" });
+            return res.status(404).json({ success: false, message: "Student not found" });
         }
 
         if (!reason || reason == "") {
-            return res.json({ success: false, message: "Rejection reason is required" });
+            return res.status(400).json({ success: false, message: "Rejection reason is required" });
         }
 
         if (paymentType == "Fee") {
@@ -1767,7 +1773,7 @@ export const RejectStudentPaymentCont = async (req, res) => {
                 student?.instituteId?.instituteName,
                 paymentType,
                 reason,
-                `${process.env.FRONTEND_URL}/auth/login`)
+                `${getFrontendUrl()}/auth/login`)
         );
 
         await feeTransaction.save();

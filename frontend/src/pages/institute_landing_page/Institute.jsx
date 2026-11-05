@@ -10,6 +10,22 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const formatCurrency = (amount) => `PKR ${Number(amount || 0).toLocaleString()}`;
 
+// Older institutes had their own profile URL stored as their website. Only
+// show the website button when it points somewhere else.
+const isExternalWebsite = (website) => {
+    if (!website) return false;
+
+    try {
+        const target = new URL(website, window.location.href);
+        const current = new URL(window.location.href);
+        const targetPath = target.pathname.replace(/\/+$/, "") || "/";
+        const currentPath = current.pathname.replace(/\/+$/, "") || "/";
+        return target.origin !== current.origin || targetPath !== currentPath;
+    } catch {
+        return false;
+    }
+};
+
 const InstituteLoading = () => {
     return (
         <>
@@ -116,7 +132,7 @@ export const Institute = () => {
                     <div className="heroButtons">
                         <button className="applyBtn" onClick={() => navigate(`/${institute.instituteType}/admission/${institute._id}`)}>Apply Now</button>
                         <a className="callBtn" href={`tel:${institute.institutePhone}`}><FaPhoneAlt /> Call</a>
-                        {institute.website && <a className="websiteBtn" href={institute.website} target="_blank" rel="noreferrer"><FaGlobe /> Website</a>}
+                        {isExternalWebsite(institute.website) && <a className="websiteBtn" href={institute.website} target="_blank" rel="noreferrer"><FaGlobe /> Website</a>}
                     </div>
                 </div>
             </div></section>

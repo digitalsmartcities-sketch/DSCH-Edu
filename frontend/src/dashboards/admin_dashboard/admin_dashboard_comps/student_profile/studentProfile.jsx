@@ -2,24 +2,23 @@ import { useEffect, useState } from "react";
 import {
     FaUserGraduate,
     FaUser,
-    FaPhone,
-    FaEnvelope,
-    FaCalendarAlt,
     FaBookOpen,
     FaFileAlt,
+    FaFilePdf,
     FaCreditCard,
     FaCheckCircle,
     FaClock,
     FaTimesCircle,
     FaIdCard,
     FaArrowLeft,
-    FaEdit,
     FaLock,
     FaImage,
     FaGraduationCap
 } from "react-icons/fa";
 import "./studentProfile.css";
 import { getStudentById } from "../../../../apicalls/admin_apicalls";
+
+const isPdfUrl = (url) => Boolean(url && url.split("?")[0].toLowerCase().endsWith(".pdf"));
 
 export const StudentProfile = ({ setSubpage, id }) => {
     const [student, setStudent] = useState(null);
@@ -402,10 +401,24 @@ export const StudentProfile = ({ setSubpage, id }) => {
                                     </strong>
                                 </div>
                                 {document.imageUrl ? (
-                                    <img
-                                        src={document.imageUrl}
-                                        alt={document.title || "Student document"}
-                                    />
+                                    isPdfUrl(document.imageUrl) ? (
+                                        <a
+                                            className="studentDocumentPdfLink"
+                                            href={document.imageUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <FaFilePdf />
+                                            <span>
+                                                Open PDF
+                                            </span>
+                                        </a>
+                                    ) : (
+                                        <img
+                                            src={document.imageUrl}
+                                            alt={document.title || "Student document"}
+                                        />
+                                    )
                                 ) : (
                                     <div className="missingDocument">
                                         <FaFileAlt />

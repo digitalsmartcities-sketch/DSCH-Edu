@@ -1,6 +1,6 @@
 import express from "express";
 import { UserMW } from "../Middleware/userMW.js";
-import { upload } from "../Config/multure.js";
+import { upload, uploadDocuments } from "../Config/multer.js";
 import * as ADMIN_CONT from "../Controller/admin_cont.js"
 const ADMIN_ROUTER = express.Router();
 
@@ -42,13 +42,13 @@ ADMIN_ROUTER.get("/get/inst/fees", UserMW, ADMIN_CONT.GetInstFeesRecordCont);
 ADMIN_ROUTER.post("/generate/monthly/fee", UserMW, ADMIN_CONT.GenerateMonthlyFeeCont);
 ADMIN_ROUTER.post("/approve/payment/fee", UserMW, ADMIN_CONT.ApproveMonthlyFeePaymentCont)
 ADMIN_ROUTER.post("/certificate/studentData", UserMW, ADMIN_CONT.GetStudentDataForCertificateCont);
-ADMIN_ROUTER.post("/update/student/aplication", UserMW, upload.any(), ADMIN_CONT.UpdateRejectedStudentApplicationCont);
+ADMIN_ROUTER.post("/update/student/aplication", UserMW, uploadDocuments.any(), ADMIN_CONT.UpdateRejectedStudentApplicationCont);
 ADMIN_ROUTER.get("/admin/profile", UserMW, ADMIN_CONT.GetAdminProfileCont);
 ADMIN_ROUTER.post("/reject/student/payment", UserMW, ADMIN_CONT.RejectStudentPaymentCont);
 ADMIN_ROUTER.post("/generate/fee/for/student", UserMW, ADMIN_CONT.GenerateFeeForStudentCont);
 ADMIN_ROUTER.post("/reject/fee/payment/:id", UserMW, ADMIN_CONT.RejectFeePaymentCont);
-ADMIN_ROUTER.get("/suspend/student/:id", UserMW, ADMIN_CONT.SuspendTheStudentCont);
-ADMIN_ROUTER.get("/unsuspend/student/:id", UserMW, ADMIN_CONT.UnsuspendTheStudentCont);
+ADMIN_ROUTER.post("/suspend/student/:id", UserMW, ADMIN_CONT.SuspendTheStudentCont);
+ADMIN_ROUTER.post("/unsuspend/student/:id", UserMW, ADMIN_CONT.UnsuspendTheStudentCont);
 
 
 export default ADMIN_ROUTER;

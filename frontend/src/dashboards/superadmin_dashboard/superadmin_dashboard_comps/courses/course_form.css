@@ -680,6 +680,303 @@
 }
 
 /* =====================================================
+   EXISTING COURSES
+===================================================== */
+
+.courseLibrary {
+  margin-bottom: 24px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(17, 24, 39, 0.025);
+}
+
+.courseLibraryHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.courseLibraryHeader h2 {
+  margin: 0 0 4px;
+  color: #111827;
+  font-size: 17px;
+}
+
+.courseLibraryHeader p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.courseRefreshBtn {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #fff;
+  color: #374151;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.courseRefreshBtn:hover {
+  border-color: #10b981;
+  color: #059669;
+}
+
+.courseRefreshBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.courseRefreshBtn .isSpinning {
+  animation: courseSpin 0.9s linear infinite;
+}
+
+@keyframes courseSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.courseLibraryState {
+  padding: 28px 16px;
+  border: 1px dashed #d1d5db;
+  border-radius: 9px;
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 12px;
+  text-align: center;
+}
+
+.courseLibraryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 14px;
+}
+
+.courseLibraryCard {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  transition: 0.2s ease;
+}
+
+.courseLibraryCard:hover {
+  border-color: #a7f3d0;
+  transform: translateY(-1px);
+}
+
+.courseLibraryCard.isEditing {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.courseLibraryCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 11px;
+}
+
+.courseStatusBadge,
+.courseCodeBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.courseStatusBadge {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.courseStatusBadge.status-published {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.courseStatusBadge.status-draft {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.courseStatusBadge.status-archived {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.courseCodeBadge {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.courseLibraryCard h3 {
+  margin: 0 0 7px;
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.courseLibraryCard > p {
+  margin: 0 0 12px;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.courseLibraryMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.courseLibraryMeta span {
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #f3f4f6;
+  color: #4b5563;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.courseLibraryFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 13px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.courseLibraryFooter div {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.courseLibraryFooter strong {
+  color: #111827;
+  font-size: 13px;
+}
+
+.courseLibraryFooter small {
+  font-size: 10px;
+}
+
+.courseEditBtn {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 0 11px;
+  border: 1px solid #10b981;
+  border-radius: 7px;
+  background: #ecfdf5;
+  color: #047857;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.courseEditBtn:hover {
+  background: #10b981;
+  color: #fff;
+}
+
+/* =====================================================
+   FORM INTRO
+===================================================== */
+
+.courseFormIntro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  border: 1px solid #d1fae5;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 70%);
+}
+
+.courseFormIntro > div > span {
+  display: block;
+  margin-bottom: 4px;
+  color: #059669;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.courseFormIntro h2 {
+  margin: 0 0 4px;
+  color: #111827;
+  font-size: 19px;
+}
+
+.courseFormIntro p {
+  max-width: 720px;
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.courseCancelEditBtn {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 0 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #fff;
+  color: #374151;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.courseCancelEditBtn:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+/* =====================================================
    RESPONSIVE
 ===================================================== */
 
@@ -689,6 +986,15 @@
   }
 
   .courseManagementHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .courseLibraryHeader {
+    flex-direction: column;
+  }
+
+  .courseFormIntro {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -712,7 +1018,22 @@
     font-size: 24px;
   }
 
-  .courseEnrollmentBtn {
+  .courseEnrollmentBtn,
+  .courseRefreshBtn,
+  .courseCancelEditBtn {
+    width: 100%;
+  }
+
+  .courseLibrary {
+    padding: 16px;
+  }
+
+  .courseLibraryFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .courseEditBtn {
     width: 100%;
   }
 

@@ -1,8 +1,10 @@
+import "./plugins.js";
 import mongoose from "mongoose";
 
 const FeeSchema = new mongoose.Schema({
     studentId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", required: true },
     instituteId: { type: mongoose.Schema.Types.ObjectId, ref: "Institute", required: true },
+    class: { type: String, default: "" },
     feeType: { type: String, enum: ["MONTHLY"], default: "MONTHLY" },
     month: { type: String, required: true },
     year: { type: Number, required: true },

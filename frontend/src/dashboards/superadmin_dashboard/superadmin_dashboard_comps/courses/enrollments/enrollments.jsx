@@ -18,7 +18,7 @@ export const Enrollments = ({ setCurrentComponent }) => {
     const [status, setStatus] = useState("ALL");
     const [course, setCourse] = useState("ALL");
     const [paymentStatus, setPaymentStatus] = useState("ALL");
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
 
     const [enrollments, setEnrollments] = useState([
         {

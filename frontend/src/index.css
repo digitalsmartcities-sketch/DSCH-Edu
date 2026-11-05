@@ -9,3 +9,36 @@
   outline: none;
   font-family: 'Outfit';
 }
+
+/* =========================================
+   GLOBAL ROUTE LOADING FALLBACK
+   ========================================= */
+
+.appPageLoader {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.appPageLoader__spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #dcfce7;
+  border-top-color: #10b981;
+  border-radius: 50%;
+  animation: appPageLoaderSpin 0.8s linear infinite;
+}
+
+.appPageLoader p {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+@keyframes appPageLoaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

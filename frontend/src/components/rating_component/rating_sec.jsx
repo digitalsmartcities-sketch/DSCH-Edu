@@ -4,10 +4,12 @@ import "./rating_sec.css";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../../app_context/context";
 import { getTheReviews, handleReviewSubmission } from "../../apicalls/public_apicalls";
+import { useToast } from "../toast/ToastContext";
 
 export const RatingReview = ({ instituteId }) => {
     const navigate = useNavigate();
     const { userState } = useContext(AppContext);
+    const toast = useToast();
     const [rating, setRating] = useState(0); // user rating getting
     const [hoverRating, setHoverRating] = useState(0);
     const [review, setReview] = useState(""); // for user review getting
@@ -21,18 +23,18 @@ export const RatingReview = ({ instituteId }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (userState !== "login") {
-            alert("Please login first to submit a review.");
+        if (!userState) {
+            toast.error("Please login first to submit a review.");
             return;
         }
 
         if (rating === 0) {
-            alert("Please select a rating.");
+            toast.error("Please select a rating.");
             return;
         }
 
         if (!review.trim()) {
-            alert("Please write your review.");
+            toast.error("Please write your review.");
             return;
         }
 
@@ -47,7 +49,7 @@ export const RatingReview = ({ instituteId }) => {
                     <h2>What Students Say</h2>
                 </div>
                 <div className="review-form-card">
-                    {userState !== "login" ? (
+                    {!userState ? (
                         <div className="login-review-message">
                             <h3>Want to review this institute?</h3>
                             <p>
@@ -139,7 +141,7 @@ export const RatingReview = ({ instituteId }) => {
                                     the right decision.
                                 </p>
 
-                                {userState !== "login" && (
+                                {!userState && (
                                     <span className="noReviewsLoginText">
                                         Login to submit your review.
                                     </span>
@@ -174,7 +176,7 @@ export const RatingReview = ({ instituteId }) => {
                                                 </span>
 
                                                 <span className="reviewDot">
-                                                    •
+                                                    â€¢
                                                 </span>
 
                                                 <span className="reviewDate">
@@ -242,7 +244,7 @@ export const RatingReview = ({ instituteId }) => {
 
                                         {item.isVerified && (
                                             <span className="verifiedBadgeOfReviewer">
-                                                ✓ Verified
+                                                âœ“ Verified
                                             </span>
                                         )}
 

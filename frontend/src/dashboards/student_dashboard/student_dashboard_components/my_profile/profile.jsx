@@ -4,9 +4,7 @@ import {
     FaPhone,
     FaGraduationCap,
     FaIdCard,
-    FaLock,
-    FaSave,
-    FaEdit
+    FaSave
 } from "react-icons/fa";
 import { getStudentProfile, updateStudentProfile } from "../../../../apicalls/student_apicalls";
 import "./profile.css";
@@ -14,7 +12,7 @@ import "./profile.css";
 export const StudentProfile = () => {
     const [student, setStudent] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [saving, setSaving] = useState(false);
+    const [saving] = useState(false);
     const [changed, setChanged] = useState(false);
     const [changes, setChanges] = useState({});
 
@@ -439,7 +437,7 @@ export const StudentProfile = () => {
                     <button
                         type="submit"
                         className="saveStudentProfileBtn"
-                        disabled={changed ? false : true || saving}
+                        disabled={!changed || saving}
                     >
                         <FaSave />
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
     FaSave,
     FaTimes,
@@ -11,71 +11,52 @@ import {
 import "./admin_rejected_edit.css";
 import { updateRejectedAdminApplication } from "../../../../apicalls/superadmin_apicalls";
 
+// Builds the editable form state from the rejected application.
+const buildForm = (admin) => ({
+    ownerName: admin?.ownerName || "",
+    fatherName: admin?.fatherName || "",
+    email: admin?.email || "",
+    phone: admin?.phone || "",
+    cnic: admin?.cnic || "",
+    dateOfBirth: admin?.dateOfBirth || "",
+    gender: admin?.gender || "",
+    address: admin?.address || "",
+    city: admin?.city || "",
+    province: admin?.province || "",
+    instituteName: admin?.instituteName || "",
+    instituteType: admin?.instituteType || "",
+    registrationNumber: admin?.registrationNumber || "",
+    establishedYear: admin?.establishedYear || "",
+    instituteAddress: admin?.instituteAddress || "",
+    instituteCity: admin?.instituteCity || "",
+    instituteProvince: admin?.instituteProvince || "",
+    institutePhone: admin?.institutePhone || "",
+    instituteEmail: admin?.instituteEmail || "",
+    website: admin?.website || "",
+    paymentMethod: admin?.paymentMethod || "",
+    transactionId: admin?.transactionId || "",
+});
+
+const buildDocuments = (admin) =>
+    (admin?.images || []).map((doc) => ({
+        title: doc?.title || "",
+        imageUrl: doc?.imageUrl || "",
+        publicId: doc?.publicId || "",
+        file: null,
+    }));
+
+// Newly selected files use a blob URL, so the file type is checked first.
+const isPdfDocument = (document) =>
+    document?.file?.type === "application/pdf" ||
+    (typeof document?.imageUrl === "string" &&
+        document.imageUrl.split("?")[0].toLowerCase().endsWith(".pdf"));
+
 export const AdminRejectedEdit = ({ admin, loading, onCancel }) => {
-    const [form, setForm] = useState({
-        ownerName: "",
-        fatherName: "",
-        email: "",
-        phone: "",
-        cnic: "",
-        dateOfBirth: "",
-        gender: "",
-        address: "",
-        city: "",
-        province: "",
-        instituteName: "",
-        instituteType: "",
-        registrationNumber: "",
-        establishedYear: "",
-        instituteAddress: "",
-        instituteCity: "",
-        instituteProvince: "",
-        institutePhone: "",
-        instituteEmail: "",
-        website: "",
-        paymentMethod: "",
-        transactionId: "",
-    });
+    // The application is already loaded when this form is rendered, so the
+    // state can be initialised directly instead of being synced in an effect.
+    const [form, setForm] = useState(() => buildForm(admin));
 
-    const [documents, setDocuments] = useState([]);
-
-    useEffect(() => {
-        if (!admin) return;
-
-        setForm({
-            ownerName: admin.ownerName || "",
-            fatherName: admin.fatherName || "",
-            email: admin.email || "",
-            phone: admin.phone || "",
-            cnic: admin.cnic || "",
-            dateOfBirth: admin.dateOfBirth || "",
-            gender: admin.gender || "",
-            address: admin.address || "",
-            city: admin.city || "",
-            province: admin.province || "",
-            instituteName: admin.instituteName || "",
-            instituteType: admin.instituteType || "",
-            registrationNumber: admin.registrationNumber || "",
-            establishedYear: admin.establishedYear || "",
-            instituteAddress: admin.instituteAddress || "",
-            instituteCity: admin.instituteCity || "",
-            instituteProvince: admin.instituteProvince || "",
-            institutePhone: admin.institutePhone || "",
-            instituteEmail: admin.instituteEmail || "",
-            website: admin.website || "",
-            paymentMethod: admin.paymentMethod || "",
-            transactionId: admin.transactionId || ""
-        });
-
-        setDocuments(
-            (admin.images || []).map((doc) => ({
-                title: doc?.title || "",
-                imageUrl: doc?.imageUrl || "",
-                publicId: doc?.publicId || "",
-                file: null
-            }))
-        );
-    }, [admin]);
+    const [documents, setDocuments] = useState(() => buildDocuments(admin));
 
     let [editedFields, setEditedFields] = useState({});
     let [editedDoc, setEditedDoc] = useState([]);
@@ -389,15 +370,25 @@ export const AdminRejectedEdit = ({ admin, loading, onCancel }) => {
                                 </div>
                             </div>
                             <div className="rejectedDocumentPreview">
-                                {document.imageUrl ? (
+                                {!document.imageUrl ? (
+                                    <div className="noDocumentPreview">
+                                        No document
+                                    </div>
+                                ) : isPdfDocument(document) ? (
+                                    <div className="noDocumentPreview">
+                                        <a
+                                            href={document.imageUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            Open PDF
+                                        </a>
+                                    </div>
+                                ) : (
                                     <img
                                         src={document.imageUrl}
                                         alt={document.title}
                                     />
-                                ) : (
-                                    <div className="noDocumentPreview">
-                                        No document
-                                    </div>
                                 )}
                             </div>
                             <label className="replaceDocumentBtn">

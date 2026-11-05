@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     FaBookOpen,
     FaCreditCard,
     FaFileAlt,
+    FaFilePdf,
     FaSave,
     FaTimes,
     FaUpload,
@@ -13,17 +14,21 @@ import "./student_rejected_edit.css";
 import {
     updateRejectedStudentApplication
 } from "../../../../apicalls/admin_apicalls";
+import notify from "../../../../components/toast/toastBus";
+
+const isPdfDocument = (document) => {
+    if (!document) return false;
+    if (document.file?.type === "application/pdf") return true;
+    return Boolean(
+        document.imageUrl &&
+        document.imageUrl.split("?")[0].toLowerCase().endsWith(".pdf")
+    );
+};
 
 export const StudentRejectedEdit = ({
     admission,
     onCancel
 }) => {
-
-    if (!admission) {
-        alert("Admission not found");
-        onCancel();
-        return;
-    }
 
     const [form, setForm] = useState(() => ({
         firstName: admission?.firstName || "",
@@ -65,6 +70,17 @@ export const StudentRejectedEdit = ({
     const [paymentProof, setPaymentProof] = useState(null);
 
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (!admission) {
+            notify.error("Admission not found.");
+            onCancel?.();
+        }
+    }, [admission, onCancel]);
+
+    if (!admission) {
+        return null;
+    }
 
 
     /* =====================================================
@@ -562,10 +578,26 @@ export const StudentRejectedEdit = ({
 
                                 {doc.imageUrl ? (
 
-                                    <img
-                                        src={doc.imageUrl}
-                                        alt={doc.title}
-                                    />
+                                    isPdfDocument(doc) ? (
+
+                                        <a
+                                            className="studentDocumentPdfLink"
+                                            href={doc.imageUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <FaFilePdf />
+                                            Open PDF
+                                        </a>
+
+                                    ) : (
+
+                                        <img
+                                            src={doc.imageUrl}
+                                            alt={doc.title}
+                                        />
+
+                                    )
 
                                 ) : (
 

@@ -4,25 +4,37 @@ import "./admin_previewpage.css";
 import { useEffect } from "react";
 import { rejectAdminApplication } from "../../../../apicalls/superadmin_apicalls";
 import { AdminRejectedEdit } from "../edit_admin_application.jsx/admin_rejected_edit";
+import notify from "../../../../components/toast/toastBus";
 
 export const AdminPreview = ({ id, setSubpage }) => {
     let [admin, setAdmin] = useState(null);
     let [loading, setLoading] = useState(null);
+    let [showRejectForm, setShowRejectForm] = useState(false);
+    let [rejectReason, setRejectReason] = useState("");
 
     useEffect(() => {
         getAdminById(id, setAdmin, setLoading);
-    }, []);
+    }, [id]);
 
     const handleApprove = () => {
         approveAdmin(id, setSubpage, setAdmin, setLoading);
     };
 
     const handleReject = () => {
-        rejectAdminApplication(id, setSubpage, setLoading)
+        if (!rejectReason.trim()) {
+            notify.error("A rejection reason is required.");
+            return;
+        }
+        rejectAdminApplication(id, rejectReason.trim(), setSubpage, setLoading);
+    };
+
+    const cancelReject = () => {
+        setRejectReason("");
+        setShowRejectForm(false);
     };
 
     if (admin?.rejected) {
-        return <AdminRejectedEdit admin={admin} loading={loading} onCancel={() => setSubpage("Applications")} />
+        return <AdminRejectedEdit key={admin._id} admin={admin} loading={loading} onCancel={() => setSubpage("Applications")} />
     }
 
     return (
@@ -264,30 +276,16 @@ export const AdminPreview = ({ id, setSubpage }) => {
                     </div>
                 </div>
                 <div className="documents-grid">
-                    <DocumentCard
-                        title={admin?.images?.[0].title || "Owner CNIC - Front"}
-                        image={admin?.images?.[0].imageUrl}
-                    />
-                    <DocumentCard
-                        title={admin?.images?.[1].title || "Owner CNIC - Back"}
-                        image={admin?.images?.[1].imageUrl}
-                    />
-                    <DocumentCard
-                        title={admin?.images?.[2].title || "Institute Registration"}
-                        image={admin?.images?.[2].imageUrl}
-                    />
-                    <DocumentCard
-                        title={admin?.images?.[3].title || "Institute Ownership"}
-                        image={admin?.images?.[3].imageUrl}
-                    />
-                    <DocumentCard
-                        title={admin?.images?.[4].title || "Owner Photo"}
-                        image={admin?.images?.[4].imageUrl}
-                    />
-                    <DocumentCard
-                        title={admin?.images?.[5].title || "Payment Proof"}
-                        image={admin?.images?.[5].imageUrl}
-                    />
+                    {(admin?.images || []).map((document, index) => (
+                        <DocumentCard
+                            key={document.publicId || document.imageUrl || index}
+                            title={document.title || `Document ${index + 1}`}
+                            image={document.imageUrl}
+                        />
+                    ))}
+                    {!admin?.images?.length && (
+                        <p>No documents submitted.</p>
+                    )}
                 </div>
             </section>
             {/* =========================================
@@ -307,7 +305,7 @@ export const AdminPreview = ({ id, setSubpage }) => {
                     <div className="decision-buttons">
                         <button
                             className="reject-app-btn"
-                            onClick={handleReject}
+                            onClick={() => setShowRejectForm((prev) => !prev)}
                             disabled={(loading || admin?.approved || admin?.rejected) ? true : false}
                         >
                             ✕ Reject Application
@@ -321,6 +319,42 @@ export const AdminPreview = ({ id, setSubpage }) => {
                         </button>
                     </div>
                 </div>
+
+                {showRejectForm && (
+                    <div className="reject-reason-panel">
+                        <label htmlFor="reject-reason">
+                            Reason for rejection <span aria-hidden="true">*</span>
+                        </label>
+                        <textarea
+                            id="reject-reason"
+                            name="rejectReason"
+                            value={rejectReason}
+                            onChange={(e) => setRejectReason(e.target.value)}
+                            placeholder="Explain why this application is being rejected..."
+                            rows={4}
+                            maxLength={500}
+                            disabled={loading}
+                        />
+                        <div className="reject-reason-actions">
+                            <button
+                                type="button"
+                                className="reject-cancel-btn"
+                                onClick={cancelReject}
+                                disabled={loading}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="button"
+                                className="reject-confirm-btn"
+                                onClick={handleReject}
+                                disabled={loading || !rejectReason.trim()}
+                            >
+                                {loading ? "Rejecting..." : "Confirm Rejection & Delete"}
+                            </button>
+                        </div>
+                    </div>
+                )}
             </section>
         </div>
     );
@@ -346,21 +380,33 @@ const InfoItem = ({ label, value, full }) => {
    DOCUMENT COMPONENT
 ========================================= */
 const DocumentCard = ({ title, image }) => {
+    const isPdf = typeof image === "string" && image.split("?")[0].toLowerCase().endsWith(".pdf");
+
     return (
         <div className="document-card">
             <div className="document-header">
                 <h3>
                     {title}
                 </h3>
-                <span onClick={() => window.open(image, "_blank")}>
-                    View
-                </span>
+                {image && (
+                    <span onClick={() => window.open(image, "_blank")}>
+                        View
+                    </span>
+                )}
             </div>
             <div className="document-image-wrapper">
-                <img
-                    src={image}
-                    alt={title}
-                />
+                {!image ? (
+                    <span>No preview</span>
+                ) : isPdf ? (
+                    <a href={image} target="_blank" rel="noreferrer">
+                        Open PDF
+                    </a>
+                ) : (
+                    <img
+                        src={image}
+                        alt={title}
+                    />
+                )}
             </div>
         </div>
     );

@@ -549,6 +549,97 @@
     cursor:not-allowed;
 }
 
+.enrollmentRejectBtn:disabled,
+.enrollmentApproveBtn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+/* =====================================================
+   REJECTION REASON PANEL
+   ===================================================== */
+
+.enrollmentRejectPanel{
+    margin-top:16px;
+    padding:16px;
+    border:1px solid #fecaca;
+    border-radius:10px;
+    background:#fff7f7;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.enrollmentRejectPanel label{
+    color:#111827;
+    font-size:11px;
+    font-weight:650;
+}
+
+.enrollmentRejectPanel label span{
+    color:#dc2626;
+}
+
+.enrollmentRejectPanel textarea{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid #d1d5db;
+    border-radius:7px;
+    font-family:inherit;
+    font-size:10px;
+    line-height:1.55;
+    color:#111827;
+    background:#fff;
+    resize:vertical;
+    transition:.2s ease;
+}
+
+.enrollmentRejectPanel textarea:focus{
+    outline:none;
+    border-color:#10b981;
+    box-shadow:0 0 0 3px rgba(16,185,129,.15);
+}
+
+.enrollmentRejectPanel textarea:disabled{
+    background:#f9fafb;
+    cursor:not-allowed;
+}
+
+.enrollmentRejectActions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.enrollmentRejectConfirmBtn{
+    min-height:41px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:0 14px;
+    border-radius:7px;
+    font-family:inherit;
+    font-size:9px;
+    font-weight:650;
+    cursor:pointer;
+    border:1px solid #dc2626;
+    background:#dc2626;
+    color:#fff;
+    transition:.2s ease;
+}
+
+.enrollmentRejectConfirmBtn:hover:not(:disabled){
+    border-color:#b91c1c;
+    background:#b91c1c;
+}
+
+.enrollmentRejectConfirmBtn:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
 
 /* =====================================================
    PROOF MODAL

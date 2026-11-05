@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
     FaTimes,
     FaCalendarAlt,
@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import "./generate_fee_modal.css";
 import { generateFeeForStudent, generateMonthlyFee } from "../../../../../apicalls/admin_apicalls";
+import { useToast } from "../../../../../components/toast/ToastContext";
 
 export const GenerateFeeModal = ({
     mode = "COLLECTIVE",
@@ -17,6 +18,7 @@ export const GenerateFeeModal = ({
     loading,
     setLoading
 }) => {
+    const toast = useToast();
 
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().toLocaleString("en-US", { month: "long" });
@@ -44,25 +46,28 @@ export const GenerateFeeModal = ({
         (_, index) => currentYear + index
     );
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!month || !year) {
-            alert("Please select month and year.");
+            toast.error("Please select month and year.");
             return;
         }
 
         if (mode === "INDIVIDUAL" && !student) {
-            alert("Student information is required.");
+            toast.error("Student information is required.");
             return;
         }
-        onClose()
+
         if (mode === "COLLECTIVE") {
-            generateMonthlyFee(classFilter, month, year, setLoading);
+            const result = await generateMonthlyFee(classFilter, month, year, setLoading);
+            if (result?.success) onClose();
+            return;
         }
 
         if (mode === "INDIVIDUAL") {
-            generateFeeForStudent(student?._id, month, year, setLoading);
+            const result = await generateFeeForStudent(student?._id, month, year, setLoading);
+            if (result?.success) onClose();
         }
     };
 

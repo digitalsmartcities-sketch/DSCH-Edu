@@ -1,3 +1,4 @@
+import "./plugins.js";
 import mongoose from "mongoose";
 
 const paymentProofSchema = new mongoose.Schema({

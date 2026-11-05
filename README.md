@@ -347,11 +347,17 @@ VITE_API_URL=your_backend_api_url
 Create a `.env` file inside `backend/`:
 
 ```env
-PORT=3000
+PORT=5000
 
-MONGO_URI=your_mongodb_connection_string
+DB_URL=your_mongodb_connection_string
 
 JWT_SECRET=your_jwt_secret
+
+FRONTEND_URL=your_frontend_url
+
+SUPPORT_EMAIL=your_support_email
+
+NODE_ENV=production
 
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key

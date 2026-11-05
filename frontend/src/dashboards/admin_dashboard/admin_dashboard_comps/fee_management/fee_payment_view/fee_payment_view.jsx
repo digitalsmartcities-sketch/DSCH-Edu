@@ -9,13 +9,18 @@ import {
     FaUniversity,
     FaCreditCard,
     FaFileImage,
+    FaFilePdf,
     FaMoneyBillWave
 } from "react-icons/fa";
 import "./fee_payment_view.css";
 import { approveMonthlyFeePayment, rejectFeePayment } from "../../../../../apicalls/admin_apicalls";
+import { useToast } from "../../../../../components/toast/ToastContext";
+
+const isPdfUrl = (url) => Boolean(url && url.split("?")[0].toLowerCase().endsWith(".pdf"));
 
 export const FeePaymentView = ({ fee, onClose }) => {
 
+    const toast = useToast();
     const [loading, setLoading] = useState(false);
     const [showReject, setShowReject] = useState(false);
     const [rejectionReason, setRejectionReason] = useState("");
@@ -39,11 +44,12 @@ export const FeePaymentView = ({ fee, onClose }) => {
     };
 
     const handleReject = async () => {
-        if (!rejectionReason) {
-            return alert("Please enter a rejection reason.");
+        if (!rejectionReason.trim()) {
+            toast.error("Please enter a rejection reason.");
+            return;
         }
 
-        rejectFeePayment(fee._id, rejectionReason, onClose, setLoading);
+        rejectFeePayment(fee._id, rejectionReason.trim(), onClose, setLoading);
     };
 
     const isPending = fee.status === "PENDING";
@@ -290,10 +296,26 @@ export const FeePaymentView = ({ fee, onClose }) => {
 
                 {fee.paymentProof?.imageUrl ? (
                     <div className="feePaymentProofBox">
-                        <img
-                            src={fee.paymentProof.imageUrl}
-                            alt={fee.paymentProof.title || "Payment proof"}
-                        />
+                        {isPdfUrl(fee.paymentProof.imageUrl) ? (
+                            <div className="feePaymentProofMissing">
+                                <FaFilePdf />
+                                <h3>
+                                    Payment Proof (PDF)
+                                </h3>
+                                <a
+                                    href={fee.paymentProof.imageUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Open payment proof
+                                </a>
+                            </div>
+                        ) : (
+                            <img
+                                src={fee.paymentProof.imageUrl}
+                                alt={fee.paymentProof.title || "Payment proof"}
+                            />
+                        )}
 
                         <div className="feePaymentProofInfo">
                             <span>

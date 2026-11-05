@@ -4,7 +4,9 @@ import { getHeroPageInstitutes, getUserState } from "../apicalls/public_apicalls
 const AppContext = createContext(null);
 
 export const ContextProvider = ({ children }) => {
-    let [userState, setUserState] = useState({ userState: null, setUserState: null });
+    // `userState` is null while nobody is signed in and holds the user object
+    // (role, name, email, dashboardUrl) once the session is active.
+    let [userState, setUserState] = useState(null);
     let [heroPageInstitutes, setHeroPageInstitutes] = useState([]);
     useEffect(() => {
         getUserState(setUserState);

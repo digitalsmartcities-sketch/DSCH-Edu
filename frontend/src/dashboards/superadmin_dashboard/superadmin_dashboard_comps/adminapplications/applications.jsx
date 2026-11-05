@@ -1,5 +1,5 @@
-import { FaEye,FaUserCheck, FaUserSlash } from "react-icons/fa";
-import { disableAdmin, enableAdmin, getApplications } from "../../../../apicalls/superadmin_apicalls";
+import { FaEye, FaTrash, FaUserCheck, FaUserSlash } from "react-icons/fa";
+import { deleteAdminApplication, disableAdmin, enableAdmin, getApplications } from "../../../../apicalls/superadmin_apicalls";
 import "./application.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,31 +7,23 @@ import { useNavigate } from "react-router-dom";
 export const AdminApplications = ({ setSubpage }) => {
     let [applications, setApplications] = useState([]);
     let [loading, setLoading] = useState(false);
+    let [statusFilter, setStatusFilter] = useState("all");
+    let [typeFilter, setTypeFilter] = useState("all");
     const navigate = useNavigate();
 
     useEffect(() => {
         getApplications(setApplications, navigate);
-    }, []);
+    }, [navigate]);
 
-    const stateFilter = (filter) =>
-        applications.filter((v, i) => {
-            if (filter === "pending") {
-                return !v.approved;
-            } else if (filter === "approved") {
-                return v.approved;
-            } else {
-                return true;
-            }
-        });
-
-    const typeFilter = (type) =>
-        applications.filter((v, i) => {
-            if (type === "all") {
-                return true;
-            } else {
-                return v.instituteType == type;
-            }
-        });
+    // The full list is kept in state so changing one filter never hides the
+    // rows that another filter needs.
+    const visibleApplications = applications.filter((app) => {
+        if (statusFilter === "pending" && (app.approved || app.rejected)) return false;
+        if (statusFilter === "approved" && !app.approved) return false;
+        if (statusFilter === "rejected" && !app.rejected) return false;
+        if (typeFilter !== "all" && app.instituteType !== typeFilter) return false;
+        return true;
+    });
 
     return (
         <div className="admin-applications">
@@ -60,7 +52,7 @@ export const AdminApplications = ({ setSubpage }) => {
                     <label>
                         Status
                     </label>
-                    <select defaultValue="all" onChange={(e) => setApplications(stateFilter(e.target.value))}>
+                    <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                         <option value="all">
                             All Applications
                         </option>
@@ -70,13 +62,16 @@ export const AdminApplications = ({ setSubpage }) => {
                         <option value="approved">
                             Approved
                         </option>
+                        <option value="rejected">
+                            Rejected
+                        </option>
                     </select>
                 </div>
                 <div className="application-filter">
                     <label>
                         Institute Type
                     </label>
-                    <select defaultValue="all" onChange={(e) => setApplications(typeFilter(e.target.value))}>
+                    <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
                         <option value="all">
                             All Types
                         </option>
@@ -103,7 +98,7 @@ export const AdminApplications = ({ setSubpage }) => {
                         </p>
                     </div>
                     <span className="application-count">
-                        {applications?.length} Applications
+                        {visibleApplications.length} Applications
                     </span>
                 </div>
                 {/* =====================================
@@ -144,9 +139,9 @@ export const AdminApplications = ({ setSubpage }) => {
                         </thead>
                         <tbody>
                             {
-                                (applications)
+                                visibleApplications.length
                                     ?
-                                    applications.map((app, index) => (
+                                    visibleApplications.map((app, index) => (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>{app.ownerName}</td>
@@ -160,6 +155,25 @@ export const AdminApplications = ({ setSubpage }) => {
                                                 <button disabled={loading} className="action-btns view-btn" onClick={() => setSubpage(`preview_admin:${app._id}`)}>
                                                     <FaEye />
                                                 </button>
+                                                {
+                                                    !app.approved && !app.instituteId && (
+                                                        <button
+                                                            disabled={loading}
+                                                            title="Delete Application"
+                                                            aria-label="Delete Application"
+                                                            className="action-btns delete-btn"
+                                                            onClick={() =>
+                                                                deleteAdminApplication(
+                                                                    app._id,
+                                                                    setApplications,
+                                                                    setLoading
+                                                                )
+                                                            }
+                                                        >
+                                                            <FaTrash />
+                                                        </button>
+                                                    )
+                                                }
                                                 {
                                                     app.rejected || !app.approved
                                                         ?

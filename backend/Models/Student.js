@@ -1,3 +1,4 @@
+import "./plugins.js";
 import mongoose from "mongoose";
 
 const StudentSchema = new mongoose.Schema(
@@ -58,7 +59,9 @@ const StudentSchema = new mongoose.Schema(
         // =========================================
         // STUDENT ACCOUNT
         // =========================================
-        password: { type: String, required: true },
+        // The hash is never returned by default so it can not leak through an
+        // API response. It has to be requested explicitly with `+password`.
+        password: { type: String, required: true, select: false },
         // =========================================
         // STUDENT ACCOUNT / ACTIVATION STATUS
         // =========================================

@@ -7,6 +7,7 @@ import { fetchAllCourses } from './apicalls/public_apicalls';
 import { IoSchool } from 'react-icons/io5';
 import AppContext from './app_context/context';
 import heroImage from "./assets/hero.png";
+import heroImageWebp from "./assets/hero.webp";
 import "./App.css";
 import {
   HiOutlineAcademicCap,
@@ -96,10 +97,17 @@ function App() {
             <div className="dschHeroVisual">
               <div className="dschHeroVisualGlow"></div>
               <div className="dschHeroArtwork">
-                <img
-                  src={heroImage}
-                  alt="DSCH-Edu digital education platform"
-                />
+                <picture>
+                  <source srcSet={heroImageWebp} type="image/webp" />
+                  <img
+                    src={heroImage}
+                    alt="DSCH-Edu digital education platform"
+                    width="1400"
+                    height="788"
+                    fetchPriority="high"
+                    decoding="async"
+                  />
+                </picture>
               </div>
               <div className="dschHeroAccentLine"></div>
             </div>

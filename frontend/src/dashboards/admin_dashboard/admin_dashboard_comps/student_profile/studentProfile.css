@@ -348,6 +348,28 @@
     background: #f9fafb;
 }
 
+.studentDocumentPdfLink {
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: #4f46e5;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    background: #f9fafb;
+}
+
+.studentDocumentPdfLink:hover {
+    text-decoration: underline;
+}
+
+.studentDocumentPdfLink svg {
+    font-size: 26px;
+}
+
 .missingDocument {
     height: 210px;
     display: flex;

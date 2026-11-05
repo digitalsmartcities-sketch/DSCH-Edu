@@ -149,6 +149,168 @@
 
 
 /* =====================================================
+   USER MENU (signed in)
+   ===================================================== */
+
+.userMenu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 4px 4px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(16,24,40,.04);
+}
+
+.userMenuTrigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px;
+    color: #059669;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1;
+    transition: color .2s ease;
+}
+
+.userMenuTrigger:hover {
+    color: #047857;
+}
+
+.userMenuTrigger svg {
+    width: 26px;
+    height: 26px;
+}
+
+.userMenuName {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #374151;
+}
+
+.userMenuTrigger:hover .userMenuName {
+    color: #047857;
+}
+
+.userMenuToggle {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.userMenuToggle:hover {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.userMenuToggle svg {
+    width: 16px;
+    height: 16px;
+}
+
+.userMenuDropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 232px;
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(16,24,40,.12);
+    z-index: 20;
+}
+
+.userMenuHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 12px 12px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.userMenuHeaderName {
+    color: #111827;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.userMenuHeaderRole {
+    align-self: flex-start;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #ecfdf5;
+    color: #047857;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+}
+
+.userMenuItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #374151;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.userMenuItem:hover {
+    background: #f0fdf4;
+    color: #047857;
+}
+
+.userMenuItem svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+.userMenuLogout {
+    color: #dc2626;
+}
+
+.userMenuLogout:hover {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+
+/* =====================================================
    MOBILE BUTTON
 ===================================================== */
 
@@ -201,9 +363,38 @@
         height: 50px;
     }
 
-    .navMenu,
-    .navButtons {
+    .navMenu {
         display: none;
+    }
+
+    /* The user menu stays in the bar so the signed in user can always jump
+       back to the dashboard, the login / register buttons move into the
+       mobile menu instead. */
+    .navButtons {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .navButtons > .loginNavBtn,
+    .navButtons > .registerNavBtn {
+        display: none;
+    }
+
+    .userMenu {
+        padding: 3px 3px 3px 8px;
+    }
+
+    .userMenuName {
+        display: none;
+    }
+
+    .userMenuTrigger svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .userMenuDropdown {
+        right: -46px;
     }
 
     .menuButton {
@@ -282,7 +473,8 @@
 
     .mobileLoginBtn,
     .mobileRegisterBtn,
-    .mobileLogoutBtn {
+    .mobileLogoutBtn,
+    .mobileDashboardBtn {
         min-height: 44px;
         display: flex;
         align-items: center;
@@ -296,6 +488,44 @@
         text-decoration: none;
         cursor: pointer;
         box-sizing: border-box;
+    }
+
+    .mobileUserCard {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 14px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #f9fafb;
+    }
+
+    .mobileUserCardName {
+        color: #111827;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .mobileUserCardRole {
+        align-self: flex-start;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: #ecfdf5;
+        color: #047857;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .3px;
+        text-transform: uppercase;
+    }
+
+    .mobileDashboardBtn {
+        border: 1px solid #10b981;
+        background: #059669;
+        color: #fff;
+    }
+
+    .mobileDashboardBtn:hover {
+        background: #047857;
     }
 
     .mobileLoginBtn {

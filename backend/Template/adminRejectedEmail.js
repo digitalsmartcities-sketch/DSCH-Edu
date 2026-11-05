@@ -16,7 +16,7 @@ export const adminRejectedEmail = (
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Institute Registration Update</title>
+    <title>Institute Registration Application Rejected</title>
 </head>
 
 <body style="
@@ -92,7 +92,7 @@ export const adminRejectedEmail = (
     line-height:1.4;
     font-weight:600;
 ">
-    Institute Registration Update
+    Institute Registration Application Rejected
 </h1>
 
 
@@ -128,7 +128,8 @@ export const adminRejectedEmail = (
 ">
 
     After reviewing the information and documents provided,
-    we are unable to approve the application in its current form.
+    we regret to inform you that your registration application
+    has been rejected.
 
 </p>
 
@@ -183,10 +184,10 @@ export const adminRejectedEmail = (
     line-height:1.7;
 ">
 
-    Please contact the DSCH administration team and provide
-    the corrected information and/or documents related to the
-    issue mentioned above. Your application can then be
-    reviewed again.
+    Your application and all uploaded documents have been
+    removed. You should resubmit the application with the
+    correct information and documents. Please review the reason
+    above carefully before resubmitting.
 
 </p>
 
@@ -213,7 +214,7 @@ export const adminRejectedEmail = (
     font-size:12px;
     font-weight:600;
 ">
-    Contact DSCH
+    Contact DSCH Support
 </p>
 
 <p style="
@@ -247,8 +248,9 @@ export const adminRejectedEmail = (
     line-height:1.7;
 ">
 
-    Please ensure that all corrected information and documents
-    are complete and accurate before submitting them for review.
+    For any support, contact DSCH via the email address above.
+    Please make sure all corrected information and documents
+    are complete and accurate when you resubmit.
 
 </p>
 

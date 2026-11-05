@@ -21,7 +21,7 @@ import AppContext from "../../app_context/context";
 
 export const CheckAdminAccess = () => {
     const navigate = useNavigate();
-    const { userState, setUserState } = useContext(AppContext);
+    const { setUserState } = useContext(AppContext);
     const [subpage, setSubpage] = useState("check_page");
     const [message, setMessage] = useState({
         text: null,

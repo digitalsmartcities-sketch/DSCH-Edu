@@ -296,6 +296,16 @@
     font-size: 25px;
 }
 
+.paymentProofMissing a {
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.paymentProofMissing a:hover {
+    text-decoration: underline;
+}
+
 
 /* =====================================================
    REJECTION
